@@ -7,149 +7,155 @@ import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/devotionals', label: 'Devotionals' },
-  { href: '/free-sample', label: 'Free Sample' },
-  { href: '/prayer-partners', label: 'Prayer Partners' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/',               label: 'Home' },
+  { href: '/about',          label: 'About' },
+  { href: '/devotionals',    label: 'Devotionals' },
+  { href: '/free-sample',    label: 'Free Sample' },
+  { href: '/prayer-partners',label: 'Prayer Partners' },
+  { href: '/contact',        label: 'Contact' },
 ];
 
 export default function Navigation() {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = usePathname();
+  const pathname                    = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
+
+  /* lock body scroll when mobile menu open */
   useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'glass-nav shadow-glass py-1' : 'bg-transparent py-3'
+      role="banner"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-400 ${
+        scrolled ? 'glass-nav py-2 shadow-glass' : 'bg-transparent py-3'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div
-              className={`relative flex-shrink-0 transition-all duration-500 ${
-                scrolled ? 'w-12 h-12' : 'w-16 h-16'
-              } drop-shadow-md group-hover:drop-shadow-lg`}
-            >
+        <div className="flex items-center justify-between h-14">
+
+          {/* ── Logo ── */}
+          <Link href="/" className="flex items-center gap-3 group shrink-0" aria-label="In Him Daily — home">
+            <div className={`relative flex-shrink-0 transition-all duration-400 ${scrolled ? 'w-11 h-11' : 'w-14 h-14'}`}>
               <Image
                 src="/images/ChatGPT_Image_Jun_12,_2026,_11_01_49_PM.png"
-                alt="In Him Daily Logo"
+                alt="In Him Daily logo"
                 fill
-                className="object-contain transition-transform duration-300 group-hover:scale-105"
-                sizes="64px"
+                className="object-contain drop-shadow group-hover:scale-105 transition-transform duration-300"
+                sizes="56px"
                 priority
               />
             </div>
-            <div className="hidden sm:block">
-              <span
-                className={`font-playfair font-bold leading-none block transition-all duration-500 ${
-                  scrolled ? 'text-midnight-700 text-lg' : 'text-ivory-100 text-xl'
-                }`}
-              >
-                In Him{' '}
-                <span className="text-gold-400 italic">Daily</span>
-              </span>
-              <span
-                className={`text-xs tracking-widest uppercase transition-all duration-500 ${
-                  scrolled ? 'text-midnight-500' : 'text-ivory-300/70'
-                }`}
-              >
+            <div className="hidden sm:block leading-tight">
+              <p className={`font-playfair font-bold transition-all duration-400 ${scrolled ? 'text-navy-600 text-base' : 'text-white text-[1.1rem]'}`}>
+                In Him <em className="not-italic text-gold-500">Daily</em>
+              </p>
+              <p className={`text-[0.65rem] tracking-[0.15em] uppercase transition-all duration-400 ${scrolled ? 'text-navy-400' : 'text-white/60'}`}>
                 Every Generation. One Jesus.
-              </span>
+              </p>
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
-                  pathname === link.href
-                    ? scrolled
-                      ? 'text-midnight-700 bg-gold-50/80'
-                      : 'text-gold-300 bg-white/10'
-                    : scrolled
-                    ? 'text-midnight-700/70 hover:text-midnight-700 hover:bg-ivory-200/60'
-                    : 'text-ivory-200/80 hover:text-ivory-100 hover:bg-white/10'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* ── Desktop nav ── */}
+          <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-0.5">
+            {navLinks.map((link) => {
+              const active = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative px-3.5 py-2 text-[0.82rem] font-medium rounded-lg transition-all duration-200 ${
+                    active
+                      ? scrolled
+                        ? 'text-navy-600 bg-gold-50'
+                        : 'text-gold-300 bg-white/10'
+                      : scrolled
+                      ? 'text-navy-500 hover:text-navy-700 hover:bg-ivory-200'
+                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                  }`}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center">
+          {/* ── CTA ── */}
+          <div className="hidden lg:flex">
             <Link
               href="/free-sample"
-              className={`px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 hover:shadow-gold hover:-translate-y-0.5 ${
+              className={`px-5 py-2.5 text-[0.82rem] font-semibold rounded-full transition-all duration-300 ${
                 scrolled
-                  ? 'bg-midnight-700 text-ivory-100 hover:bg-midnight-600'
-                  : 'bg-gold-400 text-midnight-700 hover:bg-gold-300'
-              }`}
+                  ? 'bg-navy-600 text-white hover:bg-navy-500 shadow-navy'
+                  : 'bg-gold-500 text-navy-700 hover:bg-gold-400 shadow-gold'
+              } hover:-translate-y-px`}
             >
               Get Free Sample
             </Link>
           </div>
 
-          {/* Mobile Toggle */}
+          {/* ── Mobile toggle ── */}
           <button
             className={`lg:hidden p-2 rounded-lg transition-colors ${
-              scrolled ? 'text-midnight-700 hover:bg-ivory-300' : 'text-ivory-100 hover:bg-white/10'
+              scrolled ? 'text-navy-600 hover:bg-ivory-300' : 'text-white hover:bg-white/10'
             }`}
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileOpen ? <X size={22} strokeWidth={2} /> : <Menu size={22} strokeWidth={2} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile menu ── */}
       <div
-        className={`lg:hidden transition-all duration-300 overflow-hidden ${
-          mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+        id="mobile-menu"
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
+        aria-hidden={!mobileOpen}
       >
-        <div className="glass-nav border-t border-gold-100/30 px-4 py-4 space-y-1">
+        <nav
+          aria-label="Mobile navigation"
+          className="glass-nav border-t border-gold-100/20 px-4 pb-5 pt-3 space-y-0.5"
+        >
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`block px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
+              className={`flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-colors ${
                 pathname === link.href
-                  ? 'text-midnight-700 bg-gold-50/80'
-                  : 'text-midnight-700/70 hover:text-midnight-700 hover:bg-ivory-200/60'
+                  ? 'text-navy-700 bg-gold-50 font-semibold'
+                  : 'text-navy-500 hover:text-navy-700 hover:bg-ivory-200'
               }`}
+              aria-current={pathname === link.href ? 'page' : undefined}
             >
               {link.label}
             </Link>
           ))}
-          <div className="pt-2">
+          <div className="pt-3">
             <Link
               href="/free-sample"
-              className="block text-center px-5 py-3 bg-midnight-700 text-ivory-100 text-sm font-semibold rounded-full hover:bg-midnight-600 transition-colors"
+              className="block text-center px-5 py-3 bg-navy-600 text-white text-sm font-semibold rounded-full hover:bg-navy-500 transition-colors"
             >
               Get Free Sample
             </Link>
           </div>
-        </div>
+        </nav>
       </div>
     </header>
   );
