@@ -15,7 +15,7 @@ const resourceLinks = [
   { href: '/free-sample', label: 'Adult Edition' },
   { href: '/free-sample', label: 'Teen Edition' },
   { href: '/free-sample', label: "Children's Edition" },
-  { href: '/prayer-partners', label: 'Prayer Guidelines' },
+  { href: '/prayer-guidelines', label: 'Prayer Guidelines' },
   { href: '/devotionals', label: 'Series Library' },
 ];
 

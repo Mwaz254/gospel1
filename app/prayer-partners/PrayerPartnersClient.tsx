@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Heart, Globe, Shield, Users, BookOpen, Sunrise, Check } from 'lucide-react';
+import Link from 'next/link';
+import { Heart, Globe, Shield, Users, BookOpen, Sunrise, Check, ArrowRight } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import { insertPrayerPartner } from '@/lib/supabase';
 
@@ -136,6 +137,22 @@ export default function PrayerPartnersClient() {
               </p>
               <span className="text-gold-500 text-[0.72rem] font-semibold tracking-wider">2 Chronicles 7:14</span>
             </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Link to prayer guidelines */}
+      <section className="py-16 bg-ivory-200" aria-labelledby="guidelines-link-heading">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+          <ScrollReveal>
+            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Go Deeper</p>
+            <h2 id="guidelines-link-heading" className="font-playfair text-3xl font-bold text-navy-700 mb-4">Read the Prayer Guidelines</h2>
+            <p className="text-[#6B6B6B] text-lg mb-8">Six foundations of effective intercession, a daily prayer rhythm, specific prayer points, and a weekly prayer guide.</p>
+            <Link href="/prayer-guidelines"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 hover:bg-navy-600 text-white font-bold rounded-full transition-all duration-300 hover:-translate-y-0.5">
+              View Prayer Guidelines
+              <ArrowRight size={18} aria-hidden="true" />
+            </Link>
           </ScrollReveal>
         </div>
       </section>
