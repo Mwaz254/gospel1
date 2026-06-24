@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Heart, Globe, Shield, Users, BookOpen, Sunrise, Check } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
+import { insertPrayerPartner } from '@/lib/supabase';
 
 const focusAreas = [
   { icon: BookOpen, title: 'The Word Going Forth',          desc: "Pray that the devotionals would not merely be read, but experienced as living encounters with Jesus. That every page would carry the weight of the Holy Spirit.", refs: ['Isaiah 55:11','Hebrews 4:12'] },
@@ -24,6 +25,7 @@ export default function PrayerPartnersClient() {
   const [submitted, setSubmitted] = useState(false);
   const [name, setName]           = useState('');
   const [email, setEmail]         = useState('');
+  const [formError, setFormError] = useState('');
 
   return (
     <div className="overflow-x-hidden">
@@ -155,7 +157,7 @@ export default function PrayerPartnersClient() {
                 <p className="text-[#6B6B6B]">Thank you, {name}. Your prayers are powerful and we are grateful to have you interceding with us.</p>
               </div>
             ) : (
-              <form onSubmit={(e)=>{e.preventDefault();if(name&&email)setSubmitted(true);}} className="space-y-3.5 text-left" noValidate>
+              <form onSubmit={async (e)=>{ e.preventDefault(); if(!name||!email) return; try { await insertPrayerPartner({name,email}); setSubmitted(true); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-3.5 text-left" noValidate>
                 <input type="text" placeholder="Your Name" value={name} onChange={e=>setName(e.target.value)} required aria-label="Your name"
                   className="w-full px-5 py-3.5 rounded-full bg-white border border-ivory-300 text-navy-700 placeholder-navy-300 focus:outline-none focus:border-gold-400 transition-colors text-sm" />
                 <input type="email" placeholder="Email Address" value={email} onChange={e=>setEmail(e.target.value)} required aria-label="Email address"
@@ -163,6 +165,7 @@ export default function PrayerPartnersClient() {
                 <button type="submit" className="w-full py-4 bg-navy-700 hover:bg-navy-600 text-white font-bold rounded-full transition-all duration-300 hover:-translate-y-0.5">
                   Join the Prayer Team
                 </button>
+                {formError && <p className="text-red-500 text-xs text-center">{formError}</p>}
                 <p className="text-center text-[#6B6B6B]/50 text-xs">Monthly updates. Unsubscribe anytime.</p>
               </form>
             )}

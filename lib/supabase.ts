@@ -1,0 +1,66 @@
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl  = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+/* ─── typed helpers ─────────────────────────────────────────── */
+
+export async function insertFreeSampleLead(data: {
+  first_name: string;
+  email: string;
+  source: 'homepage_cta' | 'free_sample_page';
+}) {
+  const { error } = await supabase.from('free_sample_leads').insert(data);
+  if (error) throw error;
+}
+
+export async function insertNewsletterSubscriber(data: {
+  name: string;
+  email: string;
+}) {
+  const { error } = await supabase
+    .from('newsletter_subscribers')
+    .upsert(
+      { ...data, status: 'subscribed', subscribed_at: new Date().toISOString() },
+      { onConflict: 'email', ignoreDuplicates: false }
+    );
+  if (error) throw error;
+}
+
+export async function insertPrayerPartner(data: {
+  name: string;
+  email: string;
+}) {
+  const { error } = await supabase
+    .from('prayer_partners')
+    .upsert(
+      { ...data, status: 'active' },
+      { onConflict: 'email', ignoreDuplicates: false }
+    );
+  if (error) throw error;
+}
+
+export async function insertPrayerRequest(data: {
+  name: string;
+  email?: string;
+  request: string;
+}) {
+  const { error } = await supabase.from('prayer_requests').insert({
+    name:    data.name,
+    email:   data.email || null,
+    request: data.request,
+  });
+  if (error) throw error;
+}
+
+export async function insertContactMessage(data: {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}) {
+  const { error } = await supabase.from('contact_messages').insert(data);
+  if (error) throw error;
+}

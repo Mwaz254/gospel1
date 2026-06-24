@@ -3,12 +3,14 @@
 import { useState } from 'react';
 import { Mail, MessageSquare, Heart, Check, ArrowRight } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
+import { insertContactMessage, insertPrayerRequest, insertNewsletterSubscriber } from '@/lib/supabase';
 
 type FormType = 'contact' | 'prayer' | 'newsletter';
 
 export default function ContactClient() {
   const [active, setActive]         = useState<FormType>('contact');
   const [submitted, setSubmitted]   = useState<FormType | null>(null);
+  const [formError, setFormError]   = useState('');
 
   const [cData, setCData]   = useState({ name:'', email:'', subject:'', message:'' });
   const [pData, setPData]   = useState({ name:'', email:'', request:'' });
@@ -94,7 +96,7 @@ export default function ContactClient() {
                         <p className="text-[#6B6B6B]">Thank you, {cData.name}. We'll reply within 24–48 hours.</p>
                       </div>
                     ) : (
-                      <form onSubmit={(e)=>{e.preventDefault();setSubmitted('contact');}} className="space-y-4" noValidate>
+                      <form onSubmit={async (e)=>{ e.preventDefault(); setFormError(''); try { await insertContactMessage(cData); setSubmitted('contact'); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-4" noValidate>
                         <div>
                           <h2 className="font-playfair text-2xl font-bold text-navy-700 mb-1">Send a Message</h2>
                           <p className="text-[#6B6B6B] text-sm">We read every message and respond personally.</p>
@@ -108,6 +110,7 @@ export default function ContactClient() {
                         <button type="submit" className="inline-flex items-center gap-2 px-7 py-3.5 bg-navy-700 text-white font-bold rounded-full hover:bg-navy-600 transition-all duration-300 hover:-translate-y-px">
                           Send Message <ArrowRight size={15} aria-hidden="true" />
                         </button>
+                        {formError && <p className="text-red-500 text-xs">{formError}</p>}
                       </form>
                     )
                   )}
@@ -123,7 +126,7 @@ export default function ContactClient() {
                         <p className="text-[#6B6B6B]">Thank you, {pData.name}. Your request is in safe hands.</p>
                       </div>
                     ) : (
-                      <form onSubmit={(e)=>{e.preventDefault();setSubmitted('prayer');}} className="space-y-4" noValidate>
+                      <form onSubmit={async (e)=>{ e.preventDefault(); setFormError(''); try { await insertPrayerRequest({name:pData.name, email:pData.email||undefined, request:pData.request}); setSubmitted('prayer'); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-4" noValidate>
                         <div>
                           <h2 className="font-playfair text-2xl font-bold text-navy-700 mb-1">Submit a Prayer Request</h2>
                           <p className="text-[#6B6B6B] text-sm">Your request will be held in confidence and prayed over faithfully.</p>
@@ -138,6 +141,7 @@ export default function ContactClient() {
                         <button type="submit" className="inline-flex items-center gap-2 px-7 py-3.5 bg-navy-700 text-white font-bold rounded-full hover:bg-navy-600 transition-all duration-300 hover:-translate-y-px">
                           Submit Request <Heart size={15} aria-hidden="true" />
                         </button>
+                        {formError && <p className="text-red-500 text-xs">{formError}</p>}
                       </form>
                     )
                   )}
@@ -153,7 +157,7 @@ export default function ContactClient() {
                         <p className="text-[#6B6B6B]">Welcome, {nData.name}! Look out for updates from In Him Daily.</p>
                       </div>
                     ) : (
-                      <form onSubmit={(e)=>{e.preventDefault();setSubmitted('newsletter');}} className="space-y-4" noValidate>
+                      <form onSubmit={async (e)=>{ e.preventDefault(); setFormError(''); try { await insertNewsletterSubscriber({name:nData.name,email:nData.email}); setSubmitted('newsletter'); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-4" noValidate>
                         <div>
                           <h2 className="font-playfair text-2xl font-bold text-navy-700 mb-1">Subscribe to Our Newsletter</h2>
                           <p className="text-[#6B6B6B] text-sm">New content, family resources, and ministry updates.</p>
@@ -170,6 +174,7 @@ export default function ContactClient() {
                         <button type="submit" className="inline-flex items-center gap-2 px-7 py-3.5 bg-navy-700 text-white font-bold rounded-full hover:bg-navy-600 transition-all duration-300 hover:-translate-y-px">
                           Subscribe <ArrowRight size={15} aria-hidden="true" />
                         </button>
+                        {formError && <p className="text-red-500 text-xs">{formError}</p>}
                         <p className="text-[#6B6B6B]/45 text-xs">No spam. Unsubscribe anytime.</p>
                       </form>
                     )

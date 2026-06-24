@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ArrowRight, BookOpen, Star, Check, X, Sparkles, Users, ChevronRight } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import WhatsAppCommunity from '@/components/WhatsAppCommunity';
+import { insertFreeSampleLead } from '@/lib/supabase';
 
 /* ─── static data ───────────────────────────────────────────────── */
 const familyEncounterData = {
@@ -61,12 +62,19 @@ export default function HomePage() {
   const [submitted, setSubmitted]   = useState(false);
   const [email, setEmail]           = useState('');
   const [firstName, setFirstName]   = useState('');
+  const [formError, setFormError]   = useState('');
 
   const data = familyEncounterData[active];
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (email && firstName) setSubmitted(true);
+    if (!email || !firstName) return;
+    try {
+      await insertFreeSampleLead({ first_name: firstName, email, source: 'homepage_cta' });
+      setSubmitted(true);
+    } catch {
+      setFormError('Something went wrong. Please try again.');
+    }
   }
 
   return (
@@ -465,6 +473,7 @@ export default function HomePage() {
                 <button type="submit" className="w-full py-4 bg-gold-500 hover:bg-gold-400 text-navy-800 font-bold rounded-full transition-all duration-300 shadow-gold hover:-translate-y-0.5 text-[0.9rem]">
                   Send Me The Free Sample
                 </button>
+                {formError && <p className="text-red-300 text-xs text-center">{formError}</p>}
                 <p className="text-white/30 text-xs">No spam. Just scripture. Unsubscribe anytime.</p>
               </form>
             )}
