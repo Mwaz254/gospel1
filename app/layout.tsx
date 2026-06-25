@@ -29,15 +29,20 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   metadataBase: new URL('https://inhimdaily.org'),
   title: {
-    default: 'In Him Daily | Every Generation. One Jesus. Every Day.',
+    default: 'In Him Daily | Daily Christian Devotionals & Faith Community',
     template: '%s | In Him Daily',
   },
   description:
-    'In Him Daily is a devotional ministry written simultaneously for adults, teenagers, and children—so every generation in your family encounters Jesus through the same scripture on the same day.',
+    'Grow closer to Christ through daily devotionals, Bible reflections, prayer resources, and a thriving Christian community. Written for adults, teens, and children — every generation, every day.',
   keywords: [
     'Christian devotional',
+    'daily devotional',
     'family devotional',
     'daily Bible reading',
+    'Bible reflections',
+    'prayer resources',
+    'Christian community',
+    'faith community',
     'generational devotional',
     'kids devotional',
     'teen devotional',
@@ -45,6 +50,8 @@ export const metadata: Metadata = {
     'In Him Daily',
     'Jesus devotional',
     'family Bible study',
+    'daily scripture',
+    'grow closer to Christ',
   ],
   authors: [{ name: 'In Him Daily', url: 'https://inhimdaily.org' }],
   creator: 'In Him Daily',

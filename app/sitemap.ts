@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://inhimdaily.org';
-  const routes = ['', '/about', '/devotionals', '/free-sample', '/prayer-partners', '/contact'];
+  const routes = ['', '/about', '/devotionals', '/free-sample', '/prayer-partners', '/prayer-guidelines', '/contact', '/privacy-policy'];
 
   return routes.map((route) => ({
     url: `${base}${route}`,

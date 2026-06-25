@@ -17,6 +17,7 @@ const resourceLinks = [
   { href: '/free-sample', label: "Children's Edition" },
   { href: '/prayer-guidelines', label: 'Prayer Guidelines' },
   { href: '/devotionals', label: 'Series Library' },
+  { href: '/privacy-policy', label: 'Privacy Policy' },
 ];
 
 export default function Footer() {
@@ -108,9 +109,12 @@ export default function Footer() {
           <p className="text-xs text-white/35">
             &copy; {new Date().getFullYear()} In Him Daily. All rights reserved.
           </p>
-          <p className="text-xs text-white/35 flex items-center gap-1.5">
-            Made with <Heart size={11} className="text-gold-500 fill-gold-500" aria-hidden="true" /> for families everywhere
-          </p>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy-policy" className="text-xs text-white/35 hover:text-gold-300 transition-colors">Privacy Policy</Link>
+            <p className="text-xs text-white/35 flex items-center gap-1.5">
+              Made with <Heart size={11} className="text-gold-500 fill-gold-500" aria-hidden="true" /> for families everywhere
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Heart, Globe, Shield, BookOpen, Users } from 'lucide-react';
+import { ArrowRight, Heart, Globe, Shield, BookOpen, Users, Cross, Church, Crown } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const beliefs = [
@@ -118,6 +118,76 @@ export default function AboutClient() {
               &ldquo;We believe a generation that encounters Jesus together will stand together. We are building devotional tools to make that encounter possible—for every family, in every season.&rdquo;
             </p>
             <div className="gold-divider mx-auto" aria-hidden="true" />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Statement of Faith ── */}
+      <section className="py-24 bg-ivory-200" aria-labelledby="faith-heading">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal className="text-center mb-14">
+            <div className="w-12 h-12 mx-auto mb-5 rounded-xl bg-navy-700 flex items-center justify-center">
+              <Cross size={22} className="text-gold-300" aria-hidden="true" />
+            </div>
+            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Our Statement of Faith</p>
+            <h2 id="faith-heading" className="font-playfair text-3xl md:text-4xl font-bold text-navy-700">What We Believe</h2>
+          </ScrollReveal>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {[
+              { title: 'The Scriptures', desc: 'We believe the Bible is the inspired, infallible, and authoritative Word of God — living, active, and sufficient for every dimension of life and faith.' },
+              { title: 'The Trinity', desc: 'We believe in one God eternally existing in three persons: Father, Son, and Holy Spirit — equal in power, glory, and majesty.' },
+              { title: 'Jesus Christ', desc: 'We believe Jesus is the Son of God — fully God and fully man, born of a virgin, crucified for our sins, risen on the third day, and coming again in glory.' },
+              { title: 'Salvation', desc: 'We believe salvation is by grace alone, through faith alone, in Christ alone. No one is too far, too broken, or too ordinary for His grace.' },
+              { title: 'The Holy Spirit', desc: 'We believe the Holy Spirit indwells, transforms, empowers, and guides every believer into a daily, living encounter with Jesus.' },
+              { title: 'The Family', desc: 'We believe the family is the first and most powerful place of discipleship — and that every generation deserves to encounter Jesus at full depth.' },
+            ].map((item, i) => (
+              <ScrollReveal key={i} delay={i * 60}>
+                <div className="p-6 rounded-2xl bg-white border border-ivory-300 shadow-sm h-full">
+                  <h3 className="font-playfair text-lg font-bold text-navy-700 mb-2">{item.title}</h3>
+                  <p className="text-[#6B6B6B] text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Leadership ── */}
+      <section className="py-24 bg-[#FAF8F3]" aria-labelledby="leadership-heading">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal className="text-center mb-14">
+            <div className="w-12 h-12 mx-auto mb-5 rounded-xl bg-gold-500 flex items-center justify-center">
+              <Crown size={22} className="text-navy-800" aria-hidden="true" />
+            </div>
+            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Our Leadership</p>
+            <h2 id="leadership-heading" className="font-playfair text-3xl md:text-4xl font-bold text-navy-700">The Team Behind In Him Daily</h2>
+          </ScrollReveal>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {[
+              { name: 'Founder & Lead Writer', role: 'Vision & Theological Direction', desc: 'A pastor with over 15 years of ministry experience, called to help families encounter Jesus through His Word daily.' },
+              { name: 'Teen Edition Writer', role: 'Youth Content', desc: 'A youth minister passionate about making scripture real, honest, and accessible for teenagers without talking down to them.' },
+              { name: "Children's Edition Writer", role: 'Kids Content', desc: 'An educator and parent who crafts wonder-filled, story-rich devotionals that help children meet Jesus naturally.' },
+            ].map((person, i) => (
+              <ScrollReveal key={i} delay={i * 80}>
+                <div className="p-6 rounded-2xl bg-white border border-ivory-300 shadow-sm text-center h-full">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-navy-700 flex items-center justify-center">
+                    <Church size={24} className="text-gold-300" aria-hidden="true" />
+                  </div>
+                  <h3 className="font-playfair text-base font-bold text-navy-700 mb-1">{person.name}</h3>
+                  <p className="text-gold-600 text-xs font-semibold mb-3">{person.role}</p>
+                  <p className="text-[#6B6B6B] text-sm leading-relaxed">{person.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+          <ScrollReveal className="text-center mt-10">
+            <p className="text-[#6B6B6B] text-sm">
+              Have a question about our ministry?{' '}
+              <Link href="/contact" className="text-navy-700 font-semibold hover:text-gold-600 transition-colors">
+                Contact us
+              </Link>
+              {' '}— we&apos;d love to hear from you.
+            </p>
           </ScrollReveal>
         </div>
       </section>

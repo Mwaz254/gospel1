@@ -15,6 +15,16 @@ const navLinks = [
   { href: '/contact',        label: 'Contact' },
 ];
 
+const footerLinks = [
+  { href: '/about',           label: 'About' },
+  { href: '/devotionals',     label: 'Devotionals' },
+  { href: '/free-sample',     label: 'Free Sample' },
+  { href: '/prayer-partners', label: 'Prayer Partners' },
+  { href: '/prayer-guidelines',label: 'Prayer Guidelines' },
+  { href: '/contact',         label: 'Contact' },
+  { href: '/privacy-policy',  label: 'Privacy Policy' },
+];
+
 export default function Navigation() {
   const [scrolled, setScrolled]     = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
