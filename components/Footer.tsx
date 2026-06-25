@@ -43,7 +43,7 @@ export default function Footer() {
             <Link href="/" className="inline-flex items-center gap-4 mb-6 group" aria-label="In Him Daily home">
               <div className="relative w-16 h-16 flex-shrink-0 drop-shadow-lg transition-transform duration-300 group-hover:scale-105">
                 <Image
-                  src="/images/ChatGPT_Image_Jun_12,_2026,_11_01_49_PM.png"
+                  src="/images/ChatGPT_Image_Jun_25,_2026,_02_12_03_PM.png"
                   alt="In Him Daily logo"
                   fill
                   className="object-contain"
@@ -55,12 +55,12 @@ export default function Footer() {
                   In Him <em className="not-italic text-gold-400">Daily</em>
                 </p>
                 <p className="text-[0.65rem] text-white/50 tracking-[0.15em] uppercase mt-1">
-                  Every Generation. One Jesus. Every Day.
+                  Hidden with Christ in God
                 </p>
               </div>
             </Link>
             <p className="text-white/60 text-sm leading-relaxed max-w-[340px]">
-              A devotional ministry helping every generation in your family encounter Jesus through the same scripture, every day.
+              Daily devotionals for the whole family — rooted in the finished work of Christ. <em className="not-italic text-gold-300">&ldquo;For you died, and your life is now hidden with Christ in God.&rdquo;</em> — Colossians 3:3
             </p>
             <a
               href="mailto:hello@inhimdaily.org"

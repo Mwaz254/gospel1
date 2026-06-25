@@ -27,6 +27,10 @@ export default function AboutClient() {
           <p className="text-white/65 text-xl max-w-2xl mx-auto leading-relaxed">
             A vision born from a simple, powerful question: What if every generation in a family could encounter Jesus together—on the same day, through the same scripture?
           </p>
+          <p className="font-cormorant text-lg text-gold-200 italic mt-4 max-w-xl mx-auto">
+            &ldquo;For you died, and your life is now hidden with Christ in God.&rdquo;
+          </p>
+          <p className="text-gold-400 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mt-1">Colossians 3:3</p>
         </div>
       </section>
 

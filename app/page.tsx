@@ -158,10 +158,34 @@ export default function HomePage() {
             <span className="text-gold-gradient">Every Day</span>
           </h1>
 
-          <p className="text-white/70 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
+          <p className="text-white/70 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-8">
             Daily devotionals, Bible reflections, prayer resources, and a community of believers.
             Written for <em className="not-italic text-gold-300">adults, teens, and children</em> — so every generation encounters Jesus together.
           </p>
+
+          {/* Colossians 3:3 foundation verse */}
+          <div className="mb-6">
+            <p className="font-cormorant text-lg sm:text-xl text-gold-200 italic leading-relaxed max-w-xl mx-auto">
+              &ldquo;For you died, and your life is now hidden with Christ in God.&rdquo;
+            </p>
+            <p className="text-gold-400 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mt-1">Colossians 3:3</p>
+          </div>
+
+          {/* Rolling theme ticker */}
+          <div className="theme-roller mb-10 max-w-2xl mx-auto">
+            <span className="font-cormorant text-lg sm:text-xl text-white/80 italic">
+              Because everything you need is already found in Him.
+            </span>
+            <span className="font-cormorant text-lg sm:text-xl text-white/80 italic">
+              &ldquo;Discover who you are, what you have, and where you stand — in Christ.&rdquo;
+            </span>
+            <span className="font-cormorant text-lg sm:text-xl text-white/80 italic">
+              &ldquo;Grace. Identity. Victory. Every day — in Him.&rdquo;
+            </span>
+            <span className="font-cormorant text-lg sm:text-xl text-white/80 italic">
+              &ldquo;Your life is hidden with Christ in God. Live from that place — every day.&rdquo;
+            </span>
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/devotionals" className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold-500 hover:bg-gold-400 text-navy-800 font-bold text-[0.9rem] rounded-full transition-all duration-300 shadow-gold hover:-translate-y-0.5">
@@ -696,9 +720,9 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="gold-divider mx-auto mb-10" aria-hidden="true" />
             <p className="font-cormorant text-4xl md:text-5xl lg:text-6xl text-navy-700 italic leading-tight scripture-glow">
-              &ldquo;The Word became flesh and made His dwelling among us.&rdquo;
+              &ldquo;For you died, and your life is now hidden with Christ in God.&rdquo;
             </p>
-            <p className="mt-5 text-gold-600 text-[0.72rem] font-semibold tracking-[0.18em] uppercase">John 1:14</p>
+            <p className="mt-5 text-gold-600 text-[0.72rem] font-semibold tracking-[0.18em] uppercase">Colossians 3:3</p>
             <div className="gold-divider mx-auto mt-10" aria-hidden="true" />
           </ScrollReveal>
         </div>
