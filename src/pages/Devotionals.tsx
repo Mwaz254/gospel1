@@ -1,7 +1,5 @@
-'use client';
-
-import Link from 'next/link';
-import { ArrowRight, BookOpen, Users, Clock, Check, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, BookOpen, Users, Clock, Check } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const series = [
@@ -32,11 +30,9 @@ const inside = [
   { n:'06', title:'Family Connection',   desc:'Questions designed to spark conversation across generations.' },
 ];
 
-export default function DevotionalsClient() {
+export default function DevotionalsPage() {
   return (
     <div className="overflow-x-hidden">
-
-      {/* Hero */}
       <section className="relative pt-32 pb-24 bg-navy-700 overflow-hidden" aria-label="Devotionals hero">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 75%, rgba(201,152,58,0.11) 0%, transparent 70%)' }} />
@@ -51,7 +47,6 @@ export default function DevotionalsClient() {
         </div>
       </section>
 
-      {/* Timeline banner */}
       <section className="py-10 bg-gold-50 border-y border-gold-200" aria-label="240 Days of Encountering Jesus">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <ScrollReveal className="text-center mb-6">
@@ -59,12 +54,12 @@ export default function DevotionalsClient() {
           </ScrollReveal>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             {[
-              {day:'Day 1',  name:'The Word',          ref:'John 1:1',       s1:true},
-              {day:'Day 30', name:'Bread of Life',     ref:'John 6:35',      s1:true},
-              {day:'Day 60', name:'Good Shepherd',     ref:'John 10:11',     s1:true},
-              {day:'Day 120',name:'King of Kings',     ref:'Rev 19:16',      s1:true},
-              {day:'Day 121',name:'Grace & Truth',     ref:'John 1:14',      s1:false},
-              {day:'Day 240',name:'It Is Finished',    ref:'John 19:30',     s1:false},
+              {day:'Day 1',  name:'The Word',       ref:'John 1:1',   s1:true},
+              {day:'Day 30', name:'Bread of Life',  ref:'John 6:35',  s1:true},
+              {day:'Day 60', name:'Good Shepherd',  ref:'John 10:11', s1:true},
+              {day:'Day 120',name:'King of Kings',  ref:'Rev 19:16',  s1:true},
+              {day:'Day 121',name:'Grace & Truth',  ref:'John 1:14',  s1:false},
+              {day:'Day 240',name:'It Is Finished', ref:'John 19:30', s1:false},
             ].map((item,i,arr)=>(
               <div key={i} className="flex items-center gap-3">
                 <div className="text-center">
@@ -84,7 +79,6 @@ export default function DevotionalsClient() {
         </div>
       </section>
 
-      {/* Series cards */}
       <section className="py-24 bg-[#FAF8F3]" aria-label="Series">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
           {series.map((s,i)=>(
@@ -123,7 +117,7 @@ export default function DevotionalsClient() {
                         <p key={j} className="text-[0.82rem] text-navy-600 py-1 border-b border-ivory-300 last:border-0">{a}</p>
                       ))}
                     </div>
-                    <Link href="/free-sample"
+                    <Link to="/free-sample"
                       className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-px w-fit ${
                         s.available ? 'bg-navy-700 text-white hover:bg-navy-600 shadow-navy' : 'bg-ivory-300 text-navy-400 cursor-not-allowed'
                       }`}>
@@ -138,7 +132,6 @@ export default function DevotionalsClient() {
         </div>
       </section>
 
-      {/* What's inside */}
       <section className="py-24 bg-ivory-200" aria-labelledby="inside-heading">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -161,13 +154,12 @@ export default function DevotionalsClient() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-20 bg-navy-700 text-center" aria-label="Get started">
         <div className="max-w-xl mx-auto px-4">
           <ScrollReveal>
             <h2 className="font-playfair text-4xl font-bold text-white mb-4">Ready to Begin?</h2>
             <p className="text-white/55 mb-8">Start your family's encounter with a free 7-day sample from Series One.</p>
-            <Link href="/free-sample" className="inline-flex items-center gap-2 px-8 py-4 bg-gold-500 text-navy-800 font-bold rounded-full hover:bg-gold-400 transition-all duration-300 shadow-gold hover:-translate-y-0.5">
+            <Link to="/free-sample" className="inline-flex items-center gap-2 px-8 py-4 bg-gold-500 text-navy-800 font-bold rounded-full hover:bg-gold-400 transition-all duration-300 shadow-gold hover:-translate-y-0.5">
               Get Your Free Sample <ArrowRight size={17} aria-hidden="true" />
             </Link>
           </ScrollReveal>

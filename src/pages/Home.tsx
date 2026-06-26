@@ -1,13 +1,10 @@
-'use client';
-
 import { useState } from 'react';
-import Link from 'next/link';
-import { ArrowRight, BookOpen, Star, Check, X, Sparkles, Users, ChevronRight, Mail, Globe, Heart, Share2, Copy } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, BookOpen, Star, Check, X, Sparkles, ChevronRight, Mail, Copy } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import WhatsAppCommunity from '@/components/WhatsAppCommunity';
 import { insertFreeSampleLead, insertNewsletterSubscriber } from '@/lib/supabase';
 
-/* ─── static data ───────────────────────────────────────────────── */
 const todaysVerse = {
   reference: 'John 1:14',
   text: 'The Word became flesh and made His dwelling among us. We have seen His glory, the glory of the one and only Son, who came from the Father, full of grace and truth.',
@@ -114,7 +111,7 @@ export default function HomePage() {
   }
 
   function copyLink() {
-    navigator.clipboard.writeText(typeof window !== 'undefined' ? window.location.href : '');
+    navigator.clipboard.writeText(window.location.href);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
@@ -122,26 +119,17 @@ export default function HomePage() {
   return (
     <div className="overflow-x-hidden">
 
-      {/* ══════════════════════════════════════════════
-          HERO
-      ══════════════════════════════════════════════ */}
+      {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center bg-navy-700 overflow-hidden" aria-label="Hero">
-        {/* radial glow */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true" style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 65%, rgba(201,152,58,0.13) 0%, transparent 70%)' }} />
-
-        {/* subtle dot grid */}
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none" aria-hidden="true"
           style={{ backgroundImage: 'radial-gradient(circle, #E4B86A 1px, transparent 1px)', backgroundSize: '36px 36px' }} />
-
-        {/* light rays */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-3/4 pointer-events-none" aria-hidden="true">
           {[-36,-22,-10,0,10,22,36].map((deg, i) => (
             <div key={i} className="absolute bottom-0 left-1/2 origin-bottom"
               style={{ width: '1.5px', height: `${42 + i * 5}%`, background: 'linear-gradient(to top, rgba(228,184,106,0.55), transparent)', transform: `translateX(-50%) rotate(${deg}deg)`, animation: `ray-appear ${0.9 + i * 0.12}s ease-out forwards` }} />
           ))}
         </div>
-
-        {/* floating particles */}
         {[14,25,38,52,63,75,86,92].map((left, i) => (
           <div key={i} className="particle absolute w-1 h-1 rounded-full bg-gold-300/40 pointer-events-none" aria-hidden="true"
             style={{ left: `${left}%`, top: `${22 + (i % 3) * 18}%`, animationDelay: `${i * 0.55}s`, animationDuration: `${3.5 + i * 0.6}s` }} />
@@ -163,7 +151,6 @@ export default function HomePage() {
             Written for <em className="not-italic text-gold-300">adults, teens, and children</em> — so every generation encounters Jesus together.
           </p>
 
-          {/* Colossians 3:3 foundation verse */}
           <div className="mb-6">
             <p className="font-cormorant text-lg sm:text-xl text-gold-200 italic leading-relaxed max-w-xl mx-auto">
               &ldquo;For you died, and your life is now hidden with Christ in God.&rdquo;
@@ -171,7 +158,6 @@ export default function HomePage() {
             <p className="text-gold-400 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mt-1">Colossians 3:3</p>
           </div>
 
-          {/* Rolling theme ticker */}
           <div className="theme-roller mb-10 max-w-2xl mx-auto">
             <span className="font-cormorant text-lg sm:text-xl text-white/80 italic">
               Because everything you need is already found in Him.
@@ -188,23 +174,22 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/devotionals" className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold-500 hover:bg-gold-400 text-navy-800 font-bold text-[0.9rem] rounded-full transition-all duration-300 shadow-gold hover:-translate-y-0.5">
+            <Link to="/devotionals" className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold-500 hover:bg-gold-400 text-navy-800 font-bold text-[0.9rem] rounded-full transition-all duration-300 shadow-gold hover:-translate-y-0.5">
               Read Today&apos;s Devotional
               <ArrowRight size={17} className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
             </Link>
-            <Link href="#community" className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/25 text-white/80 hover:text-white hover:border-white/40 font-medium text-[0.9rem] rounded-full transition-all duration-200">
+            <a href="#community" className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/25 text-white/80 hover:text-white hover:border-white/40 font-medium text-[0.9rem] rounded-full transition-all duration-200">
               Join Our WhatsApp Community
-            </Link>
+            </a>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-            <Link href="/free-sample" className="inline-flex items-center justify-center gap-2 px-6 py-3 text-gold-300 hover:text-gold-200 font-medium text-[0.85rem] rounded-full transition-all duration-200 hover:bg-white/5">
+            <Link to="/free-sample" className="inline-flex items-center justify-center gap-2 px-6 py-3 text-gold-300 hover:text-gold-200 font-medium text-[0.85rem] rounded-full transition-all duration-200 hover:bg-white/5">
               Start Your Faith Journey
               <ArrowRight size={15} aria-hidden="true" />
             </Link>
           </div>
 
-          {/* pathway visual */}
           <div className="mt-20 flex items-end justify-center gap-5" aria-hidden="true">
             {[{l:'Adults',h:56},{l:'Teens',h:40},{l:'Children',h:28}].map((p,i)=>(
               <div key={i} className="flex flex-col items-center gap-2 animate-fade-up opacity-0" style={{animationDelay:`${i*0.18}s`,animationFillMode:'forwards'}}>
@@ -222,9 +207,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          SOCIAL PROOF STATS
-      ══════════════════════════════════════════════ */}
+      {/* STATS */}
       <section className="py-16 bg-navy-700 border-t border-white/5" aria-labelledby="stats-heading">
         <h2 id="stats-heading" className="sr-only">Community statistics</h2>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -247,9 +230,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          TODAY'S VERSE
-      ══════════════════════════════════════════════ */}
+      {/* TODAY'S VERSE */}
       <section className="py-24 bg-[#FAF8F3]" aria-labelledby="verse-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-10">
@@ -272,9 +253,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          LATEST DEVOTIONALS
-      ══════════════════════════════════════════════ */}
+      {/* LATEST DEVOTIONALS */}
       <section className="py-24 bg-ivory-200" aria-labelledby="latest-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -294,29 +273,17 @@ export default function HomePage() {
                   <p className="text-gold-500 text-sm font-medium mb-3">{d.scripture}</p>
                   <p className="text-[#6B6B6B] text-sm leading-relaxed flex-1 mb-5">{d.excerpt}</p>
                   <div className="flex items-center justify-between pt-4 border-t border-ivory-300">
-                    <Link href="/devotionals" className="text-sm font-semibold text-navy-700 hover:text-gold-600 transition-colors flex items-center gap-1">
+                    <Link to="/devotionals" className="text-sm font-semibold text-navy-700 hover:text-gold-600 transition-colors flex items-center gap-1">
                       Read more <ChevronRight size={14} aria-hidden="true" />
                     </Link>
                     <div className="flex items-center gap-2">
-                      <button onClick={() => {
-                        if (typeof window !== 'undefined') {
-                          window.open(`https://wa.me/?text=${encodeURIComponent(d.title + ' — ' + d.scripture + ' | In Him Daily')}`, '_blank');
-                        }
-                      }} aria-label="Share on WhatsApp" className="w-8 h-8 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 flex items-center justify-center transition-colors">
+                      <button onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(d.title + ' — ' + d.scripture + ' | In Him Daily')}`, '_blank')} aria-label="Share on WhatsApp" className="w-8 h-8 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 flex items-center justify-center transition-colors">
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="text-[#128C7E]" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                       </button>
-                      <button onClick={() => {
-                        if (typeof window !== 'undefined') {
-                          window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
-                        }
-                      }} aria-label="Share on Facebook" className="w-8 h-8 rounded-full bg-blue-50 hover:bg-blue-100 flex items-center justify-center transition-colors">
+                      <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')} aria-label="Share on Facebook" className="w-8 h-8 rounded-full bg-blue-50 hover:bg-blue-100 flex items-center justify-center transition-colors">
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="text-blue-600" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                       </button>
-                      <button onClick={() => {
-                        if (typeof window !== 'undefined') {
-                          window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(d.title + ' — ' + d.scripture + ' | In Him Daily')}`, '_blank');
-                        }
-                      }} aria-label="Share on X" className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                      <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(d.title + ' — ' + d.scripture + ' | In Him Daily')}`, '_blank')} aria-label="Share on X" className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                       </button>
                       <button onClick={copyLink} aria-label={copied ? 'Link copied' : 'Copy link'} className="w-8 h-8 rounded-full bg-ivory-200 hover:bg-ivory-300 flex items-center justify-center transition-colors">
@@ -329,16 +296,14 @@ export default function HomePage() {
             ))}
           </div>
           <ScrollReveal className="text-center mt-10">
-            <Link href="/devotionals" className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 text-white font-semibold rounded-full hover:bg-navy-600 transition-colors">
+            <Link to="/devotionals" className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 text-white font-semibold rounded-full hover:bg-navy-600 transition-colors">
               View All Devotionals <ArrowRight size={17} aria-hidden="true" />
             </Link>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          PROBLEM
-      ══════════════════════════════════════════════ */}
+      {/* PROBLEM */}
       <section className="py-24 bg-[#FAF8F3]" aria-labelledby="problem-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -347,7 +312,6 @@ export default function HomePage() {
               Does your family read the Bible together—but experience it separately?
             </h2>
           </ScrollReveal>
-
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <ScrollReveal delay={80}>
               <div className="p-8 rounded-2xl bg-white border border-ivory-300 shadow-sm h-full">
@@ -365,7 +329,6 @@ export default function HomePage() {
                 </ul>
               </div>
             </ScrollReveal>
-
             <ScrollReveal delay={180}>
               <div className="p-8 rounded-2xl bg-navy-700 h-full">
                 <div className="w-9 h-9 rounded-full bg-gold-400/20 flex items-center justify-center mb-5">
@@ -386,9 +349,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          SOLUTION — THREE EDITIONS
-      ══════════════════════════════════════════════ */}
+      {/* THREE EDITIONS */}
       <section className="py-24 bg-ivory-200" aria-labelledby="solution-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -396,8 +357,6 @@ export default function HomePage() {
             <h2 id="solution-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">One Encounter. Three Generations.</h2>
             <p className="text-[#6B6B6B] text-lg max-w-xl mx-auto">The same scripture, in three unique voices—each crafted to meet its reader exactly where they are.</p>
           </ScrollReveal>
-
-          {/* shared scripture */}
           <ScrollReveal className="max-w-2xl mx-auto text-center mb-14">
             <div className="relative p-8 rounded-2xl bg-navy-700 border border-gold-500/20 overflow-hidden">
               <div className="absolute inset-0 pointer-events-none" style={{background:'radial-gradient(ellipse at 50% 110%, rgba(201,152,58,0.12) 0%, transparent 65%)'}} aria-hidden="true" />
@@ -409,7 +368,6 @@ export default function HomePage() {
               </div>
             </div>
           </ScrollReveal>
-
           <div className="grid md:grid-cols-3 gap-6">
             {editions.map((ed, i) => (
               <ScrollReveal key={i} delay={i * 90}>
@@ -431,9 +389,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          FAMILY ENCOUNTER (interactive)
-      ══════════════════════════════════════════════ */}
+      {/* FAMILY ENCOUNTER */}
       <section className="py-24 bg-[#FAF8F3]" id="family-encounter" aria-labelledby="encounter-heading">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-12">
@@ -441,8 +397,6 @@ export default function HomePage() {
             <h2 id="encounter-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">The Family Encounter</h2>
             <p className="text-[#6B6B6B] text-lg max-w-xl mx-auto">Select your generation to see how the same scripture speaks uniquely to you.</p>
           </ScrollReveal>
-
-          {/* scripture */}
           <ScrollReveal className="max-w-xl mx-auto text-center mb-10">
             <div className="inline-block px-6 py-4 rounded-xl bg-gold-50 border border-gold-200">
               <p className="font-cormorant text-lg text-navy-700 italic leading-snug">
@@ -451,8 +405,6 @@ export default function HomePage() {
               <span className="text-gold-600 text-sm font-semibold mt-2 block">{familyEncounterData.scripture.reference}</span>
             </div>
           </ScrollReveal>
-
-          {/* tabs */}
           <div className="flex justify-center gap-2.5 mb-10" role="tablist" aria-label="Choose generation">
             {(['adult','teen','child'] as const).map((gen) => (
               <button key={gen} role="tab" aria-selected={active === gen} aria-controls={`panel-${gen}`}
@@ -464,8 +416,6 @@ export default function HomePage() {
               </button>
             ))}
           </div>
-
-          {/* content panel */}
           <div className="max-w-2xl mx-auto" id={`panel-${active}`} role="tabpanel">
             <div className="bg-white rounded-2xl shadow-card-hover border border-ivory-300 overflow-hidden">
               <div className={`px-8 py-4 ${active==='adult' ? 'bg-navy-700' : active==='teen' ? 'bg-gold-500' : 'bg-lavender-200'}`}>
@@ -492,14 +442,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          WHATSAPP COMMUNITY
-      ══════════════════════════════════════════════ */}
       <WhatsAppCommunity />
 
-      {/* ══════════════════════════════════════════════
-          COMPARISON TABLE
-      ══════════════════════════════════════════════ */}
+      {/* COMPARISON TABLE */}
       <section className="py-24 bg-navy-700" aria-labelledby="comparison-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -507,7 +452,6 @@ export default function HomePage() {
             <h2 id="comparison-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Why In Him Daily Is Different</h2>
             <p className="text-white/55 text-lg max-w-xl mx-auto">Traditional devotionals were built for individuals. In Him Daily was built for families—all of them, at once.</p>
           </ScrollReveal>
-
           <ScrollReveal>
             <div className="rounded-2xl overflow-hidden border border-white/10">
               <div className="grid grid-cols-3 bg-white/5">
@@ -523,7 +467,7 @@ export default function HomePage() {
                 <div key={i} className={`grid grid-cols-3 border-t border-white/10 ${i%2===0 ? 'bg-transparent' : 'bg-white/[0.02]'}`}>
                   <div className="p-4"><span className="text-white/75 text-sm">{row.feature}</span></div>
                   <div className="p-4 flex items-center justify-center border-l border-white/10">
-                    {row.traditional === false ? <X size={15} className="text-red-400" aria-label="No" /> : row.traditional === true ? <Check size={15} className="text-white/40" aria-label="Yes" /> : <span className="text-white/40 text-xs text-center leading-tight">{row.traditional}</span>}
+                    {row.traditional === false ? <X size={15} className="text-red-400" aria-label="No" /> : row.traditional === true ? <Check size={15} className="text-white/40" aria-label="Yes" /> : <span className="text-white/40 text-xs text-center leading-tight">{row.traditional as string}</span>}
                   </div>
                   <div className="p-4 flex items-center justify-center border-l border-white/10 bg-gold-500/5">
                     {row.ihd && <Check size={15} className="text-gold-400" aria-label="Yes" />}
@@ -535,9 +479,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          DEVOTIONAL LIBRARY
-      ══════════════════════════════════════════════ */}
+      {/* DEVOTIONAL LIBRARY */}
       <section className="py-24 bg-ivory-200" aria-labelledby="library-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -545,7 +487,6 @@ export default function HomePage() {
             <h2 id="library-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">The Devotional Library</h2>
             <p className="text-[#6B6B6B] text-lg max-w-xl mx-auto">Premium series crafted to take your family deeper into Jesus—one scripture at a time.</p>
           </ScrollReveal>
-
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
               { series:'Series One', title:'I AM', sub:'120 Names of Jesus', available:true, img:'https://images.pexels.com/photos/1111319/pexels-photo-1111319.jpeg?auto=compress&cs=tinysrgb&w=600', desc:"A transformational journey through 120 names and titles of Jesus Christ—from Alpha to Omega, Bread of Life to King of Kings." },
@@ -569,7 +510,7 @@ export default function HomePage() {
                     <p className="text-[#6B6B6B] text-sm leading-relaxed mb-5">{s.desc}</p>
                     <div className="flex items-center justify-between">
                       <span className="text-[0.72rem] text-navy-500 bg-ivory-200 px-3 py-1.5 rounded-full">120 Days</span>
-                      <Link href="/devotionals" className="text-sm font-semibold text-navy-700 hover:text-gold-600 transition-colors flex items-center gap-1">
+                      <Link to="/devotionals" className="text-sm font-semibold text-navy-700 hover:text-gold-600 transition-colors flex items-center gap-1">
                         Learn more <ChevronRight size={14} aria-hidden="true" />
                       </Link>
                     </div>
@@ -578,18 +519,15 @@ export default function HomePage() {
               </ScrollReveal>
             ))}
           </div>
-
           <ScrollReveal className="text-center mt-10">
-            <Link href="/devotionals" className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 text-white font-semibold rounded-full hover:bg-navy-600 transition-colors">
+            <Link to="/devotionals" className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 text-white font-semibold rounded-full hover:bg-navy-600 transition-colors">
               View Full Library <ArrowRight size={17} aria-hidden="true" />
             </Link>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          TESTIMONIALS
-      ══════════════════════════════════════════════ */}
+      {/* TESTIMONIALS */}
       <section className="py-24 bg-[#FAF8F3]" aria-labelledby="testimonials-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -620,9 +558,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          EMAIL NEWSLETTER
-      ══════════════════════════════════════════════ */}
+      {/* NEWSLETTER */}
       <section className="py-24 bg-ivory-200" aria-labelledby="newsletter-heading">
         <div className="max-w-xl mx-auto px-4 sm:px-6 text-center">
           <ScrollReveal>
@@ -637,7 +573,6 @@ export default function HomePage() {
             <p className="text-[#6B6B6B] text-lg mb-10 leading-relaxed">
               Don&apos;t rely only on WhatsApp. Get each day&apos;s devotional delivered directly to your email — and own your faith journey.
             </p>
-
             {nlSubmitted ? (
               <div className="p-8 rounded-2xl bg-green-50 border border-green-200 animate-fade-in">
                 <div className="w-11 h-11 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
@@ -665,9 +600,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          FREE SAMPLE CTA
-      ══════════════════════════════════════════════ */}
+      {/* FREE SAMPLE CTA */}
       <section className="py-24 bg-navy-700 relative overflow-hidden" aria-labelledby="cta-heading">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true" style={{background:'radial-gradient(ellipse 55% 45% at 50% 50%, rgba(201,152,58,0.10) 0%, transparent 70%)'}} />
         <div className="relative z-10 max-w-xl mx-auto px-4 sm:px-6 text-center">
@@ -684,7 +617,6 @@ export default function HomePage() {
             <p className="text-white/60 text-lg mb-10">
               Receive a free 7-day sample—all three editions, one scripture. See how In Him Daily transforms family devotion.
             </p>
-
             {submitted ? (
               <div className="p-8 rounded-2xl bg-gold-400/15 border border-gold-400/25 animate-fade-in">
                 <div className="w-11 h-11 rounded-full bg-gold-400/25 flex items-center justify-center mx-auto mb-4">
@@ -712,9 +644,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          CLOSING SCRIPTURE
-      ══════════════════════════════════════════════ */}
+      {/* CLOSING SCRIPTURE */}
       <section className="py-24 bg-[#FAF8F3] text-center" aria-label="Closing scripture">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <ScrollReveal>

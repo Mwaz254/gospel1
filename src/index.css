@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Design tokens ─────────────────────────────────────────────── */
+/* ─── Font variables ─────────────────────────────────────────────── */
 :root {
+  --font-playfair: 'Playfair Display';
+  --font-inter: 'Inter';
+  --font-cormorant: 'Cormorant Garamond';
+
   /* Palette */
   --navy:      #17324D;
   --navy-dark: #0E2035;
@@ -63,6 +67,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   img, video {
@@ -104,7 +109,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #C9983A; /* fallback for older browsers */
+  color: #C9983A;
 }
 
 /* ─── Scripture glow ────────────────────────────────────────────── */

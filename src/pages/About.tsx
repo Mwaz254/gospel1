@@ -1,7 +1,5 @@
-'use client';
-
-import Link from 'next/link';
-import { ArrowRight, Heart, Globe, Shield, BookOpen, Users, Cross, Church, Crown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Heart, Globe, BookOpen, Users, Cross, Church, Crown } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const beliefs = [
@@ -11,7 +9,7 @@ const beliefs = [
   { icon: Globe,    title: 'One Body, One Word',  text: "The Church is one family across all ages. When we read the same scripture, we stand as one body before one Lord." },
 ];
 
-export default function AboutClient() {
+export default function AboutPage() {
   return (
     <div className="overflow-x-hidden">
 
@@ -100,7 +98,6 @@ export default function AboutClient() {
             <p className="text-gold-400 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">The Vision</p>
             <h2 id="vision-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">A Movement, Not Just a Ministry</h2>
           </ScrollReveal>
-
           <div className="grid md:grid-cols-3 gap-5 mb-14">
             {[
               { number:'240+', label:'Days of Content', sub:'Across two complete series' },
@@ -116,7 +113,6 @@ export default function AboutClient() {
               </ScrollReveal>
             ))}
           </div>
-
           <ScrollReveal className="max-w-2xl mx-auto text-center">
             <p className="font-cormorant text-2xl text-white/85 italic leading-relaxed mb-8">
               &ldquo;We believe a generation that encounters Jesus together will stand together. We are building devotional tools to make that encounter possible—for every family, in every season.&rdquo;
@@ -126,7 +122,7 @@ export default function AboutClient() {
         </div>
       </section>
 
-      {/* ── Statement of Faith ── */}
+      {/* Statement of Faith */}
       <section className="py-24 bg-ivory-200" aria-labelledby="faith-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -156,7 +152,7 @@ export default function AboutClient() {
         </div>
       </section>
 
-      {/* ── Leadership ── */}
+      {/* Leadership */}
       <section className="py-24 bg-[#FAF8F3]" aria-labelledby="leadership-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -187,7 +183,7 @@ export default function AboutClient() {
           <ScrollReveal className="text-center mt-10">
             <p className="text-[#6B6B6B] text-sm">
               Have a question about our ministry?{' '}
-              <Link href="/contact" className="text-navy-700 font-semibold hover:text-gold-600 transition-colors">
+              <Link to="/contact" className="text-navy-700 font-semibold hover:text-gold-600 transition-colors">
                 Contact us
               </Link>
               {' '}— we&apos;d love to hear from you.
@@ -202,7 +198,7 @@ export default function AboutClient() {
           <ScrollReveal>
             <h2 className="font-playfair text-3xl font-bold text-navy-700 mb-4">Join the Movement</h2>
             <p className="text-[#6B6B6B] mb-8">Begin your family's journey with a free 7-day sample devotional.</p>
-            <Link href="/free-sample" className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 text-white font-bold rounded-full hover:bg-navy-600 transition-colors shadow-navy">
+            <Link to="/free-sample" className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 text-white font-bold rounded-full hover:bg-navy-600 transition-colors shadow-navy">
               Get Free Sample <ArrowRight size={17} aria-hidden="true" />
             </Link>
           </ScrollReveal>

@@ -1,7 +1,5 @@
-'use client';
-
 import { useState } from 'react';
-import { Check, BookOpen, Star, ArrowRight } from 'lucide-react';
+import { Check, BookOpen, Star } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import { insertFreeSampleLead } from '@/lib/supabase';
 
@@ -54,7 +52,7 @@ const content: Record<Tab, {
   },
 };
 
-export default function FreeSampleClient() {
+export default function FreeSamplePage() {
   const [tab, setTab]           = useState<Tab>('adult');
   const [submitted, setSubmitted] = useState(false);
   const [email, setEmail]         = useState('');
@@ -65,8 +63,6 @@ export default function FreeSampleClient() {
 
   return (
     <div className="overflow-x-hidden">
-
-      {/* Hero */}
       <section className="relative pt-32 pb-16 bg-navy-700 overflow-hidden" aria-label="Free sample hero">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 75%, rgba(201,152,58,0.11) 0%, transparent 70%)' }} />
@@ -89,11 +85,8 @@ export default function FreeSampleClient() {
         </div>
       </section>
 
-      {/* Sample reader */}
       <section className="py-20 bg-[#FAF8F3]" aria-label="Sample devotional reader">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* tabs */}
           <ScrollReveal className="flex justify-center gap-2.5 mb-10">
             {(['adult','teen','children'] as Tab[]).map((t)=>(
               <button key={t} onClick={()=>setTab(t)} role="tab" aria-selected={tab===t}
@@ -107,7 +100,6 @@ export default function FreeSampleClient() {
 
           <ScrollReveal>
             <div className="rounded-2xl overflow-hidden shadow-card-hover border border-ivory-300 transition-all duration-400">
-              {/* book header */}
               <div className={`${c.headerBg} px-8 py-5 flex items-center justify-between`}>
                 <div>
                   <p className={`text-[0.68rem] font-bold tracking-[0.15em] uppercase ${c.headerText} opacity-70`}>
@@ -117,14 +109,10 @@ export default function FreeSampleClient() {
                 </div>
                 <BookOpen size={22} className={`${c.headerText} opacity-40`} aria-hidden="true" />
               </div>
-
-              {/* scripture */}
               <div className="px-8 py-6 bg-ivory-200 border-b border-ivory-300">
                 <p className="font-cormorant text-xl italic text-navy-700 leading-relaxed">{c.scripture.text}</p>
                 <p className="text-gold-600 text-sm font-semibold mt-2">{c.scripture.ref}</p>
               </div>
-
-              {/* body */}
               <div className="px-8 py-8 bg-white">
                 <h2 className="font-playfair text-2xl font-bold text-navy-700 mb-5">{c.title}</h2>
                 <div className="space-y-3.5 mb-7">
@@ -132,7 +120,6 @@ export default function FreeSampleClient() {
                     <p key={i} className="text-[#6B6B6B] text-sm leading-relaxed">{p}</p>
                   ))}
                 </div>
-
                 <div className="space-y-3">
                   <div className="p-4 rounded-xl bg-ivory-200 border-l-4 border-gold-400">
                     <p className="text-[0.65rem] font-bold text-gold-600 uppercase tracking-[0.12em] mb-1">Reflection</p>
@@ -148,8 +135,6 @@ export default function FreeSampleClient() {
                   </div>
                 </div>
               </div>
-
-              {/* footer */}
               <div className="px-8 py-3.5 bg-ivory-200 border-t border-ivory-300 flex items-center justify-between">
                 <span className="text-xs text-navy-400">Day 1 of 120</span>
                 <div className="flex gap-0.5" aria-label="5 out of 5 stars">
@@ -161,7 +146,6 @@ export default function FreeSampleClient() {
         </div>
       </section>
 
-      {/* Email capture */}
       <section className="py-24 bg-navy-700 relative overflow-hidden" aria-labelledby="sample-cta-heading">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 50%, rgba(201,152,58,0.09) 0%, transparent 70%)' }} />
@@ -174,7 +158,6 @@ export default function FreeSampleClient() {
             <p className="text-white/55 mb-10 text-lg">
               Receive 7 complete days—all three editions—delivered to your inbox. Free, no strings attached.
             </p>
-
             {submitted ? (
               <div className="p-8 rounded-2xl bg-gold-400/15 border border-gold-400/25 animate-fade-in">
                 <div className="w-11 h-11 rounded-full bg-gold-400/25 flex items-center justify-center mx-auto mb-4">
@@ -200,7 +183,6 @@ export default function FreeSampleClient() {
         </div>
       </section>
 
-      {/* Closing scripture */}
       <section className="py-16 bg-[#FAF8F3] text-center" aria-label="Closing scripture">
         <div className="max-w-2xl mx-auto px-4">
           <ScrollReveal>

@@ -1,8 +1,6 @@
-'use client';
-
 import { useState } from 'react';
-import Link from 'next/link';
-import { Heart, Globe, Shield, Users, BookOpen, Sunrise, Check, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Heart, Globe, Shield, Users, BookOpen, Check, ArrowRight } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import { insertPrayerPartner } from '@/lib/supabase';
 
@@ -12,7 +10,6 @@ const focusAreas = [
   { icon: Globe,    title: 'Global Reach',                  desc: "Pray for In Him Daily to reach families across every nation, tribe, and tongue—that the message of Jesus would cross every barrier.", refs: ['Matthew 28:19-20','Revelation 7:9'] },
   { icon: Shield,   title: 'Protection for the Ministry',   desc: "Cover the ministry in prayer against every spiritual opposition. Pray for wisdom, discernment, and the grace to steward this calling faithfully.", refs: ['Psalm 91:1-4','Ephesians 6:10-12'] },
   { icon: Heart,    title: 'Writers and Creators',          desc: "Pray for the writers behind every devotional—that they would write from genuine encounter with Jesus and deep wells of His presence.", refs: ['Psalm 45:1','2 Timothy 2:15'] },
-  { icon: Sunrise,  title: 'Next Generation Encounter',     desc: "Intercede specifically for children and teenagers—that this generation would encounter Jesus early and carry that encounter throughout their lives.", refs: ['Proverbs 22:6','Psalm 22:31'] },
 ];
 
 const monthly = [
@@ -22,7 +19,7 @@ const monthly = [
   { week:'Week 4', focus:'The Ministry',            prayer:'Cover the team, resources, and future direction of In Him Daily in prayer.' },
 ];
 
-export default function PrayerPartnersClient() {
+export default function PrayerPartnersPage() {
   const [submitted, setSubmitted] = useState(false);
   const [name, setName]           = useState('');
   const [email, setEmail]         = useState('');
@@ -30,8 +27,6 @@ export default function PrayerPartnersClient() {
 
   return (
     <div className="overflow-x-hidden">
-
-      {/* Hero */}
       <section className="relative pt-32 pb-24 bg-navy-700 overflow-hidden" aria-label="Prayer partners hero">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 75%, rgba(201,152,58,0.11) 0%, transparent 70%)' }} />
@@ -45,7 +40,6 @@ export default function PrayerPartnersClient() {
         </div>
       </section>
 
-      {/* Why prayer */}
       <section className="py-24 bg-[#FAF8F3]" aria-labelledby="why-prayer-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
@@ -78,7 +72,6 @@ export default function PrayerPartnersClient() {
         </div>
       </section>
 
-      {/* Focus areas */}
       <section className="py-24 bg-ivory-200" aria-labelledby="focus-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -107,7 +100,6 @@ export default function PrayerPartnersClient() {
         </div>
       </section>
 
-      {/* Monthly rhythm */}
       <section className="py-24 bg-navy-700" aria-labelledby="monthly-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -141,14 +133,13 @@ export default function PrayerPartnersClient() {
         </div>
       </section>
 
-      {/* Link to prayer guidelines */}
       <section className="py-16 bg-ivory-200" aria-labelledby="guidelines-link-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
           <ScrollReveal>
             <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Go Deeper</p>
             <h2 id="guidelines-link-heading" className="font-playfair text-3xl font-bold text-navy-700 mb-4">Read the Prayer Guidelines</h2>
             <p className="text-[#6B6B6B] text-lg mb-8">Six foundations of effective intercession, a daily prayer rhythm, specific prayer points, and a weekly prayer guide.</p>
-            <Link href="/prayer-guidelines"
+            <Link to="/prayer-guidelines"
               className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 hover:bg-navy-600 text-white font-bold rounded-full transition-all duration-300 hover:-translate-y-0.5">
               View Prayer Guidelines
               <ArrowRight size={18} aria-hidden="true" />
@@ -157,7 +148,6 @@ export default function PrayerPartnersClient() {
         </div>
       </section>
 
-      {/* Join form */}
       <section className="py-24 bg-[#FAF8F3]" aria-labelledby="join-heading">
         <div className="max-w-xl mx-auto px-4 sm:px-6 text-center">
           <ScrollReveal>

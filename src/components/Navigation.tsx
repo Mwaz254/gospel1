@@ -1,10 +1,6 @@
-'use client';
-
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import Image from 'next/image';
 
 const navLinks = [
   { href: '/',               label: 'Home' },
@@ -15,20 +11,11 @@ const navLinks = [
   { href: '/contact',        label: 'Contact' },
 ];
 
-const footerLinks = [
-  { href: '/about',           label: 'About' },
-  { href: '/devotionals',     label: 'Devotionals' },
-  { href: '/free-sample',     label: 'Free Sample' },
-  { href: '/prayer-partners', label: 'Prayer Partners' },
-  { href: '/prayer-guidelines',label: 'Prayer Guidelines' },
-  { href: '/contact',         label: 'Contact' },
-  { href: '/privacy-policy',  label: 'Privacy Policy' },
-];
-
 export default function Navigation() {
   const [scrolled, setScrolled]     = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname                    = usePathname();
+  const location                    = useLocation();
+  const pathname                    = location.pathname;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -39,7 +26,6 @@ export default function Navigation() {
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
 
-  /* lock body scroll when mobile menu open */
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -55,16 +41,12 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
 
-          {/* ── Logo ── */}
-          <Link href="/" className="flex items-center gap-3 group shrink-0" aria-label="In Him Daily — home">
+          <Link to="/" className="flex items-center gap-3 group shrink-0" aria-label="In Him Daily — home">
             <div className={`relative flex-shrink-0 transition-all duration-400 ${scrolled ? 'w-11 h-11' : 'w-14 h-14'}`}>
-              <Image
+              <img
                 src="/images/ChatGPT_Image_Jun_12,_2026,_11_01_49_PM.png"
                 alt="In Him Daily logo"
-                fill
-                className="object-contain drop-shadow group-hover:scale-105 transition-transform duration-300"
-                sizes="56px"
-                priority
+                className="w-full h-full object-contain drop-shadow group-hover:scale-105 transition-transform duration-300"
               />
             </div>
             <div className="hidden sm:block leading-tight">
@@ -77,14 +59,13 @@ export default function Navigation() {
             </div>
           </Link>
 
-          {/* ── Desktop nav ── */}
           <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) => {
               const active = pathname === link.href;
               return (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  to={link.href}
                   className={`relative px-3.5 py-2 text-[0.82rem] font-medium rounded-lg transition-all duration-200 ${
                     active
                       ? scrolled
@@ -102,10 +83,9 @@ export default function Navigation() {
             })}
           </nav>
 
-          {/* ── CTA ── */}
           <div className="hidden lg:flex">
             <Link
-              href="/free-sample"
+              to="/free-sample"
               className={`px-5 py-2.5 text-[0.82rem] font-semibold rounded-full transition-all duration-300 ${
                 scrolled
                   ? 'bg-navy-600 text-white hover:bg-navy-500 shadow-navy'
@@ -116,7 +96,6 @@ export default function Navigation() {
             </Link>
           </div>
 
-          {/* ── Mobile toggle ── */}
           <button
             className={`lg:hidden p-2 rounded-lg transition-colors ${
               scrolled ? 'text-navy-600 hover:bg-ivory-300' : 'text-white hover:bg-white/10'
@@ -131,7 +110,6 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* ── Mobile menu ── */}
       <div
         id="mobile-menu"
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
@@ -146,7 +124,7 @@ export default function Navigation() {
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               className={`flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-colors ${
                 pathname === link.href
                   ? 'text-navy-700 bg-gold-50 font-semibold'
@@ -159,7 +137,7 @@ export default function Navigation() {
           ))}
           <div className="pt-3">
             <Link
-              href="/free-sample"
+              to="/free-sample"
               className="block text-center px-5 py-3 bg-navy-600 text-white text-sm font-semibold rounded-full hover:bg-navy-500 transition-colors"
             >
               Get Free Sample

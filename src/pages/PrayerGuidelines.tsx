@@ -1,10 +1,6 @@
-'use client';
-
-import Link from 'next/link';
-import { Heart, BookOpen, Users, Globe, Shield, Sunrise, Clock, Hand, Eye, Ear, Check, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Heart, BookOpen, Users, Globe, Shield, Clock, Hand, Eye, Ear, Check, ArrowRight } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
-
-/* ─── data ────────────────────────────────────────────────────── */
 
 const foundations = [
   { icon: Ear,    title: 'Listen First',         desc: 'Begin by listening. Intercession is not informing God of what He does not know — it is agreeing with what He already wants to do. Spend time in His presence before you speak.', refs: ['Habakkuk 2:1', 'John 10:27'] },
@@ -67,13 +63,9 @@ const commitments = [
   'I will believe that my prayers are heard and that they matter.',
 ];
 
-/* ─── component ────────────────────────────────────────────────── */
-
-export default function PrayerGuidelinesClient() {
+export default function PrayerGuidelinesPage() {
   return (
     <div className="overflow-x-hidden">
-
-      {/* Hero */}
       <section className="relative pt-32 pb-24 bg-navy-700 overflow-hidden" aria-label="Prayer guidelines hero">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 75%, rgba(201,152,58,0.11) 0%, transparent 70%)' }} />
@@ -87,7 +79,6 @@ export default function PrayerGuidelinesClient() {
         </div>
       </section>
 
-      {/* Introduction */}
       <section className="py-24 bg-[#FAF8F3]" aria-labelledby="intro-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
@@ -108,7 +99,6 @@ export default function PrayerGuidelinesClient() {
         </div>
       </section>
 
-      {/* Six Foundations */}
       <section className="py-24 bg-ivory-200" aria-labelledby="foundations-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -137,7 +127,6 @@ export default function PrayerGuidelinesClient() {
         </div>
       </section>
 
-      {/* Daily Rhythm */}
       <section className="py-24 bg-navy-700" aria-labelledby="rhythm-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -169,7 +158,6 @@ export default function PrayerGuidelinesClient() {
         </div>
       </section>
 
-      {/* Prayer Points */}
       <section className="py-24 bg-[#FAF8F3]" aria-labelledby="points-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -204,7 +192,6 @@ export default function PrayerGuidelinesClient() {
         </div>
       </section>
 
-      {/* Weekly Guide */}
       <section className="py-24 bg-ivory-200" aria-labelledby="weekly-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
@@ -230,7 +217,6 @@ export default function PrayerGuidelinesClient() {
         </div>
       </section>
 
-      {/* Commitments */}
       <section className="py-24 bg-navy-700" aria-labelledby="commitment-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-12">
@@ -252,7 +238,6 @@ export default function PrayerGuidelinesClient() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-24 bg-[#FAF8F3] text-center" aria-labelledby="cta-heading">
         <div className="max-w-xl mx-auto px-4 sm:px-6">
           <ScrollReveal>
@@ -261,7 +246,7 @@ export default function PrayerGuidelinesClient() {
             <p className="text-[#6B6B6B] text-lg mb-8 leading-relaxed">
               Join the prayer team and receive monthly prayer guides and specific intercession requests delivered to your inbox.
             </p>
-            <Link href="/prayer-partners"
+            <Link to="/prayer-partners"
               className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 hover:bg-navy-600 text-white font-bold rounded-full transition-all duration-300 hover:-translate-y-0.5">
               Join the Prayer Team
               <ArrowRight size={18} aria-hidden="true" />
@@ -270,7 +255,6 @@ export default function PrayerGuidelinesClient() {
         </div>
       </section>
 
-      {/* Closing scripture */}
       <section className="py-14 bg-[#FAF8F3] text-center" aria-label="Closing scripture">
         <div className="max-w-xl mx-auto px-4">
           <ScrollReveal>

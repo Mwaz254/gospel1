@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import { ExternalLink, BookOpen, MessageCircle, Star, Users, Heart, Check } from 'lucide-react';
 

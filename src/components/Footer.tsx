@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import { Link } from 'react-router-dom';
 import { Mail, Heart } from 'lucide-react';
 
 const navLinks = [
@@ -23,7 +22,6 @@ const resourceLinks = [
 export default function Footer() {
   return (
     <footer className="bg-navy-700 text-white" aria-label="Site footer">
-      {/* Scripture banner */}
       <div className="border-b border-white/10">
         <div className="max-w-3xl mx-auto px-6 py-10 text-center">
           <p className="font-cormorant text-2xl md:text-[1.75rem] text-gold-200 italic leading-relaxed">
@@ -38,16 +36,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
 
-          {/* Brand */}
           <div className="sm:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-4 mb-6 group" aria-label="In Him Daily home">
+            <Link to="/" className="inline-flex items-center gap-4 mb-6 group" aria-label="In Him Daily home">
               <div className="relative w-16 h-16 flex-shrink-0 drop-shadow-lg transition-transform duration-300 group-hover:scale-105">
-                <Image
+                <img
                   src="/images/ChatGPT_Image_Jun_12,_2026,_11_01_49_PM.png"
                   alt="In Him Daily logo"
-                  fill
-                  className="object-contain"
-                  sizes="64px"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div>
@@ -71,7 +66,6 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Navigate */}
           <div>
             <h3 className="font-playfair text-xs font-semibold text-gold-400 tracking-[0.14em] uppercase mb-5">
               Navigate
@@ -79,7 +73,7 @@ export default function Footer() {
             <ul className="space-y-2.5" role="list">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-white/55 hover:text-gold-300 transition-colors">
+                  <Link to={link.href} className="text-sm text-white/55 hover:text-gold-300 transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -87,7 +81,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Resources */}
           <div>
             <h3 className="font-playfair text-xs font-semibold text-gold-400 tracking-[0.14em] uppercase mb-5">
               Resources
@@ -95,7 +88,7 @@ export default function Footer() {
             <ul className="space-y-2.5" role="list">
               {resourceLinks.map((link, i) => (
                 <li key={i}>
-                  <Link href={link.href} className="text-sm text-white/55 hover:text-gold-300 transition-colors">
+                  <Link to={link.href} className="text-sm text-white/55 hover:text-gold-300 transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -104,13 +97,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-12 pt-7 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/35">
             &copy; {new Date().getFullYear()} In Him Daily. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/privacy-policy" className="text-xs text-white/35 hover:text-gold-300 transition-colors">Privacy Policy</Link>
+            <Link to="/privacy-policy" className="text-xs text-white/35 hover:text-gold-300 transition-colors">Privacy Policy</Link>
             <p className="text-xs text-white/35 flex items-center gap-1.5">
               Made with <Heart size={11} className="text-gold-500 fill-gold-500" aria-hidden="true" /> for families everywhere
             </p>

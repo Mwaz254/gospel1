@@ -1,7 +1,5 @@
-'use client';
-
-import ScrollReveal from '@/components/ScrollReveal';
 import { Shield, Mail, Eye, Lock, FileText, Users } from 'lucide-react';
+import ScrollReveal from '@/components/ScrollReveal';
 
 const sections = [
   {
@@ -64,10 +62,9 @@ const sections = [
   },
 ];
 
-export default function PrivacyPolicyClient() {
+export default function PrivacyPolicyPage() {
   return (
     <div className="overflow-x-hidden">
-      {/* Hero */}
       <section className="relative pt-32 pb-20 bg-navy-700 overflow-hidden" aria-label="Privacy policy hero">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 75%, rgba(201,152,58,0.11) 0%, transparent 70%)' }} />
@@ -81,7 +78,6 @@ export default function PrivacyPolicyClient() {
         </div>
       </section>
 
-      {/* Intro */}
       <section className="py-16 bg-[#FAF8F3]" aria-labelledby="intro-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
@@ -95,7 +91,6 @@ export default function PrivacyPolicyClient() {
         </div>
       </section>
 
-      {/* Sections */}
       <section className="pb-24 bg-[#FAF8F3]" aria-label="Privacy policy sections">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
           {sections.map((s, i) => (
@@ -119,7 +114,6 @@ export default function PrivacyPolicyClient() {
             </ScrollReveal>
           ))}
 
-          {/* Contact */}
           <ScrollReveal>
             <div className="p-7 rounded-2xl bg-navy-700 text-center">
               <h2 className="font-playfair text-xl font-bold text-white mb-3">Questions About Your Privacy?</h2>

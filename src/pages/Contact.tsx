@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import { Mail, MessageSquare, Heart, Check, ArrowRight } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
@@ -7,7 +5,7 @@ import { insertContactMessage, insertPrayerRequest, insertNewsletterSubscriber }
 
 type FormType = 'contact' | 'prayer' | 'newsletter';
 
-export default function ContactClient() {
+export default function ContactPage() {
   const [active, setActive]         = useState<FormType>('contact');
   const [submitted, setSubmitted]   = useState<FormType | null>(null);
   const [formError, setFormError]   = useState('');
@@ -27,8 +25,6 @@ export default function ContactClient() {
 
   return (
     <div className="overflow-x-hidden">
-
-      {/* Hero */}
       <section className="relative pt-32 pb-24 bg-navy-700 overflow-hidden" aria-label="Contact hero">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 75%, rgba(201,152,58,0.11) 0%, transparent 70%)' }} />
@@ -41,12 +37,9 @@ export default function ContactClient() {
         </div>
       </section>
 
-      {/* Main */}
       <section className="py-24 bg-[#FAF8F3]" aria-label="Contact forms">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-8 items-start">
-
-            {/* Sidebar */}
             <div className="space-y-3">
               <ScrollReveal>
                 <h2 className="font-playfair text-2xl font-bold text-navy-700 mb-5">How Can We Help?</h2>
@@ -80,12 +73,9 @@ export default function ContactClient() {
               </ScrollReveal>
             </div>
 
-            {/* Form panel */}
             <div className="lg:col-span-2">
               <ScrollReveal>
                 <div className="bg-white rounded-2xl border border-ivory-300 shadow-sm p-8">
-
-                  {/* ── Contact ── */}
                   {active === 'contact' && (
                     submitted === 'contact' ? (
                       <div className="text-center py-12">
@@ -115,7 +105,6 @@ export default function ContactClient() {
                     )
                   )}
 
-                  {/* ── Prayer ── */}
                   {active === 'prayer' && (
                     submitted === 'prayer' ? (
                       <div className="text-center py-12">
@@ -146,7 +135,6 @@ export default function ContactClient() {
                     )
                   )}
 
-                  {/* ── Newsletter ── */}
                   {active === 'newsletter' && (
                     submitted === 'newsletter' ? (
                       <div className="text-center py-12">
