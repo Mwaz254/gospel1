@@ -43,7 +43,7 @@ export default function Footer() {
             <Link href="/" className="inline-flex items-center gap-4 mb-6 group" aria-label="In Him Daily home">
               <div className="relative w-16 h-16 flex-shrink-0 drop-shadow-lg transition-transform duration-300 group-hover:scale-105">
                 <Image
-                  src="/images/ChatGPT_Image_Jun_25,_2026,_02_12_03_PM.png"
+                  src="/images/ChatGPT_Image_Jun_12,_2026,_11_01_49_PM.png"
                   alt="In Him Daily logo"
                   fill
                   className="object-contain"

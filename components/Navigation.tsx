@@ -59,7 +59,7 @@ export default function Navigation() {
           <Link href="/" className="flex items-center gap-3 group shrink-0" aria-label="In Him Daily — home">
             <div className={`relative flex-shrink-0 transition-all duration-400 ${scrolled ? 'w-11 h-11' : 'w-14 h-14'}`}>
               <Image
-                src="/images/ChatGPT_Image_Jun_25,_2026,_02_12_03_PM.png"
+                src="/images/ChatGPT_Image_Jun_12,_2026,_11_01_49_PM.png"
                 alt="In Him Daily logo"
                 fill
                 className="object-contain drop-shadow group-hover:scale-105 transition-transform duration-300"
