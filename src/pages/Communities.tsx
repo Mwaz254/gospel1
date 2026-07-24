@@ -93,6 +93,8 @@ export default function CommunitiesPage() {
 
       {/* HERO */}
       <section className="relative pt-32 pb-20 bg-navy-700 overflow-hidden" aria-label="Communities hero">
+        <div className="absolute inset-0 bg-cover bg-center" aria-hidden="true" style={{ backgroundImage: "url('https://images.pexels.com/photos/8108066/pexels-photo-8108066.jpeg?auto=compress&cs=tinysrgb&w=1920')", opacity: 0.2 }} />
+        <div className="absolute inset-0" aria-hidden="true" style={{ background: 'linear-gradient(180deg, rgba(14,32,53,0.78) 0%, rgba(14,32,53,0.92) 100%)' }} />
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 65%, rgba(201,152,58,0.13) 0%, transparent 70%)' }} />
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none" aria-hidden="true"
@@ -234,8 +236,8 @@ export default function CommunitiesPage() {
 
       {/* SOCIAL MEDIA SECTION */}
       <section id="social" className="py-24 bg-navy-700 relative overflow-hidden" aria-labelledby="social-heading">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
-          style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 80%, rgba(201,152,58,0.09) 0%, transparent 70%)' }} />
+        <div className="absolute inset-0 bg-cover bg-center" aria-hidden="true" style={{ backgroundImage: "url('https://images.pexels.com/photos/2203208/pexels-photo-2203208.jpeg?auto=compress&cs=tinysrgb&w=1920')", opacity: 0.15 }} />
+        <div className="absolute inset-0" aria-hidden="true" style={{ background: 'linear-gradient(180deg, rgba(14,32,53,0.82) 0%, rgba(14,32,53,0.92) 100%)' }} />
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" aria-hidden="true"
           style={{ backgroundImage: 'radial-gradient(circle, #E4B86A 1px, transparent 1px)', backgroundSize: '36px 36px' }} />
 

@@ -66,6 +66,8 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="overflow-x-hidden">
       <section className="relative pt-32 pb-20 bg-navy-700 overflow-hidden" aria-label="Privacy policy hero">
+        <div className="absolute inset-0 bg-cover bg-center" aria-hidden="true" style={{ backgroundImage: "url('https://images.pexels.com/photos/2383053/pexels-photo-2383053.jpeg?auto=compress&cs=tinysrgb&w=1920')", opacity: 0.2 }} />
+        <div className="absolute inset-0" aria-hidden="true" style={{ background: 'linear-gradient(180deg, rgba(14,32,53,0.78) 0%, rgba(14,32,53,0.92) 100%)' }} />
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 75%, rgba(201,152,58,0.11) 0%, transparent 70%)' }} />
         <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

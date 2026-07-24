@@ -15,6 +15,8 @@ export default function AboutPage() {
 
       {/* Hero */}
       <section className="relative pt-32 pb-24 bg-navy-700 overflow-hidden" aria-label="About hero">
+        <div className="absolute inset-0 bg-cover bg-center" aria-hidden="true" style={{ backgroundImage: "url('https://images.pexels.com/photos/1111319/pexels-photo-1111319.jpeg?auto=compress&cs=tinysrgb&w=1920')", opacity: 0.2 }} />
+        <div className="absolute inset-0" aria-hidden="true" style={{ background: 'linear-gradient(180deg, rgba(14,32,53,0.78) 0%, rgba(14,32,53,0.92) 100%)' }} />
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 75%, rgba(201,152,58,0.11) 0%, transparent 70%)' }} />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -91,8 +93,8 @@ export default function AboutPage() {
 
       {/* The Vision */}
       <section className="py-24 bg-navy-700 relative overflow-hidden" aria-labelledby="vision-heading">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
-          style={{ background: 'radial-gradient(ellipse 50% 40% at 50% 55%, rgba(201,152,58,0.09) 0%, transparent 70%)' }} />
+        <div className="absolute inset-0 bg-cover bg-center" aria-hidden="true" style={{ backgroundImage: "url('https://images.pexels.com/photos/415571/pexels-photo-415571.jpeg?auto=compress&cs=tinysrgb&w=1920')", opacity: 0.15 }} />
+        <div className="absolute inset-0" aria-hidden="true" style={{ background: 'linear-gradient(180deg, rgba(14,32,53,0.82) 0%, rgba(14,32,53,0.92) 100%)' }} />
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
             <p className="text-gold-400 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">The Vision</p>

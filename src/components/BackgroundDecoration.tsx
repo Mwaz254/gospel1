@@ -25,6 +25,12 @@ export default function BackgroundDecoration() {
       {/* Base wash */}
       <div className="absolute inset-0 bg-ivory" />
 
+      {/* Subtle texture photo — soft light through cathedral trees */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.06]"
+        style={{ backgroundImage: "url('https://images.pexels.com/photos/261726/pexels-photo-261726.jpeg?auto=compress&cs=tinysrgb&w=1600')" }}
+      />
+
       {/* Soft radial glows */}
       <div
         className="absolute -top-32 -left-24 w-[42rem] h-[42rem] rounded-full opacity-60"
