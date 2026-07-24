@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import BackgroundDecoration from '@/components/BackgroundDecoration';
 import Home from './pages/Home';
 import About from './pages/About';
 import Admin from './pages/Admin';
@@ -16,6 +17,7 @@ import NotFound from './pages/NotFound';
 export default function App() {
   return (
     <BrowserRouter>
+      <BackgroundDecoration />
       <Navigation />
       <main id="main-content">
         <Routes>

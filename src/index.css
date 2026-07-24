@@ -219,6 +219,17 @@
 .theme-roller > span:nth-child(3) { animation-delay:  8s; }
 .theme-roller > span:nth-child(4) { animation-delay: 12s; }
 
+/* ─── Background mote float ──────────────────────────────────────── */
+@keyframes bg-mote-float {
+  0%, 100% { transform: translate(0, 0);     opacity: 0.35; }
+  50%       { transform: translate(10px, -22px); opacity: 0.85; }
+}
+
+.bg-mote {
+  box-shadow: 0 0 6px rgba(228, 184, 106, 0.45);
+  will-change: transform, opacity;
+}
+
 /* ─── Scrollbar (WebKit) ─────────────────────────────────────────── */
 ::-webkit-scrollbar        { width: 6px; }
 ::-webkit-scrollbar-track  { background: var(--ivory); }
