@@ -8,6 +8,7 @@ const navLinks = [
   { href: '/devotionals',    label: 'Devotionals' },
   { href: '/free-sample',    label: 'Free Sample' },
   { href: '/prayer-partners',label: 'Prayer Partners' },
+  { href: '/communities',    label: 'Communities' },
   { href: '/contact',        label: 'Contact' },
 ];
 

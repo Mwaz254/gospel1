@@ -10,6 +10,7 @@ import FreeSample from './pages/FreeSample';
 import PrayerGuidelines from './pages/PrayerGuidelines';
 import PrayerPartners from './pages/PrayerPartners';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Communities from './pages/Communities';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/prayer-guidelines" element={<PrayerGuidelines />} />
           <Route path="/prayer-partners" element={<PrayerPartners />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/communities" element={<Communities />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
