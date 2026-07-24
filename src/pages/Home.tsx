@@ -121,8 +121,16 @@ export default function HomePage() {
 
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center bg-navy-700 overflow-hidden" aria-label="Hero">
-        <div className="absolute inset-0 bg-cover bg-center" aria-hidden="true" style={{ backgroundImage: "url('https://images.pexels.com/photos/256502/pexels-photo-256502.jpeg?auto=compress&cs=tinysrgb&w=1920')", opacity: 0.22 }} />
-        <div className="absolute inset-0" aria-hidden="true" style={{ background: 'linear-gradient(180deg, rgba(14,32,53,0.78) 0%, rgba(14,32,53,0.92) 100%)' }} />
+        {/* Logo image as atmospheric background — screen blend removes black, leaves gold/white glow */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
+          <img
+            src="/images/733127106_122096833941384062_9064072413288732878_n.jpg"
+            alt=""
+            className="w-full h-full object-cover opacity-30"
+            style={{ mixBlendMode: 'screen' }}
+          />
+        </div>
+        <div className="absolute inset-0" aria-hidden="true" style={{ background: 'linear-gradient(180deg, rgba(14,32,53,0.55) 0%, rgba(14,32,53,0.80) 60%, rgba(14,32,53,0.97) 100%)' }} />
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true" style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 65%, rgba(201,152,58,0.13) 0%, transparent 70%)' }} />
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none" aria-hidden="true"
           style={{ backgroundImage: 'radial-gradient(circle, #E4B86A 1px, transparent 1px)', backgroundSize: '36px 36px' }} />
@@ -138,6 +146,20 @@ export default function HomePage() {
         ))}
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32 pt-40">
+
+          {/* Logo badge */}
+          <div className="flex justify-center mb-8 animate-fade-in">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full blur-2xl opacity-50" style={{ background: 'radial-gradient(circle, rgba(201,152,58,0.6) 0%, transparent 70%)' }} aria-hidden="true" />
+              <img
+                src="/images/733127106_122096833941384062_9064072413288732878_n.jpg"
+                alt="In Him Daily logo"
+                className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full object-cover border-2 border-gold-400/50 shadow-gold-lg"
+                style={{ boxShadow: '0 0 48px rgba(201,152,58,0.45), 0 0 12px rgba(201,152,58,0.25)' }}
+              />
+            </div>
+          </div>
+
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-500/15 border border-gold-400/30 mb-8 animate-fade-in">
             <Sparkles size={13} className="text-gold-300" aria-hidden="true" />
             <span className="text-gold-200 text-[0.72rem] font-semibold tracking-[0.14em] uppercase">A New Way for Families to Encounter Jesus</span>
