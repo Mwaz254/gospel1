@@ -183,60 +183,173 @@ export const checklist: string[] = [
   'Deep Theology',
 ];
 
-export interface PricingTier {
+export interface PriceTier {
   id: string;
   name: string;
-  price: string;
+  tagline: string;
   highlight?: boolean;
+  prices: { currency: string; amount: string }[];
   formats: string[];
-  stores: { label: string; href: string }[];
 }
 
-export const pricing: PricingTier[] = [
+export const pdfPricing: PriceTier[] = [
   {
-    id: 'kids-price',
-    name: 'Kids',
-    price: 'From $14.99',
-    formats: ['PDF', 'Print', 'Kindle'],
-    stores: [
-      { label: 'Amazon', href: '#' },
-      { label: 'Barnes & Noble', href: '#' },
-      { label: 'InHimDaily.org', href: '#' },
+    id: 'adult-pdf',
+    name: 'Adult Edition',
+    tagline: 'Ages 19+',
+    prices: [
+      { currency: 'USD', amount: '$12' },
+      { currency: 'KES', amount: '1,600' },
+      { currency: 'NGN', amount: '19,000' },
+      { currency: 'GHS', amount: '170' },
+      { currency: 'ZAR', amount: '220' },
+      { currency: 'UGX', amount: '45,000' },
+      { currency: 'TZS', amount: '32,000' },
     ],
+    formats: ['PDF'],
   },
   {
-    id: 'teen-price',
-    name: 'Teen',
-    price: 'From $16.99',
-    formats: ['PDF', 'Print', 'Kindle'],
-    stores: [
-      { label: 'Amazon', href: '#' },
-      { label: 'Barnes & Noble', href: '#' },
-      { label: 'InHimDaily.org', href: '#' },
+    id: 'teen-pdf',
+    name: 'Teen Edition',
+    tagline: 'Ages 13–18',
+    prices: [
+      { currency: 'USD', amount: '$10' },
+      { currency: 'KES', amount: '1,350' },
+      { currency: 'NGN', amount: '16,000' },
+      { currency: 'GHS', amount: '142' },
+      { currency: 'ZAR', amount: '185' },
+      { currency: 'UGX', amount: '37,000' },
+      { currency: 'TZS', amount: '27,000' },
     ],
+    formats: ['PDF'],
   },
   {
-    id: 'adult-price',
-    name: 'Adult',
-    price: 'From $19.99',
-    formats: ['PDF', 'Print', 'Kindle'],
-    stores: [
-      { label: 'Amazon', href: '#' },
-      { label: 'Barnes & Noble', href: '#' },
-      { label: 'InHimDaily.org', href: '#' },
+    id: 'kids-pdf',
+    name: 'Kids Edition',
+    tagline: 'Ages 6–12',
+    prices: [
+      { currency: 'USD', amount: '$8' },
+      { currency: 'KES', amount: '1,080' },
+      { currency: 'NGN', amount: '12,800' },
+      { currency: 'GHS', amount: '114' },
+      { currency: 'ZAR', amount: '148' },
+      { currency: 'UGX', amount: '30,000' },
+      { currency: 'TZS', amount: '21,000' },
     ],
+    formats: ['PDF'],
   },
   {
-    id: 'family',
-    name: 'Family Bundle',
-    price: 'From $44.99',
+    id: 'family-bundle',
+    name: 'Complete Family Bundle',
+    tagline: 'All 3 editions',
     highlight: true,
-    formats: ['PDF', 'Print', 'Kindle'],
-    stores: [
-      { label: 'Amazon', href: '#' },
-      { label: 'Barnes & Noble', href: '#' },
-      { label: 'InHimDaily.org', href: '#' },
+    prices: [
+      { currency: 'USD', amount: '$25' },
+      { currency: 'KES', amount: '3,350' },
+      { currency: 'NGN', amount: '40,000' },
+      { currency: 'GHS', amount: '356' },
+      { currency: 'ZAR', amount: '460' },
+      { currency: 'UGX', amount: '94,000' },
+      { currency: 'TZS', amount: '68,000' },
     ],
+    formats: ['PDF'],
+  },
+];
+
+export interface BulkTier {
+  id: string;
+  quantity: string;
+  discount: string;
+  note?: string;
+}
+
+export const bulkPricing: BulkTier[] = [
+  { id: 'b1', quantity: '5–20 family bundles', discount: '20% off' },
+  { id: 'b2', quantity: '21–50 family bundles', discount: '30% off' },
+  { id: 'b3', quantity: '51+ family bundles', discount: '40% off', note: 'Contact inhimdaily.org for invoice' },
+];
+
+export const freeEntryPoints: { id: string; title: string; description: string }[] = [
+  {
+    id: 'f1',
+    title: '7-Day Sampler PDF',
+    description: 'A free 7-day sampler of every volume — yours to keep, no sign-up required.',
+  },
+  {
+    id: 'f2',
+    title: 'Day 1 of Every Book',
+    description: 'Read the first day of every book free on inhimdaily.org, no account needed.',
+  },
+  {
+    id: 'f3',
+    title: 'YouVersion Reading Plan',
+    description: 'A free reading plan on YouVersion — the top of the acquisition funnel.',
+  },
+];
+
+export interface HowToDayMovement {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export const dailyMovements: HowToDayMovement[] = [
+  {
+    id: 'see-jesus',
+    title: 'See Jesus First',
+    description:
+      'The passage is read through the lens of Christ. You will not start with practical application — you will start with the Person the passage points toward.',
+  },
+  {
+    id: 'what-isnt',
+    title: "What This Isn't",
+    description:
+      'Good reading also knows what the text is not doing, which protects you from misreading it in either direction.',
+  },
+  {
+    id: 'ordinary-day',
+    title: 'What This Looks Like in an Ordinary Day',
+    description:
+      'The Christ you see in the text is meant to change how you live, not just what you believe.',
+  },
+  {
+    id: 'conversation',
+    title: 'Your Conversation With God',
+    description:
+      'Journal prompts, reflection questions, and prayer space that take the day’s insight into personal encounter.',
+  },
+  {
+    id: 'deep-reflection',
+    title: 'Deep Reflection Questions',
+    description:
+      'For those who want to go further into the theological and personal weight of what the passage contains.',
+  },
+];
+
+export interface HowToTip {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export const howToTips: HowToTip[] = [
+  {
+    id: 'read-order',
+    title: 'Read in Order',
+    description:
+      'Each day builds on what has come before. You do not need to know the Bible well to begin — no theology degree or years of church experience required. You need only the willingness to look at what the text actually says, and let the One you find there change you.',
+  },
+  {
+    id: 'do-not-rush',
+    title: 'Do Not Rush',
+    description:
+      'The journal space is not decorative. The questions are not optional extras. Slow reading that produces genuine encounter is worth more than fast reading that produces only information.',
+  },
+  {
+    id: 'come-back',
+    title: 'Come Back',
+    description:
+      'If life interrupts and you miss a day or a week, come back where you left off. This is not a race and there is no judgment for stopping and starting. The Person you are reading toward is patient.',
   },
 ];
 

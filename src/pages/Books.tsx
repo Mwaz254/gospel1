@@ -6,6 +6,7 @@ import Hero from './books/Hero';
 import AgeCards from './books/AgeCards';
 import CollectionCards from './books/CollectionCards';
 import FeaturesGrid from './books/FeaturesGrid';
+import HowToUse from './books/HowToUse';
 import ScriptureTimeline from './books/ScriptureTimeline';
 import ComparisonSection from './books/ComparisonSection';
 import OneMission from './books/OneMission';
@@ -35,6 +36,7 @@ export default function Books() {
         <AgeCards />
         <CollectionCards />
         <FeaturesGrid />
+        <HowToUse />
         <ScriptureTimeline />
         <ComparisonSection />
         <OneMission />

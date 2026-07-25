@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Check, Star } from 'lucide-react';
+import { Check, Star, Users, Gift, Sparkles } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
-import { pricing } from './assets';
+import { pdfPricing, bulkPricing, freeEntryPoints } from './assets';
 
 export default function PricingCards() {
   return (
@@ -13,12 +13,14 @@ export default function PricingCards() {
             Choose Your Journey
           </h2>
           <p className="mt-4 text-white/60 max-w-2xl mx-auto">
-            Available in PDF, Print, and Kindle — on Amazon, Barnes &amp; Noble, and InHimDaily.org.
+            Every volume is available as a digital PDF, priced for families and ministries across
+            the world. Pick the edition that fits your household.
           </p>
         </ScrollReveal>
 
+        {/* PDF pricing cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {pricing.map((tier, i) => (
+          {pdfPricing.map((tier, i) => (
             <ScrollReveal key={tier.id} delay={i * 100}>
               <div
                 className={`relative rounded-2xl p-8 h-full flex flex-col transition-all duration-500 hover:-translate-y-2 ${
@@ -33,10 +35,10 @@ export default function PricingCards() {
                   </span>
                 )}
 
-                <h3 className="font-cinzel text-2xl font-semibold text-white mb-2">
+                <h3 className="font-cinzel text-2xl font-semibold text-white mb-1">
                   {tier.name}
                 </h3>
-                <p className="text-gold-300 font-semibold text-lg mb-6">{tier.price}</p>
+                <p className="text-white/50 text-sm mb-6">{tier.tagline}</p>
 
                 <div className="flex flex-wrap gap-2 mb-6">
                   {tier.formats.map((f) => (
@@ -49,11 +51,16 @@ export default function PricingCards() {
                   ))}
                 </div>
 
-                <ul className="space-y-3 mb-8 flex-1">
-                  {tier.stores.map((s) => (
-                    <li key={s.label} className="flex items-center gap-2 text-white/70 text-sm">
-                      <Check size={15} className="text-gold-300 shrink-0" />
-                      {s.label}
+                <ul className="space-y-2 mb-8 flex-1">
+                  {tier.prices.map((p) => (
+                    <li
+                      key={p.currency}
+                      className={`flex items-baseline justify-between text-sm ${
+                        p.currency === 'USD' ? 'text-gold-200 font-semibold' : 'text-white/65'
+                      }`}
+                    >
+                      <span className="tracking-wider">{p.currency}</span>
+                      <span>{p.amount}</span>
                     </li>
                   ))}
                 </ul>
@@ -72,6 +79,74 @@ export default function PricingCards() {
             </ScrollReveal>
           ))}
         </div>
+
+        {/* Church & ministry bulk pricing */}
+        <ScrollReveal delay={200}>
+          <div className="mt-16 rounded-2xl bk-glass p-8 sm:p-10">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="w-10 h-10 rounded-full flex items-center justify-center bg-gold-400/10 border border-gold-400/30">
+                <Users className="text-gold-300" size={20} />
+              </span>
+              <h3 className="font-cinzel text-2xl font-semibold text-white">
+                Church &amp; Ministry Bulk Pricing
+              </h3>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-6">
+              {bulkPricing.map((tier) => (
+                <div
+                  key={tier.id}
+                  className="rounded-xl border border-white/10 bg-white/[0.02] p-6 text-center"
+                >
+                  <p className="text-white/80 text-sm mb-2">{tier.quantity}</p>
+                  <p className="font-cinzel text-2xl font-bold text-gold-300 mb-2">
+                    {tier.discount}
+                  </p>
+                  {tier.note && (
+                    <p className="text-white/45 text-xs mt-2">{tier.note}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-6 text-center text-white/50 text-sm">
+              Bible study groups of 10+: contact us for group licence pricing.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* Free entry points */}
+        <ScrollReveal delay={250}>
+          <div className="mt-12 text-center">
+            <div className="flex items-center justify-center gap-2 mb-8">
+              <Gift className="text-gold-300" size={20} />
+              <h3 className="font-cinzel text-xl font-semibold text-white tracking-wide">
+                Free Entry Points
+              </h3>
+              <Sparkles className="text-gold-300" size={16} />
+            </div>
+            <p className="text-white/50 text-sm mb-8 max-w-xl mx-auto">
+              Always available at zero cost — start your journey with no commitment.
+            </p>
+
+            <div className="grid sm:grid-cols-3 gap-6 text-left">
+              {freeEntryPoints.map((f) => (
+                <div
+                  key={f.id}
+                  className="rounded-xl border border-white/10 bg-white/[0.02] p-6"
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <Check size={16} className="text-gold-300 shrink-0" />
+                    <h4 className="font-cinzel text-base font-semibold text-white">
+                      {f.title}
+                    </h4>
+                  </div>
+                  <p className="text-white/55 text-sm leading-relaxed">{f.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
 
         <ScrollReveal className="flex items-center justify-center gap-2 mt-12 text-white/50 text-sm">
           <Star size={14} className="text-gold-300 fill-gold-300" />
