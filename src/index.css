@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -242,6 +244,123 @@
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* ─── Cinzel display font (Books page) ────────────────────────────── */
+
+.font-cinzel { font-family: 'Cinzel', Georgia, 'Times New Roman', serif; }
+
+/* ─── Books page: cinematic palette ───────────────────────────────── */
+.bk-bg-900 { background-color: #05070D; }
+.bk-bg-800 { background-color: #0B1220; }
+.bk-bg-700 { background-color: #101828; }
+.bk-text-muted { color: #D1D5DB; }
+
+/* ─── Star field ─────────────────────────────────────────────────── */
+@keyframes bk-twinkle {
+  0%, 100% { opacity: 0.15; }
+  50%       { opacity: 0.9; }
+}
+.bk-star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: bk-twinkle var(--dur, 4s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ─── Floating dust particles ────────────────────────────────────── */
+@keyframes bk-dust {
+  0%   { transform: translate(0, 0) scale(1);     opacity: 0; }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.5; }
+  100% { transform: translate(var(--dx, 20px), -120vh) scale(0.6); opacity: 0; }
+}
+.bk-dust {
+  position: absolute;
+  bottom: -10px;
+  width: 3px; height: 3px;
+  background: rgba(212, 175, 55, 0.55);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(212,175,55,0.5);
+  animation: bk-dust var(--dur, 18s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ─── Lantern flicker glow ───────────────────────────────────────── */
+@keyframes bk-lantern {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  25%      { opacity: 0.7;  transform: scale(1.03); }
+  50%      { opacity: 0.5;  transform: scale(0.98); }
+  75%      { opacity: 0.65; transform: scale(1.02); }
+}
+.bk-lantern { animation: bk-lantern 5s ease-in-out infinite; }
+
+/* ─── Floating book ──────────────────────────────────────────────── */
+@keyframes bk-float {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50%       { transform: translateY(-18px) rotate(var(--rot, 0deg)); }
+}
+.bk-float { animation: bk-float 6s ease-in-out infinite; }
+
+/* ─── Soft light sweep across books ──────────────────────────────── */
+@keyframes bk-sweep {
+  0%   { transform: translateX(-120%) skewX(-18deg); opacity: 0; }
+  50%  { opacity: 0.35; }
+  100% { transform: translateX(220%) skewX(-18deg); opacity: 0; }
+}
+.bk-sweep {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  animation: bk-sweep 7s ease-in-out infinite;
+}
+
+/* ─── Gold shimmer on buttons ────────────────────────────────────── */
+@keyframes bk-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.bk-shimmer {
+  background-image: linear-gradient(110deg, #D4AF37 0%, #F5E4B8 25%, #D4AF37 50%, #F5E4B8 75%, #D4AF37 100%);
+  background-size: 200% 100%;
+  animation: bk-shimmer 4s linear infinite;
+}
+
+/* ─── Glassmorphism card ─────────────────────────────────────────── */
+.bk-glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+/* ─── Timeline node glow ──────────────────────────────────────────── */
+@keyframes bk-node-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.5), 0 0 14px rgba(212,175,55,0.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(212,175,55,0), 0 0 22px rgba(212,175,55,0.6); }
+}
+.bk-node { animation: bk-node-pulse 3.5s ease-in-out infinite; }
+
+/* ─── Testimonial marquee ────────────────────────────────────────── */
+@keyframes bk-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.bk-marquee { animation: bk-marquee 40s linear infinite; }
+.bk-marquee:hover { animation-play-state: paused; }
+
+/* ─── Slow moving light (final CTA) ──────────────────────────────── */
+@keyframes bk-cta-light {
+  0%, 100% { transform: translateX(-30%) translateY(0);   opacity: 0.25; }
+  50%       { transform: translateX(30%)  translateY(-10px); opacity: 0.45; }
+}
+.bk-cta-light { animation: bk-cta-light 12s ease-in-out infinite; }
+
+/* ─── Cross glow ─────────────────────────────────────────────────── */
+@keyframes bk-cross-glow {
+  0%, 100% { opacity: 0.5; filter: drop-shadow(0 0 20px rgba(212,175,55,0.4)); }
+  50%       { opacity: 0.85; filter: drop-shadow(0 0 40px rgba(212,175,55,0.7)); }
+}
+.bk-cross-glow { animation: bk-cross-glow 6s ease-in-out infinite; }
 
 /* ─── Print ──────────────────────────────────────────────────────── */
 @media print {
