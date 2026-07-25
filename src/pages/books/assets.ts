@@ -20,7 +20,7 @@ export const heroBooks: BookCover[] = [
     subtitle: 'Ages 6–12',
     age: 'Kids',
     accent: '#F59E0B',
-    cover: 'https://images.pexels.com/photos/8468470/pexels-photo-8468470.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/he_was_always_the_answer(kids_edition).png',
   },
   {
     id: 'teen',
@@ -28,7 +28,7 @@ export const heroBooks: BookCover[] = [
     subtitle: 'Ages 13–18',
     age: 'Teen',
     accent: '#3B82F6',
-    cover: 'https://images.pexels.com/photos/256502/pexels-photo-256502.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/he_was_always_the_answer(teen_edition).png',
   },
   {
     id: 'adult',
@@ -36,7 +36,7 @@ export const heroBooks: BookCover[] = [
     subtitle: 'Ages 19+',
     age: 'Adult',
     accent: '#D4AF37',
-    cover: 'https://images.pexels.com/photos/1111319/pexels-photo-1111319.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/he_was_always_the_answer(adult_edition).png',
   },
 ];
 
@@ -58,7 +58,7 @@ export const collections: Collection[] = [
     scripture: 'Meeting Jesus throughout Scripture',
     days: 120,
     description: 'A 120-day journey tracing the promise of a Saviour from Genesis to Revelation, revealing Christ on every page.',
-    cover: 'https://images.pexels.com/photos/235554/pexels-photo-235554.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/he_was_always_the_answer(adult_edition).png',
   },
   {
     id: 'torah-1',
@@ -67,7 +67,7 @@ export const collections: Collection[] = [
     scripture: 'Genesis & Exodus',
     days: 100,
     description: 'Walk through the foundations of Scripture and see the Lamb slain before the foundation of the world.',
-    cover: 'https://images.pexels.com/photos/261726/pexels-photo-261726.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/in_the_begining_he_was_there(adult_version).png',
   },
   {
     id: 'torah-2',
@@ -76,7 +76,7 @@ export const collections: Collection[] = [
     scripture: 'Leviticus & Numbers',
     days: 67,
     description: 'Discover how every sacrifice, feast, and tent peg in the wilderness pointed to the coming Saviour.',
-    cover: 'https://images.pexels.com/photos/3014852/pexels-photo-3014852.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/in_the_begining_he_was_there(adult_version).png',
   },
   {
     id: 'psalms',
@@ -85,7 +85,7 @@ export const collections: Collection[] = [
     scripture: 'The Songbook of the King',
     days: 82,
     description: 'Hear the voice of the Shepherd-King in every psalm, from the cross-shaped cries of David to the praises of Zion.',
-    cover: 'https://images.pexels.com/photos/415571/pexels-photo-415571.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/he_sang_about_himself(adult_edition).png',
   },
   {
     id: 'nt',
@@ -94,7 +94,7 @@ export const collections: Collection[] = [
     scripture: 'The Gospels & Beyond',
     days: 120,
     description: 'See how the Old Testament promises burst into living colour the moment the Word becomes flesh.',
-    cover: 'https://images.pexels.com/photos/3775534/pexels-photo-3775534.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/every_where_i_look_its_him(adult_edition).png',
   },
   {
     id: 'deut',
@@ -103,7 +103,7 @@ export const collections: Collection[] = [
     scripture: 'The Prophet Like Moses',
     days: 120,
     description: 'Listen to the sermons of Moses and hear the heartbeat of the Prophet who would one day stand on the mountain.',
-    cover: 'https://images.pexels.com/photos/2383053/pexels-photo-2383053.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/he_spoke_before_he_came(adult_version).png',
   },
 ];
 
@@ -121,21 +121,21 @@ export const ageCards: AgeCard[] = [
     age: 'Kids',
     range: 'Age 6–12',
     features: ['Bright illustrations', 'Simple explanations', 'Fun activities', 'Family discussion'],
-    cover: 'https://images.pexels.com/photos/8468470/pexels-photo-8468470.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/he_was_always_the_answer(kids_edition).png',
   },
   {
     id: 'teen-card',
     age: 'Teen',
     range: 'Age 13–18',
     features: ['Faith in today\'s world', 'Reflection', 'Questions', 'Life application'],
-    cover: 'https://images.pexels.com/photos/256502/pexels-photo-256502.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/he_was_always_the_answer(teen_edition).png',
   },
   {
     id: 'adult-card',
     age: 'Adult',
     range: 'Age 19+',
     features: ['Rich theology', 'Prayer', 'Daily transformation', 'Church study'],
-    cover: 'https://images.pexels.com/photos/1111319/pexels-photo-1111319.jpeg?auto=compress&cs=tinysrgb&w=600',
+    cover: '/images/books/he_was_always_the_answer(adult_edition).png',
   },
 ];
 
