@@ -42,16 +42,16 @@ export default function PrayerPartnersPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#FAF8F3]" aria-labelledby="why-prayer-heading">
+      <section className="py-24 ih-section" aria-labelledby="why-prayer-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             <ScrollReveal>
               <div>
-                <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-4">Why Prayer Matters</p>
-                <h2 id="why-prayer-heading" className="font-playfair text-3xl md:text-4xl font-bold text-navy-700 mb-6 leading-snug">
+                <p className="ih-eyebrow mb-4">Why Prayer Matters</p>
+                <h2 id="why-prayer-heading" className="font-playfair text-3xl md:text-4xl font-bold text-white mb-6 leading-snug">
                   Every Movement Needs Intercessors
                 </h2>
-                <div className="space-y-4 text-[#6B6B6B] leading-relaxed text-[0.95rem]">
+                <div className="space-y-4 text-white/65 leading-relaxed text-[0.95rem]">
                   <p>In Him Daily is more than a devotional ministry. It is a spiritual movement—one that seeks to restore generational unity in encountering Jesus. And every movement needs people who pray.</p>
                   <p>Prayer partners are the hidden engine behind what In Him Daily does. They stand in the gap for families we have never met. They intercede for children who are encountering Jesus for the first time.</p>
                   <p>If you feel called to pray—this is your place. We believe the prayers of the intercessors carry as much weight as the words on the page.</p>
@@ -63,9 +63,9 @@ export default function PrayerPartnersPage() {
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-card-hover">
                   <img src="https://images.pexels.com/photos/3991842/pexels-photo-3991842.jpeg?auto=compress&cs=tinysrgb&w=700"
                     alt="Hands open in prayer over scripture" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-800/35 to-transparent" aria-hidden="true" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#05070D]/60 to-transparent" aria-hidden="true" />
                 </div>
-                <div className="absolute -bottom-5 -left-5 p-5 bg-navy-700 rounded-2xl shadow-navy hidden md:block max-w-[190px]">
+                <div className="absolute -bottom-5 -left-5 p-5 ih-card hidden md:block max-w-[190px]">
                   <p className="font-cormorant text-gold-200 italic text-lg leading-snug">&ldquo;Your prayers shape what families receive.&rdquo;</p>
                 </div>
               </div>
@@ -74,25 +74,25 @@ export default function PrayerPartnersPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-ivory-200" aria-labelledby="focus-heading">
+      <section className="py-24 ih-section" aria-labelledby="focus-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Intercession Guide</p>
-            <h2 id="focus-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">Prayer Focus Areas</h2>
-            <p className="text-[#6B6B6B] text-lg max-w-xl mx-auto">Specific areas where your intercession makes a direct impact.</p>
+            <p className="ih-eyebrow mb-3">Intercession Guide</p>
+            <h2 id="focus-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Prayer Focus Areas</h2>
+            <p className="text-white/55 text-lg max-w-xl mx-auto">Specific areas where your intercession makes a direct impact.</p>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {focusAreas.map((a,i)=>(
               <ScrollReveal key={i} delay={i*70}>
-                <div className="premium-card p-7 bg-white rounded-2xl border border-ivory-300 shadow-sm h-full">
-                  <div className="w-12 h-12 rounded-xl bg-gold-50 border border-gold-200 flex items-center justify-center mb-5">
-                    <a.icon size={21} className="text-gold-600" aria-hidden="true" />
+                <div className="premium-card p-7 rounded-2xl ih-card h-full">
+                  <div className="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center mb-5">
+                    <a.icon size={21} className="text-gold-300" aria-hidden="true" />
                   </div>
-                  <h3 className="font-playfair text-lg font-bold text-navy-700 mb-3">{a.title}</h3>
-                  <p className="text-[#6B6B6B] text-sm leading-relaxed mb-4">{a.desc}</p>
+                  <h3 className="font-playfair text-lg font-bold text-white mb-3">{a.title}</h3>
+                  <p className="text-white/60 text-sm leading-relaxed mb-4">{a.desc}</p>
                   <div className="flex gap-2 flex-wrap">
                     {a.refs.map((r,j)=>(
-                      <span key={j} className="text-[0.68rem] bg-gold-50 text-gold-700 border border-gold-200 px-2.5 py-1 rounded-full font-medium">{r}</span>
+                      <span key={j} className="text-[0.68rem] bg-white/10 text-gold-200 border border-white/15 px-2.5 py-1 rounded-full font-medium">{r}</span>
                     ))}
                   </div>
                 </div>
@@ -135,14 +135,14 @@ export default function PrayerPartnersPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-ivory-200" aria-labelledby="guidelines-link-heading">
+      <section className="py-16 ih-section" aria-labelledby="guidelines-link-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
           <ScrollReveal>
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Go Deeper</p>
-            <h2 id="guidelines-link-heading" className="font-playfair text-3xl font-bold text-navy-700 mb-4">Read the Prayer Guidelines</h2>
-            <p className="text-[#6B6B6B] text-lg mb-8">Six foundations of effective intercession, a daily prayer rhythm, specific prayer points, and a weekly prayer guide.</p>
+            <p className="ih-eyebrow mb-3">Go Deeper</p>
+            <h2 id="guidelines-link-heading" className="font-playfair text-3xl font-bold text-white mb-4">Read the Prayer Guidelines</h2>
+            <p className="text-white/55 text-lg mb-8">Six foundations of effective intercession, a daily prayer rhythm, specific prayer points, and a weekly prayer guide.</p>
             <Link to="/prayer-guidelines"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 hover:bg-navy-600 text-white font-bold rounded-full transition-all duration-300 hover:-translate-y-0.5">
+              className="inline-flex items-center gap-2 px-8 py-4 ih-btn-gold">
               View Prayer Guidelines
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
@@ -150,46 +150,46 @@ export default function PrayerPartnersPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#FAF8F3]" aria-labelledby="join-heading">
+      <section className="py-24 ih-section" aria-labelledby="join-heading">
         <div className="max-w-xl mx-auto px-4 sm:px-6 text-center">
           <ScrollReveal>
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-4">Get Involved</p>
-            <h2 id="join-heading" className="font-playfair text-4xl font-bold text-navy-700 mb-4">Join the Prayer Team</h2>
-            <p className="text-[#6B6B6B] text-lg mb-10">Receive monthly prayer guides and specific intercession requests delivered to your inbox.</p>
+            <p className="ih-eyebrow mb-4">Get Involved</p>
+            <h2 id="join-heading" className="font-playfair text-4xl font-bold text-white mb-4">Join the Prayer Team</h2>
+            <p className="text-white/55 text-lg mb-10">Receive monthly prayer guides and specific intercession requests delivered to your inbox.</p>
 
             {submitted ? (
-              <div className="p-8 rounded-2xl bg-gold-50 border border-gold-200 animate-fade-in">
-                <div className="w-11 h-11 rounded-full bg-gold-100 flex items-center justify-center mx-auto mb-4">
-                  <Check size={22} className="text-gold-600" aria-hidden="true" />
+              <div className="p-8 rounded-2xl ih-card border-gold-400/30 animate-fade-in">
+                <div className="w-11 h-11 rounded-full bg-gold-400/15 flex items-center justify-center mx-auto mb-4">
+                  <Check size={22} className="text-gold-300" aria-hidden="true" />
                 </div>
-                <h3 className="font-playfair text-2xl font-bold text-navy-700 mb-2">Welcome to the Team!</h3>
-                <p className="text-[#6B6B6B]">Thank you, {name}. Your prayers are powerful and we are grateful to have you interceding with us.</p>
+                <h3 className="font-playfair text-2xl font-bold text-white mb-2">Welcome to the Team!</h3>
+                <p className="text-white/55">Thank you, {name}. Your prayers are powerful and we are grateful to have you interceding with us.</p>
               </div>
             ) : (
               <form onSubmit={async (e)=>{ e.preventDefault(); if(!name||!email) return; try { await insertPrayerPartner({name,email}); setSubmitted(true); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-3.5 text-left" noValidate>
                 <input type="text" placeholder="Your Name" value={name} onChange={e=>setName(e.target.value)} required aria-label="Your name"
-                  className="w-full px-5 py-3.5 rounded-full bg-white border border-ivory-300 text-navy-700 placeholder-navy-300 focus:outline-none focus:border-gold-400 transition-colors text-sm" />
+                  className="w-full px-5 py-3.5 ih-input transition-colors text-sm" />
                 <input type="email" placeholder="Email Address" value={email} onChange={e=>setEmail(e.target.value)} required aria-label="Email address"
-                  className="w-full px-5 py-3.5 rounded-full bg-white border border-ivory-300 text-navy-700 placeholder-navy-300 focus:outline-none focus:border-gold-400 transition-colors text-sm" />
-                <button type="submit" className="w-full py-4 bg-navy-700 hover:bg-navy-600 text-white font-bold rounded-full transition-all duration-300 hover:-translate-y-0.5">
+                  className="w-full px-5 py-3.5 ih-input transition-colors text-sm" />
+                <button type="submit" className="w-full py-4 ih-btn-gold text-[0.9rem]">
                   Join the Prayer Team
                 </button>
-                {formError && <p className="text-red-500 text-xs text-center">{formError}</p>}
-                <p className="text-center text-[#6B6B6B]/50 text-xs">Monthly updates. Unsubscribe anytime.</p>
+                {formError && <p className="text-red-400 text-xs text-center">{formError}</p>}
+                <p className="text-center text-white/35 text-xs">Monthly updates. Unsubscribe anytime.</p>
               </form>
             )}
           </ScrollReveal>
         </div>
       </section>
 
-      <section className="py-14 bg-[#FAF8F3] text-center" aria-label="Closing scripture">
+      <section className="py-14 ih-section text-center" aria-label="Closing scripture">
         <div className="max-w-xl mx-auto px-4">
           <ScrollReveal>
             <div className="gold-divider mx-auto mb-7" aria-hidden="true" />
-            <p className="font-cormorant text-3xl text-navy-700 italic leading-relaxed">
+            <p className="font-cormorant text-3xl text-white italic leading-relaxed">
               &ldquo;Devote yourselves to prayer, being watchful and thankful.&rdquo;
             </p>
-            <p className="text-gold-600 text-[0.72rem] font-semibold mt-3 tracking-[0.18em] uppercase">Colossians 4:2</p>
+            <p className="text-gold-400 text-[0.72rem] font-semibold mt-3 tracking-[0.18em] uppercase">Colossians 4:2</p>
           </ScrollReveal>
         </div>
       </section>

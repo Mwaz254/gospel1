@@ -63,13 +63,14 @@
   }
 
   body {
-    background-color: var(--ivory);
-    color: var(--ink);
+    background-color: #05070D;
+    color: #E5E7EB;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
   }
 
   img, video {
@@ -97,12 +98,12 @@
   .text-balance   { text-wrap: balance; }
 }
 
-/* ─── Navigation glass ──────────────────────────────────────────── */
+/* ─── Navigation glass (dark) ─────────────────────────────────────── */
 .glass-nav {
-  background-color: rgba(250, 248, 243, 0.92);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  backdrop-filter: blur(18px) saturate(180%);
-  border-bottom: 1px solid rgba(201, 152, 58, 0.18);
+  background-color: rgba(5, 7, 13, 0.85);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.22);
 }
 
 /* ─── Gold gradient text (cross-browser safe) ───────────────────── */
@@ -144,16 +145,33 @@
 /* ─── Card hover ────────────────────────────────────────────────── */
 .premium-card {
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+              box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.28s ease;
   will-change: transform;
 }
 
 .premium-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   box-shadow:
-    0 20px 48px rgba(23, 50, 77, 0.10),
-    0 4px 16px rgba(201, 152, 58, 0.08);
+    0 20px 48px rgba(0, 0, 0, 0.4),
+    0 4px 16px rgba(212, 175, 55, 0.12);
 }
+
+/* ─── Dark theme shared utilities ───────────────────────────────── */
+.ih-section    { position: relative; }
+.ih-eyebrow    { font-family: 'Cinzel', Georgia, serif; color: #D4AF37; letter-spacing: 0.25em; font-size: 0.72rem; text-transform: uppercase; }
+.ih-heading    { font-family: 'Playfair Display', Georgia, serif; color: #fff; font-weight: 700; }
+.ih-body       { color: rgba(255,255,255,0.65); }
+.ih-muted      { color: rgba(255,255,255,0.45); }
+.ih-card       { background: rgba(255,255,255,0.04); backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); border: 1px solid rgba(212,175,55,0.18); border-radius: 1rem; }
+.ih-card-solid { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); border-radius: 1rem; }
+.ih-input      { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 9999px; }
+.ih-input::placeholder { color: rgba(255,255,255,0.35); }
+.ih-input:focus { border-color: rgba(212,175,55,0.6); outline: none; }
+.ih-btn-gold   { background: linear-gradient(110deg, #D4AF37, #E4B86A); color: #05070D; font-weight: 700; border-radius: 9999px; transition: all 0.3s ease; }
+.ih-btn-gold:hover { box-shadow: 0 0 28px rgba(212,175,55,0.4); transform: translateY(-1px); }
+.ih-btn-ghost  { border: 1px solid rgba(212,175,55,0.4); color: #E4B86A; border-radius: 9999px; transition: all 0.3s ease; }
+.ih-btn-ghost:hover { background: rgba(212,175,55,0.1); border-color: rgba(212,175,55,0.7); }
 
 /* ─── Ray animation ─────────────────────────────────────────────── */
 @keyframes ray-appear {
@@ -234,9 +252,9 @@
 
 /* ─── Scrollbar (WebKit) ─────────────────────────────────────────── */
 ::-webkit-scrollbar        { width: 6px; }
-::-webkit-scrollbar-track  { background: var(--ivory); }
-::-webkit-scrollbar-thumb  { background: var(--gold); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gold-lt); }
+::-webkit-scrollbar-track  { background: #05070D; }
+::-webkit-scrollbar-thumb  { background: rgba(212,175,55,0.5); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(212,175,55,0.7); }
 
 /* ─── Focus visible ──────────────────────────────────────────────── */
 :focus-visible {

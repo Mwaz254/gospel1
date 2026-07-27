@@ -11,25 +11,25 @@ type ContactMessage = { id: string; name: string; email: string; subject: string
 type Tab = 'leads' | 'newsletter' | 'partners' | 'prayers' | 'messages';
 
 const TABS: { id: Tab; label: string; icon: React.ElementType; color: string }[] = [
-  { id: 'leads',     label: 'Free Sample Leads',    icon: BookOpen,      color: 'text-navy-600' },
-  { id: 'newsletter',label: 'Newsletter',           icon: Mail,          color: 'text-gold-600' },
-  { id: 'partners',  label: 'Prayer Partners',      icon: Users,         color: 'text-purple-600' },
-  { id: 'prayers',   label: 'Prayer Requests',      icon: Heart,         color: 'text-rose-600' },
-  { id: 'messages',  label: 'Contact Messages',     icon: MessageSquare, color: 'text-teal-600' },
+  { id: 'leads',     label: 'Free Sample Leads',    icon: BookOpen,      color: 'text-gold-300' },
+  { id: 'newsletter',label: 'Newsletter',           icon: Mail,          color: 'text-gold-300' },
+  { id: 'partners',  label: 'Prayer Partners',      icon: Users,         color: 'text-gold-300' },
+  { id: 'prayers',   label: 'Prayer Requests',      icon: Heart,         color: 'text-gold-300' },
+  { id: 'messages',  label: 'Contact Messages',     icon: MessageSquare, color: 'text-gold-300' },
 ];
 
 const STATUS_COLORS: Record<string, string> = {
-  new:          'bg-blue-50 text-blue-700 border-blue-200',
-  sent:         'bg-green-50 text-green-700 border-green-200',
-  subscribed:   'bg-green-50 text-green-700 border-green-200',
-  active:       'bg-green-50 text-green-700 border-green-200',
-  received:     'bg-amber-50 text-amber-700 border-amber-200',
-  read:         'bg-blue-50 text-blue-700 border-blue-200',
-  replied:      'bg-green-50 text-green-700 border-green-200',
-  prayed_over:  'bg-purple-50 text-purple-700 border-purple-200',
-  closed:       'bg-gray-50 text-gray-500 border-gray-200',
-  unsubscribed: 'bg-gray-50 text-gray-500 border-gray-200',
-  inactive:     'bg-gray-50 text-gray-500 border-gray-200',
+  new:          'bg-blue-500/15 text-blue-300 border-blue-500/30',
+  sent:         'bg-green-500/15 text-green-300 border-green-500/30',
+  subscribed:   'bg-green-500/15 text-green-300 border-green-500/30',
+  active:       'bg-green-500/15 text-green-300 border-green-500/30',
+  received:     'bg-amber-500/15 text-amber-300 border-amber-500/30',
+  read:         'bg-blue-500/15 text-blue-300 border-blue-500/30',
+  replied:      'bg-green-500/15 text-green-300 border-green-500/30',
+  prayed_over:  'bg-purple-500/15 text-purple-300 border-purple-500/30',
+  closed:       'bg-gray-500/15 text-gray-400 border-gray-500/30',
+  unsubscribed: 'bg-gray-500/15 text-gray-400 border-gray-500/30',
+  inactive:     'bg-gray-500/15 text-gray-400 border-gray-500/30',
 };
 
 function fmt(iso: string) {
@@ -38,7 +38,7 @@ function fmt(iso: string) {
 
 function StatusBadge({ status }: { status: string }) {
   return (
-    <span className={`inline-block px-2.5 py-0.5 rounded-full text-[0.68rem] font-semibold border ${STATUS_COLORS[status] ?? 'bg-gray-50 text-gray-600 border-gray-200'}`}>
+    <span className={`inline-block px-2.5 py-0.5 rounded-full text-[0.68rem] font-semibold border ${STATUS_COLORS[status] ?? 'bg-gray-500/15 text-gray-400 border-gray-500/30'}`}>
       {status.replace('_', ' ')}
     </span>
   );
@@ -82,8 +82,8 @@ export default function AdminPage() {
   useEffect(() => { loadAll(); }, []);
 
   return (
-    <div className="min-h-screen bg-[#FAF8F3] pt-20">
-      <div className="bg-navy-700 text-white px-4 sm:px-6 lg:px-8 py-10">
+    <div className="min-h-screen pt-20">
+      <div className="text-white px-4 sm:px-6 lg:px-8 py-10 border-b border-white/10">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
             <p className="text-gold-400 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-1">Ministry Dashboard</p>
@@ -103,20 +103,20 @@ export default function AdminPage() {
           {TABS.map((t) => (
             <button key={t.id} onClick={() => setTab(t.id)}
               className={`p-5 rounded-2xl border text-left transition-all duration-200 ${
-                tab === t.id ? 'bg-navy-700 border-navy-600 text-white' : 'bg-white border-ivory-300 hover:border-gold-300'
+                tab === t.id ? 'ih-card border-gold-400/50' : 'ih-card-solid border-white/10 hover:border-gold-400/30'
               }`}>
               <t.icon size={20} className={tab === t.id ? 'text-gold-300 mb-3' : `${t.color} mb-3`} aria-hidden="true" />
-              <p className={`text-2xl font-bold font-playfair ${tab === t.id ? 'text-white' : 'text-navy-700'}`}>
+              <p className={`text-2xl font-bold font-playfair ${tab === t.id ? 'text-white' : 'text-white'}`}>
                 {loading ? '—' : counts[t.id]}
               </p>
-              <p className={`text-xs mt-0.5 ${tab === t.id ? 'text-white/60' : 'text-[#6B6B6B]'}`}>{t.label}</p>
+              <p className={`text-xs mt-0.5 ${tab === t.id ? 'text-white/60' : 'text-white/45'}`}>{t.label}</p>
             </button>
           ))}
         </div>
 
-        <div className="bg-white rounded-2xl border border-ivory-300 shadow-sm overflow-hidden">
+        <div className="ih-card overflow-hidden">
           {loading ? (
-            <div className="flex items-center justify-center py-24 text-navy-400">
+            <div className="flex items-center justify-center py-24 text-white/50">
               <RefreshCw size={22} className="animate-spin mr-3" aria-hidden="true" />
               Loading submissions…
             </div>
@@ -124,18 +124,18 @@ export default function AdminPage() {
             <>
               {tab === 'leads' && (
                 <table className="w-full text-sm">
-                  <thead className="bg-ivory-200 text-navy-500 text-[0.72rem] uppercase tracking-wider">
+                  <thead className="bg-white/5 text-white/50 text-[0.72rem] uppercase tracking-wider">
                     <tr>{['Name','Email','Source','Status','Date'].map(h => <th key={h} className="px-5 py-3 text-left font-semibold">{h}</th>)}</tr>
                   </thead>
-                  <tbody className="divide-y divide-ivory-200">
-                    {leads.length === 0 ? <tr><td colSpan={5} className="px-5 py-10 text-center text-[#6B6B6B]">No leads yet.</td></tr>
+                  <tbody className="divide-y divide-white/10">
+                    {leads.length === 0 ? <tr><td colSpan={5} className="px-5 py-10 text-center text-white/40">No leads yet.</td></tr>
                       : leads.map(r => (
-                        <tr key={r.id} className="hover:bg-ivory-100 transition-colors">
-                          <td className="px-5 py-3.5 font-medium text-navy-700">{r.first_name}</td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B]">{r.email}</td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B] text-[0.8rem]">{r.source.replace('_', ' ')}</td>
+                        <tr key={r.id} className="hover:bg-white/5 transition-colors">
+                          <td className="px-5 py-3.5 font-medium text-white">{r.first_name}</td>
+                          <td className="px-5 py-3.5 text-white/60">{r.email}</td>
+                          <td className="px-5 py-3.5 text-white/60 text-[0.8rem]">{r.source.replace('_', ' ')}</td>
                           <td className="px-5 py-3.5"><StatusBadge status={r.status} /></td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B] text-[0.8rem]">{fmt(r.created_at)}</td>
+                          <td className="px-5 py-3.5 text-white/60 text-[0.8rem]">{fmt(r.created_at)}</td>
                         </tr>
                       ))}
                   </tbody>
@@ -143,17 +143,17 @@ export default function AdminPage() {
               )}
               {tab === 'newsletter' && (
                 <table className="w-full text-sm">
-                  <thead className="bg-ivory-200 text-navy-500 text-[0.72rem] uppercase tracking-wider">
+                  <thead className="bg-white/5 text-white/50 text-[0.72rem] uppercase tracking-wider">
                     <tr>{['Name','Email','Status','Subscribed'].map(h => <th key={h} className="px-5 py-3 text-left font-semibold">{h}</th>)}</tr>
                   </thead>
-                  <tbody className="divide-y divide-ivory-200">
-                    {subs.length === 0 ? <tr><td colSpan={4} className="px-5 py-10 text-center text-[#6B6B6B]">No subscribers yet.</td></tr>
+                  <tbody className="divide-y divide-white/10">
+                    {subs.length === 0 ? <tr><td colSpan={4} className="px-5 py-10 text-center text-white/40">No subscribers yet.</td></tr>
                       : subs.map(r => (
-                        <tr key={r.id} className="hover:bg-ivory-100 transition-colors">
-                          <td className="px-5 py-3.5 font-medium text-navy-700">{r.name}</td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B]">{r.email}</td>
+                        <tr key={r.id} className="hover:bg-white/5 transition-colors">
+                          <td className="px-5 py-3.5 font-medium text-white">{r.name}</td>
+                          <td className="px-5 py-3.5 text-white/60">{r.email}</td>
                           <td className="px-5 py-3.5"><StatusBadge status={r.status} /></td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B] text-[0.8rem]">{fmt(r.created_at)}</td>
+                          <td className="px-5 py-3.5 text-white/60 text-[0.8rem]">{fmt(r.created_at)}</td>
                         </tr>
                       ))}
                   </tbody>
@@ -161,17 +161,17 @@ export default function AdminPage() {
               )}
               {tab === 'partners' && (
                 <table className="w-full text-sm">
-                  <thead className="bg-ivory-200 text-navy-500 text-[0.72rem] uppercase tracking-wider">
+                  <thead className="bg-white/5 text-white/50 text-[0.72rem] uppercase tracking-wider">
                     <tr>{['Name','Email','Status','Joined'].map(h => <th key={h} className="px-5 py-3 text-left font-semibold">{h}</th>)}</tr>
                   </thead>
-                  <tbody className="divide-y divide-ivory-200">
-                    {partners.length === 0 ? <tr><td colSpan={4} className="px-5 py-10 text-center text-[#6B6B6B]">No prayer partners yet.</td></tr>
+                  <tbody className="divide-y divide-white/10">
+                    {partners.length === 0 ? <tr><td colSpan={4} className="px-5 py-10 text-center text-white/40">No prayer partners yet.</td></tr>
                       : partners.map(r => (
-                        <tr key={r.id} className="hover:bg-ivory-100 transition-colors">
-                          <td className="px-5 py-3.5 font-medium text-navy-700">{r.name}</td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B]">{r.email}</td>
+                        <tr key={r.id} className="hover:bg-white/5 transition-colors">
+                          <td className="px-5 py-3.5 font-medium text-white">{r.name}</td>
+                          <td className="px-5 py-3.5 text-white/60">{r.email}</td>
                           <td className="px-5 py-3.5"><StatusBadge status={r.status} /></td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B] text-[0.8rem]">{fmt(r.created_at)}</td>
+                          <td className="px-5 py-3.5 text-white/60 text-[0.8rem]">{fmt(r.created_at)}</td>
                         </tr>
                       ))}
                   </tbody>
@@ -179,18 +179,18 @@ export default function AdminPage() {
               )}
               {tab === 'prayers' && (
                 <table className="w-full text-sm">
-                  <thead className="bg-ivory-200 text-navy-500 text-[0.72rem] uppercase tracking-wider">
+                  <thead className="bg-white/5 text-white/50 text-[0.72rem] uppercase tracking-wider">
                     <tr>{['Name','Email','Request','Status','Date'].map(h => <th key={h} className="px-5 py-3 text-left font-semibold">{h}</th>)}</tr>
                   </thead>
-                  <tbody className="divide-y divide-ivory-200">
-                    {prayers.length === 0 ? <tr><td colSpan={5} className="px-5 py-10 text-center text-[#6B6B6B]">No prayer requests yet.</td></tr>
+                  <tbody className="divide-y divide-white/10">
+                    {prayers.length === 0 ? <tr><td colSpan={5} className="px-5 py-10 text-center text-white/40">No prayer requests yet.</td></tr>
                       : prayers.map(r => (
-                        <tr key={r.id} className="hover:bg-ivory-100 transition-colors">
-                          <td className="px-5 py-3.5 font-medium text-navy-700 whitespace-nowrap">{r.name}</td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B]">{r.email ?? <span className="text-navy-300 italic text-xs">anonymous</span>}</td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B] max-w-xs"><span className="line-clamp-2">{r.request}</span></td>
+                        <tr key={r.id} className="hover:bg-white/5 transition-colors">
+                          <td className="px-5 py-3.5 font-medium text-white whitespace-nowrap">{r.name}</td>
+                          <td className="px-5 py-3.5 text-white/60">{r.email ?? <span className="text-white/30 italic text-xs">anonymous</span>}</td>
+                          <td className="px-5 py-3.5 text-white/60 max-w-xs"><span className="line-clamp-2">{r.request}</span></td>
                           <td className="px-5 py-3.5 whitespace-nowrap"><StatusBadge status={r.status} /></td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B] text-[0.8rem] whitespace-nowrap">{fmt(r.created_at)}</td>
+                          <td className="px-5 py-3.5 text-white/60 text-[0.8rem] whitespace-nowrap">{fmt(r.created_at)}</td>
                         </tr>
                       ))}
                   </tbody>
@@ -198,19 +198,19 @@ export default function AdminPage() {
               )}
               {tab === 'messages' && (
                 <table className="w-full text-sm">
-                  <thead className="bg-ivory-200 text-navy-500 text-[0.72rem] uppercase tracking-wider">
+                  <thead className="bg-white/5 text-white/50 text-[0.72rem] uppercase tracking-wider">
                     <tr>{['Name','Email','Subject','Message','Status','Date'].map(h => <th key={h} className="px-5 py-3 text-left font-semibold">{h}</th>)}</tr>
                   </thead>
-                  <tbody className="divide-y divide-ivory-200">
-                    {messages.length === 0 ? <tr><td colSpan={6} className="px-5 py-10 text-center text-[#6B6B6B]">No messages yet.</td></tr>
+                  <tbody className="divide-y divide-white/10">
+                    {messages.length === 0 ? <tr><td colSpan={6} className="px-5 py-10 text-center text-white/40">No messages yet.</td></tr>
                       : messages.map(r => (
-                        <tr key={r.id} className="hover:bg-ivory-100 transition-colors">
-                          <td className="px-5 py-3.5 font-medium text-navy-700 whitespace-nowrap">{r.name}</td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B]">{r.email}</td>
-                          <td className="px-5 py-3.5 text-navy-700 font-medium">{r.subject}</td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B] max-w-xs"><span className="line-clamp-2">{r.message}</span></td>
+                        <tr key={r.id} className="hover:bg-white/5 transition-colors">
+                          <td className="px-5 py-3.5 font-medium text-white whitespace-nowrap">{r.name}</td>
+                          <td className="px-5 py-3.5 text-white/60">{r.email}</td>
+                          <td className="px-5 py-3.5 text-white font-medium">{r.subject}</td>
+                          <td className="px-5 py-3.5 text-white/60 max-w-xs"><span className="line-clamp-2">{r.message}</span></td>
                           <td className="px-5 py-3.5 whitespace-nowrap"><StatusBadge status={r.status} /></td>
-                          <td className="px-5 py-3.5 text-[#6B6B6B] text-[0.8rem] whitespace-nowrap">{fmt(r.created_at)}</td>
+                          <td className="px-5 py-3.5 text-white/60 text-[0.8rem] whitespace-nowrap">{fmt(r.created_at)}</td>
                         </tr>
                       ))}
                   </tbody>
@@ -220,76 +220,76 @@ export default function AdminPage() {
           )}
         </div>
 
-        <p className="text-center text-[#6B6B6B]/50 text-xs mt-6">
+        <p className="text-center text-white/30 text-xs mt-6">
           In Him Daily Admin · Data secured with Supabase Row Level Security
         </p>
 
-        <div className="mt-12 bg-white rounded-2xl border border-ivory-300 shadow-sm overflow-hidden">
-          <div className="bg-navy-700 px-6 py-5 flex items-center gap-3">
+        <div className="mt-12 ih-card overflow-hidden">
+          <div className="bg-white/5 px-6 py-5 flex items-center gap-3 border-b border-white/10">
             <Rocket size={20} className="text-gold-300" aria-hidden="true" />
             <h2 className="font-playfair text-lg font-bold text-white">Netlify Deployment</h2>
           </div>
           <div className="p-6 space-y-5">
             <div className="grid sm:grid-cols-3 gap-4">
-              <div className="p-4 rounded-xl bg-ivory-100 border border-ivory-300">
-                <p className="text-[0.68rem] font-semibold text-navy-400 uppercase tracking-wider mb-1">Build Command</p>
-                <p className="text-sm text-navy-700 font-mono">npm run build</p>
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p className="text-[0.68rem] font-semibold text-white/40 uppercase tracking-wider mb-1">Build Command</p>
+                <p className="text-sm text-white font-mono">npm run build</p>
               </div>
-              <div className="p-4 rounded-xl bg-ivory-100 border border-ivory-300">
-                <p className="text-[0.68rem] font-semibold text-navy-400 uppercase tracking-wider mb-1">Publish Directory</p>
-                <p className="text-sm text-navy-700 font-mono">dist</p>
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p className="text-[0.68rem] font-semibold text-white/40 uppercase tracking-wider mb-1">Publish Directory</p>
+                <p className="text-sm text-white font-mono">dist</p>
               </div>
-              <div className="p-4 rounded-xl bg-ivory-100 border border-ivory-300">
-                <p className="text-[0.68rem] font-semibold text-navy-400 uppercase tracking-wider mb-1">Framework</p>
-                <p className="text-sm text-navy-700 font-mono">React + Vite</p>
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p className="text-[0.68rem] font-semibold text-white/40 uppercase tracking-wider mb-1">Framework</p>
+                <p className="text-sm text-white font-mono">React + Vite</p>
               </div>
             </div>
 
             <div className="space-y-3">
-              <h3 className="font-playfair text-base font-bold text-navy-700">Deploy in 3 Steps</h3>
+              <h3 className="font-playfair text-base font-bold text-white">Deploy in 3 Steps</h3>
               <ol className="space-y-3">
                 <li className="flex gap-3 items-start">
-                  <span className="w-6 h-6 rounded-full bg-navy-700 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                  <span className="w-6 h-6 rounded-full bg-gold-400/20 text-gold-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
                   <div>
-                    <p className="text-sm font-medium text-navy-700">Connect your repository</p>
-                    <p className="text-xs text-[#6B6B6B] mt-0.5">Push this project to GitHub, then log in to Netlify and select &ldquo;Add new site &rarr; Import an existing project&rdquo;.</p>
+                    <p className="text-sm font-medium text-white">Connect your repository</p>
+                    <p className="text-xs text-white/50 mt-0.5">Push this project to GitHub, then log in to Netlify and select &ldquo;Add new site &rarr; Import an existing project&rdquo;.</p>
                   </div>
                 </li>
                 <li className="flex gap-3 items-start">
-                  <span className="w-6 h-6 rounded-full bg-navy-700 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                  <span className="w-6 h-6 rounded-full bg-gold-400/20 text-gold-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
                   <div>
-                    <p className="text-sm font-medium text-navy-700">Configure build settings</p>
-                    <p className="text-xs text-[#6B6B6B] mt-0.5">Set build command to <code className="text-gold-700 bg-gold-50 px-1 rounded">npm run build</code> and publish directory to <code className="text-gold-700 bg-gold-50 px-1 rounded">dist</code>.</p>
+                    <p className="text-sm font-medium text-white">Configure build settings</p>
+                    <p className="text-xs text-white/50 mt-0.5">Set build command to <code className="text-gold-300 bg-gold-400/10 px-1 rounded">npm run build</code> and publish directory to <code className="text-gold-300 bg-gold-400/10 px-1 rounded">dist</code>.</p>
                   </div>
                 </li>
                 <li className="flex gap-3 items-start">
-                  <span className="w-6 h-6 rounded-full bg-navy-700 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                  <span className="w-6 h-6 rounded-full bg-gold-400/20 text-gold-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
                   <div>
-                    <p className="text-sm font-medium text-navy-700">Set environment variables</p>
-                    <p className="text-xs text-[#6B6B6B] mt-0.5">In Netlify &rarr; Site settings &rarr; Environment variables, add <code className="text-gold-700 bg-gold-50 px-1 rounded">VITE_SUPABASE_URL</code> and <code className="text-gold-700 bg-gold-50 px-1 rounded">VITE_SUPABASE_ANON_KEY</code>.</p>
+                    <p className="text-sm font-medium text-white">Set environment variables</p>
+                    <p className="text-xs text-white/50 mt-0.5">In Netlify &rarr; Site settings &rarr; Environment variables, add <code className="text-gold-300 bg-gold-400/10 px-1 rounded">VITE_SUPABASE_URL</code> and <code className="text-gold-300 bg-gold-400/10 px-1 rounded">VITE_SUPABASE_ANON_KEY</code>.</p>
                   </div>
                 </li>
               </ol>
             </div>
 
-            <div className="p-4 rounded-xl bg-green-50 border border-green-200 flex gap-3 items-start">
-              <CheckCircle2 size={18} className="text-green-600 shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 flex gap-3 items-start">
+              <CheckCircle2 size={18} className="text-green-400 shrink-0 mt-0.5" aria-hidden="true" />
               <div>
-                <p className="text-sm font-medium text-green-800">netlify.toml is configured for Vite</p>
-                <p className="text-xs text-green-700 mt-0.5">Build command, publish directory, and SPA redirect rules are all set up.</p>
+                <p className="text-sm font-medium text-green-300">netlify.toml is configured for Vite</p>
+                <p className="text-xs text-green-400/70 mt-0.5">Build command, publish directory, and SPA redirect rules are all set up.</p>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 flex gap-3 items-start">
-              <AlertCircle size={18} className="text-amber-600 shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 flex gap-3 items-start">
+              <AlertCircle size={18} className="text-amber-400 shrink-0 mt-0.5" aria-hidden="true" />
               <div>
-                <p className="text-sm font-medium text-amber-800">Environment variables required</p>
-                <p className="text-xs text-amber-700 mt-0.5">VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY must be set in Netlify for forms and dashboard to work in production.</p>
+                <p className="text-sm font-medium text-amber-300">Environment variables required</p>
+                <p className="text-xs text-amber-400/70 mt-0.5">VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY must be set in Netlify for forms and dashboard to work in production.</p>
               </div>
             </div>
 
             <a href="https://app.netlify.com/start" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-navy-700 hover:bg-navy-600 text-white text-sm font-semibold rounded-full transition-all duration-300 hover:-translate-y-0.5">
+              className="inline-flex items-center gap-2 px-6 py-3 ih-btn-gold text-sm">
               <ExternalLink size={16} aria-hidden="true" />
               Go to Netlify
             </a>

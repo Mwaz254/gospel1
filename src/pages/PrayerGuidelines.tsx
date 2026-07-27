@@ -81,19 +81,19 @@ export default function PrayerGuidelinesPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#FAF8F3]" aria-labelledby="intro-heading">
+      <section className="py-24 ih-section" aria-labelledby="intro-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="text-center mb-12">
-              <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">A Guide for Intercessors</p>
-              <h2 id="intro-heading" className="font-playfair text-3xl md:text-4xl font-bold text-navy-700 mb-6 leading-snug">
+              <p className="ih-eyebrow mb-3">A Guide for Intercessors</p>
+              <h2 id="intro-heading" className="font-playfair text-3xl md:text-4xl font-bold text-white mb-6 leading-snug">
                 How to Pray for In Him Daily
               </h2>
             </div>
-            <div className="space-y-5 text-[#6B6B6B] leading-relaxed text-[0.95rem]">
+            <div className="space-y-5 text-white/65 leading-relaxed text-[0.95rem]">
               <p>Intercession is not a duty — it is a calling. When you pray for In Him Daily, you are not merely asking God to bless a project. You are standing in the gap for families you may never meet, asking the Holy Spirit to turn words on a page into a living encounter with Jesus Christ.</p>
               <p>These guidelines are designed to help you pray with purpose, with power, and with persistence. Whether you have five minutes or an hour, whether you pray alone or with others, these guidelines will help you focus your intercession and deepen your partnership with what God is doing through this ministry.</p>
-              <p className="font-cormorant text-xl text-navy-700 italic leading-relaxed border-l-2 border-gold-400 pl-5">
+              <p className="font-cormorant text-xl text-white italic leading-relaxed border-l-2 border-gold-400 pl-5">
                 &ldquo;You do not have because you do not ask God. When you ask, you do not receive, because you ask with wrong motives.&rdquo; — James 4:2-3
               </p>
             </div>
@@ -101,25 +101,25 @@ export default function PrayerGuidelinesPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-ivory-200" aria-labelledby="foundations-heading">
+      <section className="py-24 ih-section" aria-labelledby="foundations-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">The Six Foundations</p>
-            <h2 id="foundations-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">Principles of Effective Intercession</h2>
-            <p className="text-[#6B6B6B] text-lg max-w-xl mx-auto">Six foundational principles that shape how we pray for the ministry and the families it serves.</p>
+            <p className="ih-eyebrow mb-3">The Six Foundations</p>
+            <h2 id="foundations-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Principles of Effective Intercession</h2>
+            <p className="text-white/55 text-lg max-w-xl mx-auto">Six foundational principles that shape how we pray for the ministry and the families it serves.</p>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {foundations.map((f, i) => (
               <ScrollReveal key={i} delay={i * 70}>
-                <div className="premium-card p-7 bg-white rounded-2xl border border-ivory-300 shadow-sm h-full">
-                  <div className="w-12 h-12 rounded-xl bg-gold-50 border border-gold-200 flex items-center justify-center mb-5">
-                    <f.icon size={21} className="text-gold-600" aria-hidden="true" />
+                <div className="premium-card p-7 rounded-2xl ih-card h-full">
+                  <div className="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center mb-5">
+                    <f.icon size={21} className="text-gold-300" aria-hidden="true" />
                   </div>
-                  <h3 className="font-playfair text-lg font-bold text-navy-700 mb-3">{f.title}</h3>
-                  <p className="text-[#6B6B6B] text-sm leading-relaxed mb-4">{f.desc}</p>
+                  <h3 className="font-playfair text-lg font-bold text-white mb-3">{f.title}</h3>
+                  <p className="text-white/60 text-sm leading-relaxed mb-4">{f.desc}</p>
                   <div className="flex gap-2 flex-wrap">
                     {f.refs.map((r, j) => (
-                      <span key={j} className="text-[0.68rem] bg-gold-50 text-gold-700 border border-gold-200 px-2.5 py-1 rounded-full font-medium">{r}</span>
+                      <span key={j} className="text-[0.68rem] bg-white/10 text-gold-200 border border-white/15 px-2.5 py-1 rounded-full font-medium">{r}</span>
                     ))}
                   </div>
                 </div>
@@ -160,27 +160,27 @@ export default function PrayerGuidelinesPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#FAF8F3]" aria-labelledby="points-heading">
+      <section className="py-24 ih-section" aria-labelledby="points-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Specific Intercession</p>
-            <h2 id="points-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">Prayer Points</h2>
-            <p className="text-[#6B6B6B] text-lg max-w-xl mx-auto">Four areas of focused intercession for the ministry.</p>
+            <p className="ih-eyebrow mb-3">Specific Intercession</p>
+            <h2 id="points-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Prayer Points</h2>
+            <p className="text-white/55 text-lg max-w-xl mx-auto">Four areas of focused intercession for the ministry.</p>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-6">
             {prayerPoints.map((pp, i) => (
               <ScrollReveal key={i} delay={i * 80}>
-                <div className="p-7 bg-white rounded-2xl border border-ivory-300 shadow-sm h-full">
+                <div className="p-7 rounded-2xl ih-card h-full">
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="w-11 h-11 rounded-xl bg-navy-50 border border-navy-100 flex items-center justify-center">
-                      <pp.icon size={20} className="text-navy-600" aria-hidden="true" />
+                    <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                      <pp.icon size={20} className="text-gold-300" aria-hidden="true" />
                     </div>
-                    <h3 className="font-playfair text-xl font-bold text-navy-700">{pp.title}</h3>
+                    <h3 className="font-playfair text-xl font-bold text-white">{pp.title}</h3>
                   </div>
                   <ul className="space-y-3">
                     {pp.points.map((pt, j) => (
-                      <li key={j} className="flex gap-3 text-sm text-[#6B6B6B] leading-relaxed">
-                        <span className="text-gold-500 mt-0.5 shrink-0" aria-hidden="true">
+                      <li key={j} className="flex gap-3 text-sm text-white/60 leading-relaxed">
+                        <span className="text-gold-400 mt-0.5 shrink-0" aria-hidden="true">
                           <Check size={15} strokeWidth={2.5} />
                         </span>
                         <span>{pt}</span>
@@ -194,23 +194,23 @@ export default function PrayerGuidelinesPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-ivory-200" aria-labelledby="weekly-heading">
+      <section className="py-24 ih-section" aria-labelledby="weekly-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Weekly Guide</p>
-            <h2 id="weekly-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">A Week of Prayer</h2>
-            <p className="text-[#6B6B6B] text-lg max-w-xl mx-auto">A daily focus for each day of the week.</p>
+            <p className="ih-eyebrow mb-3">Weekly Guide</p>
+            <h2 id="weekly-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">A Week of Prayer</h2>
+            <p className="text-white/55 text-lg max-w-xl mx-auto">A daily focus for each day of the week.</p>
           </ScrollReveal>
           <div className="space-y-3">
             {weeklyGuide.map((d, i) => (
               <ScrollReveal key={i} delay={i * 50}>
-                <div className="p-5 bg-white rounded-2xl border border-ivory-300 shadow-sm flex flex-col sm:flex-row gap-4 items-start hover:border-gold-300 transition-colors">
+                <div className="p-5 ih-card-solid flex flex-col sm:flex-row gap-4 items-start hover:border-gold-400/30 transition-colors">
                   <div className="sm:w-32 shrink-0">
-                    <span className="inline-block px-3 py-1 bg-navy-700 text-white text-xs font-semibold rounded-full">{d.day}</span>
+                    <span className="inline-block px-3 py-1 bg-white/10 text-white text-xs font-semibold rounded-full">{d.day}</span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-playfair text-base font-bold text-navy-700 mb-1">{d.focus}</h3>
-                    <p className="text-[#6B6B6B] text-sm leading-relaxed">{d.prayer}</p>
+                    <h3 className="font-playfair text-base font-bold text-white mb-1">{d.focus}</h3>
+                    <p className="text-white/55 text-sm leading-relaxed">{d.prayer}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -240,16 +240,16 @@ export default function PrayerGuidelinesPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#FAF8F3] text-center" aria-labelledby="cta-heading">
+      <section className="py-24 ih-section text-center" aria-labelledby="cta-heading">
         <div className="max-w-xl mx-auto px-4 sm:px-6">
           <ScrollReveal>
             <div className="gold-divider mx-auto mb-7" aria-hidden="true" />
-            <h2 id="cta-heading" className="font-playfair text-3xl md:text-4xl font-bold text-navy-700 mb-5">Ready to Pray?</h2>
-            <p className="text-[#6B6B6B] text-lg mb-8 leading-relaxed">
+            <h2 id="cta-heading" className="font-playfair text-3xl md:text-4xl font-bold text-white mb-5">Ready to Pray?</h2>
+            <p className="text-white/55 text-lg mb-8 leading-relaxed">
               Join the prayer team and receive monthly prayer guides and specific intercession requests delivered to your inbox.
             </p>
             <Link to="/prayer-partners"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 hover:bg-navy-600 text-white font-bold rounded-full transition-all duration-300 hover:-translate-y-0.5">
+              className="inline-flex items-center gap-2 px-8 py-4 ih-btn-gold">
               Join the Prayer Team
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
@@ -257,14 +257,14 @@ export default function PrayerGuidelinesPage() {
         </div>
       </section>
 
-      <section className="py-14 bg-[#FAF8F3] text-center" aria-label="Closing scripture">
+      <section className="py-14 ih-section text-center" aria-label="Closing scripture">
         <div className="max-w-xl mx-auto px-4">
           <ScrollReveal>
             <div className="gold-divider mx-auto mb-7" aria-hidden="true" />
-            <p className="font-cormorant text-3xl text-navy-700 italic leading-relaxed">
+            <p className="font-cormorant text-3xl text-white italic leading-relaxed">
               &ldquo;Devote yourselves to prayer, being watchful and thankful.&rdquo;
             </p>
-            <p className="text-gold-600 text-[0.72rem] font-semibold mt-3 tracking-[0.18em] uppercase">Colossians 4:2</p>
+            <p className="text-gold-400 text-[0.72rem] font-semibold mt-3 tracking-[0.18em] uppercase">Colossians 4:2</p>
           </ScrollReveal>
         </div>
       </section>

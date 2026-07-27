@@ -232,7 +232,7 @@ export default function HomePage() {
       </section>
 
       {/* STATS */}
-      <section className="py-16 bg-navy-700 border-t border-white/5" aria-labelledby="stats-heading">
+      <section className="py-16 ih-section border-t border-white/5" aria-labelledby="stats-heading">
         <h2 id="stats-heading" className="sr-only">Community statistics</h2>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-10">
@@ -255,14 +255,14 @@ export default function HomePage() {
       </section>
 
       {/* TODAY'S VERSE */}
-      <section className="py-24 bg-[#FAF8F3]" aria-labelledby="verse-heading">
+      <section className="py-24 ih-section" aria-labelledby="verse-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-10">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Today&apos;s Verse</p>
-            <h2 id="verse-heading" className="font-playfair text-3xl md:text-4xl font-bold text-navy-700 mb-2">A Word for Today</h2>
+            <p className="ih-eyebrow mb-3">Today&apos;s Verse</p>
+            <h2 id="verse-heading" className="font-playfair text-3xl md:text-4xl font-bold text-white mb-2">A Word for Today</h2>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <div className="relative p-8 md:p-12 rounded-2xl bg-navy-700 border border-gold-500/20 overflow-hidden text-center">
+            <div className="relative p-8 md:p-12 rounded-2xl ih-card overflow-hidden text-center">
               <div className="absolute inset-0 pointer-events-none" style={{background:'radial-gradient(ellipse at 50% 110%, rgba(201,152,58,0.12) 0%, transparent 65%)'}} aria-hidden="true" />
               <div className="relative">
                 <p className="font-cormorant text-2xl md:text-3xl text-white/90 italic leading-relaxed mb-5">
@@ -278,40 +278,40 @@ export default function HomePage() {
       </section>
 
       {/* LATEST DEVOTIONALS */}
-      <section className="py-24 bg-ivory-200" aria-labelledby="latest-heading">
+      <section className="py-24 ih-section" aria-labelledby="latest-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Latest Devotionals</p>
-            <h2 id="latest-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">Recent Encounters with Jesus</h2>
-            <p className="text-[#6B6B6B] text-lg max-w-xl mx-auto">Fresh devotional content from Series One — I AM: 120 Names of Jesus.</p>
+            <p className="ih-eyebrow mb-3">Latest Devotionals</p>
+            <h2 id="latest-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Recent Encounters with Jesus</h2>
+            <p className="text-white/55 text-lg max-w-xl mx-auto">Fresh devotional content from Series One — I AM: 120 Names of Jesus.</p>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-6">
             {latestDevotionals.map((d, i) => (
               <ScrollReveal key={i} delay={i * 80}>
-                <div className="premium-card p-7 rounded-2xl bg-white border border-ivory-300 shadow-sm h-full flex flex-col">
+                <div className="premium-card p-7 rounded-2xl ih-card h-full flex flex-col">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-[0.68rem] font-bold text-gold-600 tracking-[0.14em] uppercase">{d.day}</span>
-                    <span className="text-[0.68rem] bg-navy-50 text-navy-600 px-2.5 py-1 rounded-full font-medium">{d.edition} Edition</span>
+                    <span className="text-[0.68rem] font-bold text-gold-300 tracking-[0.14em] uppercase">{d.day}</span>
+                    <span className="text-[0.68rem] bg-white/10 text-gold-200 px-2.5 py-1 rounded-full font-medium">{d.edition} Edition</span>
                   </div>
-                  <h3 className="font-playfair text-xl font-bold text-navy-700 mb-2 leading-snug">{d.title}</h3>
-                  <p className="text-gold-500 text-sm font-medium mb-3">{d.scripture}</p>
-                  <p className="text-[#6B6B6B] text-sm leading-relaxed flex-1 mb-5">{d.excerpt}</p>
-                  <div className="flex items-center justify-between pt-4 border-t border-ivory-300">
-                    <Link to="/devotionals" className="text-sm font-semibold text-navy-700 hover:text-gold-600 transition-colors flex items-center gap-1">
+                  <h3 className="font-playfair text-xl font-bold text-white mb-2 leading-snug">{d.title}</h3>
+                  <p className="text-gold-400 text-sm font-medium mb-3">{d.scripture}</p>
+                  <p className="text-white/55 text-sm leading-relaxed flex-1 mb-5">{d.excerpt}</p>
+                  <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                    <Link to="/devotionals" className="text-sm font-semibold text-gold-300 hover:text-gold-200 transition-colors flex items-center gap-1">
                       Read more <ChevronRight size={14} aria-hidden="true" />
                     </Link>
                     <div className="flex items-center gap-2">
                       <button onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(d.title + ' — ' + d.scripture + ' | In Him Daily')}`, '_blank')} aria-label="Share on WhatsApp" className="w-8 h-8 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 flex items-center justify-center transition-colors">
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="text-[#128C7E]" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                       </button>
-                      <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')} aria-label="Share on Facebook" className="w-8 h-8 rounded-full bg-blue-50 hover:bg-blue-100 flex items-center justify-center transition-colors">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="text-blue-600" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                      <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')} aria-label="Share on Facebook" className="w-8 h-8 rounded-full bg-[#1877F2]/15 hover:bg-[#1877F2]/25 flex items-center justify-center transition-colors">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="text-[#1877F2]" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                       </button>
-                      <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(d.title + ' — ' + d.scripture + ' | In Him Daily')}`, '_blank')} aria-label="Share on X" className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                      <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(d.title + ' — ' + d.scripture + ' | In Him Daily')}`, '_blank')} aria-label="Share on X" className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/15 flex items-center justify-center transition-colors">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-white/70" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                       </button>
-                      <button onClick={copyLink} aria-label={copied ? 'Link copied' : 'Copy link'} className="w-8 h-8 rounded-full bg-ivory-200 hover:bg-ivory-300 flex items-center justify-center transition-colors">
-                        {copied ? <Check size={12} className="text-green-600" aria-hidden="true" /> : <Copy size={12} className="text-navy-500" aria-hidden="true" />}
+                      <button onClick={copyLink} aria-label={copied ? 'Link copied' : 'Copy link'} className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/15 flex items-center justify-center transition-colors">
+                        {copied ? <Check size={12} className="text-green-400" aria-hidden="true" /> : <Copy size={12} className="text-gold-300" aria-hidden="true" />}
                       </button>
                     </div>
                   </div>
@@ -320,7 +320,7 @@ export default function HomePage() {
             ))}
           </div>
           <ScrollReveal className="text-center mt-10">
-            <Link to="/devotionals" className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 text-white font-semibold rounded-full hover:bg-navy-600 transition-colors">
+            <Link to="/devotionals" className="inline-flex items-center gap-2 px-8 py-4 ih-btn-ghost text-white font-semibold">
               View All Devotionals <ArrowRight size={17} aria-hidden="true" />
             </Link>
           </ScrollReveal>
@@ -328,25 +328,25 @@ export default function HomePage() {
       </section>
 
       {/* PROBLEM */}
-      <section className="py-24 bg-[#FAF8F3]" aria-labelledby="problem-heading">
+      <section className="py-24 ih-section" aria-labelledby="problem-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">The Challenge</p>
-            <h2 id="problem-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 max-w-3xl mx-auto leading-tight">
+            <p className="ih-eyebrow mb-3">The Challenge</p>
+            <h2 id="problem-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white max-w-3xl mx-auto leading-tight">
               Does your family read the Bible together—but experience it separately?
             </h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <ScrollReveal delay={80}>
-              <div className="p-8 rounded-2xl bg-white border border-ivory-300 shadow-sm h-full">
-                <div className="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center mb-5">
+              <div className="p-8 rounded-2xl ih-card-solid h-full">
+                <div className="w-9 h-9 rounded-full bg-red-500/15 flex items-center justify-center mb-5">
                   <X size={16} className="text-red-400" aria-hidden="true" />
                 </div>
-                <h3 className="font-playfair text-lg font-bold text-navy-700 mb-4">Before In Him Daily</h3>
+                <h3 className="font-playfair text-lg font-bold text-white mb-4">Before In Him Daily</h3>
                 <ul className="space-y-2.5" role="list">
                   {["Dad reads an adult commentary","Mom finishes a women's devotional","Teen scrolls through a youth app","Child looks at a picture Bible","Nobody has the same conversation","Family grows in faith… separately"].map((item,i)=>(
-                    <li key={i} className="flex items-start gap-2.5 text-sm text-[#6B6B6B]">
-                      <div className="w-1.5 h-1.5 rounded-full bg-red-300 mt-2 shrink-0" aria-hidden="true" />
+                    <li key={i} className="flex items-start gap-2.5 text-sm text-white/55">
+                      <div className="w-1.5 h-1.5 rounded-full bg-red-400/60 mt-2 shrink-0" aria-hidden="true" />
                       {item}
                     </li>
                   ))}
@@ -354,7 +354,7 @@ export default function HomePage() {
               </div>
             </ScrollReveal>
             <ScrollReveal delay={180}>
-              <div className="p-8 rounded-2xl bg-navy-700 h-full">
+              <div className="p-8 rounded-2xl ih-card h-full">
                 <div className="w-9 h-9 rounded-full bg-gold-400/20 flex items-center justify-center mb-5">
                   <Check size={16} className="text-gold-300" aria-hidden="true" />
                 </div>
@@ -374,15 +374,15 @@ export default function HomePage() {
       </section>
 
       {/* THREE EDITIONS */}
-      <section className="py-24 bg-ivory-200" aria-labelledby="solution-heading">
+      <section className="py-24 ih-section" aria-labelledby="solution-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">The Solution</p>
-            <h2 id="solution-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">One Encounter. Three Generations.</h2>
-            <p className="text-[#6B6B6B] text-lg max-w-xl mx-auto">The same scripture, in three unique voices—each crafted to meet its reader exactly where they are.</p>
+            <p className="ih-eyebrow mb-3">The Solution</p>
+            <h2 id="solution-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">One Encounter. Three Generations.</h2>
+            <p className="text-white/55 text-lg max-w-xl mx-auto">The same scripture, in three unique voices—each crafted to meet its reader exactly where they are.</p>
           </ScrollReveal>
           <ScrollReveal className="max-w-2xl mx-auto text-center mb-14">
-            <div className="relative p-8 rounded-2xl bg-navy-700 border border-gold-500/20 overflow-hidden">
+            <div className="relative p-8 rounded-2xl ih-card overflow-hidden">
               <div className="absolute inset-0 pointer-events-none" style={{background:'radial-gradient(ellipse at 50% 110%, rgba(201,152,58,0.12) 0%, transparent 65%)'}} aria-hidden="true" />
               <div className="relative">
                 <p className="font-cormorant text-xl md:text-2xl text-white/90 italic leading-relaxed mb-3">
@@ -395,14 +395,14 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-6">
             {editions.map((ed, i) => (
               <ScrollReveal key={i} delay={i * 90}>
-                <div className={`premium-card p-7 rounded-2xl ${ed.bg} h-full flex flex-col`}>
-                  <p className={`text-[0.68rem] font-bold tracking-[0.15em] uppercase ${ed.sub} mb-4`}>{ed.label}</p>
-                  <h3 className={`font-playfair text-xl font-bold ${ed.text} mb-3 leading-snug`}>{ed.title}</h3>
-                  <p className={`text-sm leading-relaxed mb-5 ${ed.text} opacity-70 flex-1`}>{ed.excerpt}</p>
+                <div className={`premium-card p-7 rounded-2xl ih-card h-full flex flex-col`}>
+                  <p className="text-[0.68rem] font-bold tracking-[0.15em] uppercase text-gold-300 mb-4">{ed.label}</p>
+                  <h3 className="font-playfair text-xl font-bold text-white mb-3 leading-snug">{ed.title}</h3>
+                  <p className="text-sm leading-relaxed mb-5 text-white/65 flex-1">{ed.excerpt}</p>
                   <ul className="space-y-1.5" role="list">
                     {ed.features.map((f,j)=>(
-                      <li key={j} className={`flex items-center gap-2 text-xs ${ed.text} opacity-65`}>
-                        <Check size={11} className={ed.sub} aria-hidden="true" /> {f}
+                      <li key={j} className="flex items-center gap-2 text-xs text-white/55">
+                        <Check size={11} className="text-gold-400" aria-hidden="true" /> {f}
                       </li>
                     ))}
                   </ul>
@@ -414,19 +414,19 @@ export default function HomePage() {
       </section>
 
       {/* FAMILY ENCOUNTER */}
-      <section className="py-24 bg-[#FAF8F3]" id="family-encounter" aria-labelledby="encounter-heading">
+      <section className="py-24 ih-section" id="family-encounter" aria-labelledby="encounter-heading">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-12">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Interactive Preview</p>
-            <h2 id="encounter-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">The Family Encounter</h2>
-            <p className="text-[#6B6B6B] text-lg max-w-xl mx-auto">Select your generation to see how the same scripture speaks uniquely to you.</p>
+            <p className="ih-eyebrow mb-3">Interactive Preview</p>
+            <h2 id="encounter-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">The Family Encounter</h2>
+            <p className="text-white/55 text-lg max-w-xl mx-auto">Select your generation to see how the same scripture speaks uniquely to you.</p>
           </ScrollReveal>
           <ScrollReveal className="max-w-xl mx-auto text-center mb-10">
-            <div className="inline-block px-6 py-4 rounded-xl bg-gold-50 border border-gold-200">
-              <p className="font-cormorant text-lg text-navy-700 italic leading-snug">
+            <div className="inline-block px-6 py-4 rounded-xl ih-card">
+              <p className="font-cormorant text-lg text-white italic leading-snug">
                 &ldquo;{familyEncounterData.scripture.text}&rdquo;
               </p>
-              <span className="text-gold-600 text-sm font-semibold mt-2 block">{familyEncounterData.scripture.reference}</span>
+              <span className="text-gold-400 text-sm font-semibold mt-2 block">{familyEncounterData.scripture.reference}</span>
             </div>
           </ScrollReveal>
           <div className="flex justify-center gap-2.5 mb-10" role="tablist" aria-label="Choose generation">
@@ -434,30 +434,30 @@ export default function HomePage() {
               <button key={gen} role="tab" aria-selected={active === gen} aria-controls={`panel-${gen}`}
                 onClick={() => setActive(gen)}
                 className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-250 ${
-                  active === gen ? 'bg-navy-700 text-white shadow-navy' : 'bg-white text-navy-500 border border-ivory-300 hover:border-gold-300'
+                  active === gen ? 'ih-btn-gold' : 'ih-btn-ghost'
                 }`}>
                 {gen === 'adult' ? 'Adult' : gen === 'teen' ? 'Teen' : 'Child'}
               </button>
             ))}
           </div>
           <div className="max-w-2xl mx-auto" id={`panel-${active}`} role="tabpanel">
-            <div className="bg-white rounded-2xl shadow-card-hover border border-ivory-300 overflow-hidden">
-              <div className={`px-8 py-4 ${active==='adult' ? 'bg-navy-700' : active==='teen' ? 'bg-gold-500' : 'bg-lavender-200'}`}>
-                <span className={`text-[0.7rem] font-bold tracking-[0.15em] uppercase ${active==='adult' ? 'text-gold-300' : 'text-navy-700'}`}>
+            <div className="rounded-2xl ih-card overflow-hidden">
+              <div className="px-8 py-4 bg-white/5">
+                <span className="text-[0.7rem] font-bold tracking-[0.15em] uppercase text-gold-300">
                   {data.label}
                 </span>
               </div>
               <div className="p-8">
-                <h3 className="font-playfair text-2xl font-bold text-navy-700 mb-4">{data.title}</h3>
-                <p className="text-[#6B6B6B] leading-relaxed mb-6 text-sm">{data.content}</p>
+                <h3 className="font-playfair text-2xl font-bold text-white mb-4">{data.title}</h3>
+                <p className="text-white/60 leading-relaxed mb-6 text-sm">{data.content}</p>
                 <div className="space-y-3.5">
-                  <div className="p-4 rounded-xl bg-ivory-200 border-l-4 border-gold-400">
-                    <p className="text-[0.68rem] font-bold text-gold-600 uppercase tracking-[0.12em] mb-1">Reflection</p>
-                    <p className="text-sm text-navy-700 italic">{data.reflection}</p>
+                  <div className="p-4 rounded-xl bg-white/5 border-l-4 border-gold-400">
+                    <p className="text-[0.68rem] font-bold text-gold-300 uppercase tracking-[0.12em] mb-1">Reflection</p>
+                    <p className="text-sm text-white/80 italic">{data.reflection}</p>
                   </div>
-                  <div className="p-4 rounded-xl bg-navy-50/60 border-l-4 border-navy-400">
-                    <p className="text-[0.68rem] font-bold text-navy-500 uppercase tracking-[0.12em] mb-1">Prayer</p>
-                    <p className="text-sm text-navy-700 italic">{data.prayer}</p>
+                  <div className="p-4 rounded-xl bg-white/5 border-l-4 border-navy-400">
+                    <p className="text-[0.68rem] font-bold text-navy-300 uppercase tracking-[0.12em] mb-1">Prayer</p>
+                    <p className="text-sm text-white/80 italic">{data.prayer}</p>
                   </div>
                 </div>
               </div>
@@ -504,12 +504,12 @@ export default function HomePage() {
       </section>
 
       {/* DEVOTIONAL LIBRARY */}
-      <section className="py-24 bg-ivory-200" aria-labelledby="library-heading">
+      <section className="py-24 ih-section" aria-labelledby="library-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">The Library</p>
-            <h2 id="library-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">The Devotional Library</h2>
-            <p className="text-[#6B6B6B] text-lg max-w-xl mx-auto">Premium series crafted to take your family deeper into Jesus—one scripture at a time.</p>
+            <p className="ih-eyebrow mb-3">The Library</p>
+            <h2 id="library-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">The Devotional Library</h2>
+            <p className="text-white/55 text-lg max-w-xl mx-auto">Premium series crafted to take your family deeper into Jesus—one scripture at a time.</p>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
@@ -517,24 +517,24 @@ export default function HomePage() {
               { series:'Series Two', title:'Full of Grace and Truth', sub:'120 Gospel Encounters', available:false, img:'https://images.pexels.com/photos/415571/pexels-photo-415571.jpeg?auto=compress&cs=tinysrgb&w=600', desc:"Walk through the four Gospels in 120 powerful encounters with Jesus—see Him heal, teach, confront, and rise victorious." },
             ].map((s,i)=>(
               <ScrollReveal key={i} delay={i*120}>
-                <div className="premium-card rounded-2xl overflow-hidden bg-white border border-ivory-300 shadow-sm">
+                <div className="premium-card rounded-2xl overflow-hidden ih-card">
                   <div className="relative h-48 overflow-hidden">
                     <img src={s.img} alt={s.title} loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy-800/60 to-transparent" aria-hidden="true" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#05070D]/80 to-transparent" aria-hidden="true" />
                     <div className="absolute bottom-4 left-4">
-                      <span className={`px-3 py-1 rounded-full text-[0.72rem] font-bold ${s.available ? 'bg-gold-500 text-navy-800' : 'bg-navy-700 text-white'}`}>
+                      <span className={`px-3 py-1 rounded-full text-[0.72rem] font-bold ${s.available ? 'bg-gold-500 text-[#05070D]' : 'bg-white/15 text-white backdrop-blur'}`}>
                         {s.available ? 'Available Now' : 'Coming Soon'}
                       </span>
                     </div>
                   </div>
                   <div className="p-7">
-                    <p className="text-gold-600 text-[0.68rem] font-bold tracking-[0.14em] uppercase mb-2">{s.series}</p>
-                    <h3 className="font-playfair text-2xl font-bold text-navy-700 leading-tight">{s.title}</h3>
-                    <p className="text-gold-500 font-medium text-sm mb-3">{s.sub}</p>
-                    <p className="text-[#6B6B6B] text-sm leading-relaxed mb-5">{s.desc}</p>
+                    <p className="text-gold-300 text-[0.68rem] font-bold tracking-[0.14em] uppercase mb-2">{s.series}</p>
+                    <h3 className="font-playfair text-2xl font-bold text-white leading-tight">{s.title}</h3>
+                    <p className="text-gold-400 font-medium text-sm mb-3">{s.sub}</p>
+                    <p className="text-white/55 text-sm leading-relaxed mb-5">{s.desc}</p>
                     <div className="flex items-center justify-between">
-                      <span className="text-[0.72rem] text-navy-500 bg-ivory-200 px-3 py-1.5 rounded-full">120 Days</span>
-                      <Link to="/devotionals" className="text-sm font-semibold text-navy-700 hover:text-gold-600 transition-colors flex items-center gap-1">
+                      <span className="text-[0.72rem] text-white/60 bg-white/10 px-3 py-1.5 rounded-full">120 Days</span>
+                      <Link to="/devotionals" className="text-sm font-semibold text-gold-300 hover:text-gold-200 transition-colors flex items-center gap-1">
                         Learn more <ChevronRight size={14} aria-hidden="true" />
                       </Link>
                     </div>
@@ -544,7 +544,7 @@ export default function HomePage() {
             ))}
           </div>
           <ScrollReveal className="text-center mt-10">
-            <Link to="/devotionals" className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 text-white font-semibold rounded-full hover:bg-navy-600 transition-colors">
+            <Link to="/devotionals" className="inline-flex items-center gap-2 px-8 py-4 ih-btn-ghost text-white font-semibold">
               View Full Library <ArrowRight size={17} aria-hidden="true" />
             </Link>
           </ScrollReveal>
@@ -552,27 +552,27 @@ export default function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="py-24 bg-[#FAF8F3]" aria-labelledby="testimonials-heading">
+      <section className="py-24 ih-section" aria-labelledby="testimonials-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Testimonials</p>
-            <h2 id="testimonials-heading" className="font-playfair text-3xl md:text-4xl font-bold text-navy-700">
+            <p className="ih-eyebrow mb-3">Testimonials</p>
+            <h2 id="testimonials-heading" className="font-playfair text-3xl md:text-4xl font-bold text-white">
               What Families Are Saying
             </h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t,i)=>(
               <ScrollReveal key={i} delay={i*90}>
-                <div className="premium-card p-7 rounded-2xl bg-white border border-ivory-300 shadow-sm h-full flex flex-col">
+                <div className="premium-card p-7 rounded-2xl ih-card h-full flex flex-col">
                   <div className="flex gap-1 mb-5" aria-label="5 stars">
-                    {[...Array(5)].map((_,j)=><Star key={j} size={13} className="text-gold-500 fill-gold-500" aria-hidden="true" />)}
+                    {[...Array(5)].map((_,j)=><Star key={j} size={13} className="text-gold-400 fill-gold-400" aria-hidden="true" />)}
                   </div>
-                  <p className="font-cormorant text-lg text-navy-700 italic leading-relaxed flex-1 mb-5">&ldquo;{t.quote}&rdquo;</p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-ivory-300">
-                    <div className="w-9 h-9 rounded-full bg-navy-700 flex items-center justify-center text-white text-sm font-bold shrink-0" aria-hidden="true">{t.author[0]}</div>
+                  <p className="font-cormorant text-lg text-white/85 italic leading-relaxed flex-1 mb-5">&ldquo;{t.quote}&rdquo;</p>
+                  <div className="flex items-center gap-3 pt-4 border-t border-white/10">
+                    <div className="w-9 h-9 rounded-full bg-gold-400/20 flex items-center justify-center text-gold-300 text-sm font-bold shrink-0" aria-hidden="true">{t.author[0]}</div>
                     <div>
-                      <p className="font-semibold text-navy-700 text-sm">{t.author}</p>
-                      <p className="text-[#6B6B6B] text-xs">{t.role}</p>
+                      <p className="font-semibold text-white text-sm">{t.author}</p>
+                      <p className="text-white/45 text-xs">{t.role}</p>
                     </div>
                   </div>
                 </div>
@@ -583,41 +583,41 @@ export default function HomePage() {
       </section>
 
       {/* NEWSLETTER */}
-      <section className="py-24 bg-ivory-200" aria-labelledby="newsletter-heading">
+      <section className="py-24 ih-section" aria-labelledby="newsletter-heading">
         <div className="max-w-xl mx-auto px-4 sm:px-6 text-center">
           <ScrollReveal>
             <div className="w-14 h-14 mx-auto mb-8 relative">
               <div className="w-full h-full rounded-full bg-gold-400/20 flex items-center justify-center">
-                <Mail size={26} className="text-gold-600" aria-hidden="true" />
+                <Mail size={26} className="text-gold-300" aria-hidden="true" />
               </div>
             </div>
-            <h2 id="newsletter-heading" className="font-playfair text-3xl md:text-4xl font-bold text-navy-700 mb-4">
+            <h2 id="newsletter-heading" className="font-playfair text-3xl md:text-4xl font-bold text-white mb-4">
               Receive Daily Devotionals in Your Inbox
             </h2>
-            <p className="text-[#6B6B6B] text-lg mb-10 leading-relaxed">
+            <p className="text-white/55 text-lg mb-10 leading-relaxed">
               Don&apos;t rely only on WhatsApp. Get each day&apos;s devotional delivered directly to your email — and own your faith journey.
             </p>
             {nlSubmitted ? (
-              <div className="p-8 rounded-2xl bg-green-50 border border-green-200 animate-fade-in">
-                <div className="w-11 h-11 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-                  <Check size={22} className="text-green-600" aria-hidden="true" />
+              <div className="p-8 rounded-2xl ih-card border-gold-400/30 animate-fade-in">
+                <div className="w-11 h-11 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
+                  <Check size={22} className="text-green-400" aria-hidden="true" />
                 </div>
-                <h3 className="font-playfair text-2xl font-bold text-navy-700 mb-2">You&apos;re Subscribed!</h3>
-                <p className="text-[#6B6B6B]">Welcome to the In Him Daily family, {nlName}. Watch your inbox for tomorrow&apos;s devotional.</p>
+                <h3 className="font-playfair text-2xl font-bold text-white mb-2">You&apos;re Subscribed!</h3>
+                <p className="text-white/55">Welcome to the In Him Daily family, {nlName}. Watch your inbox for tomorrow&apos;s devotional.</p>
               </div>
             ) : (
               <form onSubmit={handleNewsletter} className="space-y-3.5" noValidate>
                 <div className="flex flex-col sm:flex-row gap-3.5">
                   <input type="text" placeholder="Your Name" value={nlName} onChange={e=>setNlName(e.target.value)} required aria-label="Your name"
-                    className="flex-1 px-5 py-3.5 rounded-full bg-white border border-ivory-300 text-navy-700 placeholder-navy-300 focus:outline-none focus:border-gold-400 transition-colors text-sm" />
+                    className="flex-1 px-5 py-3.5 ih-input transition-colors text-sm" />
                   <input type="email" placeholder="Email Address" value={nlEmail} onChange={e=>setNlEmail(e.target.value)} required aria-label="Email address"
-                    className="flex-1 px-5 py-3.5 rounded-full bg-white border border-ivory-300 text-navy-700 placeholder-navy-300 focus:outline-none focus:border-gold-400 transition-colors text-sm" />
+                    className="flex-1 px-5 py-3.5 ih-input transition-colors text-sm" />
                 </div>
-                <button type="submit" className="w-full py-4 bg-navy-700 hover:bg-navy-600 text-white font-bold rounded-full transition-all duration-300 hover:-translate-y-0.5 text-[0.9rem]">
+                <button type="submit" className="w-full py-4 ih-btn-gold text-[0.9rem]">
                   Subscribe to Daily Devotionals
                 </button>
-                {nlError && <p className="text-red-500 text-xs text-center">{nlError}</p>}
-                <p className="text-navy-300 text-xs">We respect your privacy. No spam. Unsubscribe anytime.</p>
+                {nlError && <p className="text-red-400 text-xs text-center">{nlError}</p>}
+                <p className="text-white/35 text-xs">We respect your privacy. No spam. Unsubscribe anytime.</p>
               </form>
             )}
           </ScrollReveal>
@@ -669,14 +669,14 @@ export default function HomePage() {
       </section>
 
       {/* CLOSING SCRIPTURE */}
-      <section className="py-24 bg-[#FAF8F3] text-center" aria-label="Closing scripture">
+      <section className="py-24 ih-section text-center" aria-label="Closing scripture">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <ScrollReveal>
             <div className="gold-divider mx-auto mb-10" aria-hidden="true" />
-            <p className="font-cormorant text-4xl md:text-5xl lg:text-6xl text-navy-700 italic leading-tight scripture-glow">
+            <p className="font-cormorant text-4xl md:text-5xl lg:text-6xl text-white italic leading-tight scripture-glow">
               &ldquo;For you died, and your life is now hidden with Christ in God.&rdquo;
             </p>
-            <p className="mt-5 text-gold-600 text-[0.72rem] font-semibold tracking-[0.18em] uppercase">Colossians 3:3</p>
+            <p className="mt-5 text-gold-400 text-[0.72rem] font-semibold tracking-[0.18em] uppercase">Colossians 3:3</p>
             <div className="gold-divider mx-auto mt-10" aria-hidden="true" />
           </ScrollReveal>
         </div>

@@ -12,7 +12,7 @@ const content: Record<Tab, {
   reflection: string; prayer: string; confession: string;
 }> = {
   adult: {
-    label: 'Adult Edition', headerBg: 'bg-navy-700', headerText: 'text-gold-300',
+    label: 'Adult Edition', headerBg: 'bg-white/5', headerText: 'text-gold-300',
     scripture: { ref: 'John 1:1', text: '"In the beginning was the Word, and the Word was with God, and the Word was God."' },
     title: 'Before All Things',
     paragraphs: [
@@ -25,7 +25,7 @@ const content: Record<Tab, {
     confession: 'I declare that Jesus is the Word of God, eternal and unchanging. He was before all things, and through Him all things were made. He is the same yesterday, today, and forever.',
   },
   teen: {
-    label: 'Teen Edition', headerBg: 'bg-gold-500', headerText: 'text-navy-800',
+    label: 'Teen Edition', headerBg: 'bg-gold-400/10', headerText: 'text-gold-300',
     scripture: { ref: 'John 1:1', text: '"In the beginning was the Word, and the Word was with God, and the Word was God."' },
     title: 'He Was Already There',
     paragraphs: [
@@ -38,7 +38,7 @@ const content: Record<Tab, {
     confession: 'Jesus existed before everything, and He knows me completely. I am not an accident or an afterthought—I am known and loved by an eternal God.',
   },
   children: {
-    label: "Children's Edition", headerBg: 'bg-lavender-200', headerText: 'text-navy-700',
+    label: "Children's Edition", headerBg: 'bg-lavender-400/10', headerText: 'text-lavender-300',
     scripture: { ref: 'John 1:1', text: '"In the beginning was the Word, and the Word was with God, and the Word was God."' },
     title: 'Jesus Was There First!',
     paragraphs: [
@@ -87,13 +87,13 @@ export default function FreeSamplePage() {
         </div>
       </section>
 
-      <section className="py-20 bg-[#FAF8F3]" aria-label="Sample devotional reader">
+      <section className="py-20 ih-section" aria-label="Sample devotional reader">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="flex justify-center gap-2.5 mb-10">
             {(['adult','teen','children'] as Tab[]).map((t)=>(
               <button key={t} onClick={()=>setTab(t)} role="tab" aria-selected={tab===t}
                 className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-250 ${
-                  tab===t ? 'bg-navy-700 text-white shadow-navy' : 'bg-white text-navy-500 border border-ivory-300 hover:border-gold-300'
+                  tab===t ? 'ih-btn-gold' : 'ih-btn-ghost'
                 }`}>
                 {t==='adult' ? 'Adult' : t==='teen' ? 'Teen' : "Children's"}
               </button>
@@ -101,7 +101,7 @@ export default function FreeSamplePage() {
           </ScrollReveal>
 
           <ScrollReveal>
-            <div className="rounded-2xl overflow-hidden shadow-card-hover border border-ivory-300 transition-all duration-400">
+            <div className="rounded-2xl overflow-hidden ih-card">
               <div className={`${c.headerBg} px-8 py-5 flex items-center justify-between`}>
                 <div>
                   <p className={`text-[0.68rem] font-bold tracking-[0.15em] uppercase ${c.headerText} opacity-70`}>
@@ -111,36 +111,36 @@ export default function FreeSamplePage() {
                 </div>
                 <BookOpen size={22} className={`${c.headerText} opacity-40`} aria-hidden="true" />
               </div>
-              <div className="px-8 py-6 bg-ivory-200 border-b border-ivory-300">
-                <p className="font-cormorant text-xl italic text-navy-700 leading-relaxed">{c.scripture.text}</p>
-                <p className="text-gold-600 text-sm font-semibold mt-2">{c.scripture.ref}</p>
+              <div className="px-8 py-6 bg-white/[0.03] border-b border-white/10">
+                <p className="font-cormorant text-xl italic text-white/90 leading-relaxed">{c.scripture.text}</p>
+                <p className="text-gold-300 text-sm font-semibold mt-2">{c.scripture.ref}</p>
               </div>
-              <div className="px-8 py-8 bg-white">
-                <h2 className="font-playfair text-2xl font-bold text-navy-700 mb-5">{c.title}</h2>
+              <div className="px-8 py-8 bg-white/[0.02]">
+                <h2 className="font-playfair text-2xl font-bold text-white mb-5">{c.title}</h2>
                 <div className="space-y-3.5 mb-7">
                   {c.paragraphs.map((p,i)=>(
-                    <p key={i} className="text-[#6B6B6B] text-sm leading-relaxed">{p}</p>
+                    <p key={i} className="text-white/65 text-sm leading-relaxed">{p}</p>
                   ))}
                 </div>
                 <div className="space-y-3">
-                  <div className="p-4 rounded-xl bg-ivory-200 border-l-4 border-gold-400">
-                    <p className="text-[0.65rem] font-bold text-gold-600 uppercase tracking-[0.12em] mb-1">Reflection</p>
-                    <p className="text-sm text-navy-700 italic">{c.reflection}</p>
+                  <div className="p-4 rounded-xl bg-white/5 border-l-4 border-gold-400">
+                    <p className="text-[0.65rem] font-bold text-gold-300 uppercase tracking-[0.12em] mb-1">Reflection</p>
+                    <p className="text-sm text-white/80 italic">{c.reflection}</p>
                   </div>
-                  <div className="p-4 rounded-xl bg-navy-50/50 border-l-4 border-navy-400">
-                    <p className="text-[0.65rem] font-bold text-navy-500 uppercase tracking-[0.12em] mb-1">Daily Prayer</p>
-                    <p className="text-sm text-navy-700 italic">{c.prayer}</p>
+                  <div className="p-4 rounded-xl bg-white/5 border-l-4 border-navy-400">
+                    <p className="text-[0.65rem] font-bold text-navy-300 uppercase tracking-[0.12em] mb-1">Daily Prayer</p>
+                    <p className="text-sm text-white/80 italic">{c.prayer}</p>
                   </div>
-                  <div className="p-4 rounded-xl bg-gold-50 border border-gold-200">
-                    <p className="text-[0.65rem] font-bold text-gold-600 uppercase tracking-[0.12em] mb-1">Daily Confession</p>
-                    <p className="text-sm text-navy-700 font-medium">{c.confession}</p>
+                  <div className="p-4 rounded-xl bg-gold-400/10 border border-gold-400/20">
+                    <p className="text-[0.65rem] font-bold text-gold-300 uppercase tracking-[0.12em] mb-1">Daily Confession</p>
+                    <p className="text-sm text-white/80 font-medium">{c.confession}</p>
                   </div>
                 </div>
               </div>
-              <div className="px-8 py-3.5 bg-ivory-200 border-t border-ivory-300 flex items-center justify-between">
-                <span className="text-xs text-navy-400">Day 1 of 120</span>
+              <div className="px-8 py-3.5 bg-white/[0.03] border-t border-white/10 flex items-center justify-between">
+                <span className="text-xs text-white/45">Day 1 of 120</span>
                 <div className="flex gap-0.5" aria-label="5 out of 5 stars">
-                  {[...Array(5)].map((_,i)=><Star key={i} size={11} className="text-gold-500 fill-gold-500" aria-hidden="true" />)}
+                  {[...Array(5)].map((_,i)=><Star key={i} size={11} className="text-gold-400 fill-gold-400" aria-hidden="true" />)}
                 </div>
               </div>
             </div>
@@ -174,7 +174,7 @@ export default function FreeSamplePage() {
                   className="w-full px-5 py-3.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/35 focus:outline-none focus:border-gold-400 transition-colors text-sm" />
                 <input type="email" placeholder="Email Address" value={email} onChange={e=>setEmail(e.target.value)} required aria-label="Email address"
                   className="w-full px-5 py-3.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/35 focus:outline-none focus:border-gold-400 transition-colors text-sm" />
-                <button type="submit" className="w-full py-4 bg-gold-500 hover:bg-gold-400 text-navy-800 font-bold rounded-full transition-all duration-300 shadow-gold hover:-translate-y-0.5">
+                <button type="submit" className="w-full py-4 ih-btn-gold text-[0.9rem]">
                   Send Me The Free Sample
                 </button>
                 {formError && <p className="text-red-300 text-xs text-center">{formError}</p>}
@@ -185,14 +185,14 @@ export default function FreeSamplePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-[#FAF8F3] text-center" aria-label="Closing scripture">
+      <section className="py-16 ih-section text-center" aria-label="Closing scripture">
         <div className="max-w-2xl mx-auto px-4">
           <ScrollReveal>
             <div className="gold-divider mx-auto mb-8" aria-hidden="true" />
-            <p className="font-cormorant text-3xl text-navy-700 italic leading-relaxed">
+            <p className="font-cormorant text-3xl text-white italic leading-relaxed">
               &ldquo;Your word is a lamp to my feet and a light to my path.&rdquo;
             </p>
-            <p className="text-gold-600 text-[0.72rem] font-semibold mt-3 tracking-[0.18em] uppercase">Psalm 119:105</p>
+            <p className="text-gold-400 text-[0.72rem] font-semibold mt-3 tracking-[0.18em] uppercase">Psalm 119:105</p>
           </ScrollReveal>
         </div>
       </section>

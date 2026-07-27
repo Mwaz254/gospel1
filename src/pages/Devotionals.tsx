@@ -49,10 +49,10 @@ export default function DevotionalsPage() {
         </div>
       </section>
 
-      <section className="py-10 bg-gold-50 border-y border-gold-200" aria-label="240 Days of Encountering Jesus">
+      <section className="py-10 ih-section border-y border-white/10" aria-label="240 Days of Encountering Jesus">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <ScrollReveal className="text-center mb-6">
-            <h2 className="font-playfair text-2xl font-bold text-navy-700">240 Days of Encountering Jesus</h2>
+            <h2 className="font-playfair text-2xl font-bold text-white">240 Days of Encountering Jesus</h2>
           </ScrollReveal>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             {[
@@ -65,63 +65,63 @@ export default function DevotionalsPage() {
             ].map((item,i,arr)=>(
               <div key={i} className="flex items-center gap-3">
                 <div className="text-center">
-                  <div className={`w-2.5 h-2.5 rounded-full mx-auto mb-1.5 ${item.s1 ? 'bg-navy-700' : 'bg-gold-500'}`} />
-                  <p className="text-[0.72rem] font-bold text-navy-700">{item.day}</p>
-                  <p className="text-[0.68rem] text-navy-500 max-w-[72px] leading-tight">{item.name}</p>
-                  <p className="text-[0.65rem] text-gold-600">{item.ref}</p>
+                  <div className={`w-2.5 h-2.5 rounded-full mx-auto mb-1.5 ${item.s1 ? 'bg-gold-400' : 'bg-navy-400'}`} />
+                  <p className="text-[0.72rem] font-bold text-white">{item.day}</p>
+                  <p className="text-[0.68rem] text-white/50 max-w-[72px] leading-tight">{item.name}</p>
+                  <p className="text-[0.65rem] text-gold-400">{item.ref}</p>
                 </div>
-                {i < arr.length-1 && <div className="w-8 h-px bg-navy-200" aria-hidden="true" />}
+                {i < arr.length-1 && <div className="w-8 h-px bg-white/15" aria-hidden="true" />}
               </div>
             ))}
           </div>
           <div className="flex justify-center gap-6 mt-5">
-            <div className="flex items-center gap-2 text-xs text-navy-500"><div className="w-2.5 h-2.5 rounded-full bg-navy-700" aria-hidden="true" /> Series One</div>
-            <div className="flex items-center gap-2 text-xs text-navy-500"><div className="w-2.5 h-2.5 rounded-full bg-gold-500" aria-hidden="true" /> Series Two</div>
+            <div className="flex items-center gap-2 text-xs text-white/55"><div className="w-2.5 h-2.5 rounded-full bg-gold-400" aria-hidden="true" /> Series One</div>
+            <div className="flex items-center gap-2 text-xs text-white/55"><div className="w-2.5 h-2.5 rounded-full bg-navy-400" aria-hidden="true" /> Series Two</div>
           </div>
         </div>
       </section>
 
-      <section className="py-24 bg-[#FAF8F3]" aria-label="Series">
+      <section className="py-24 ih-section" aria-label="Series">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
           {series.map((s,i)=>(
             <ScrollReveal key={s.number} delay={i*80}>
-              <div className="rounded-3xl overflow-hidden shadow-card-hover border border-ivory-300 bg-white">
+              <div className="rounded-3xl overflow-hidden ih-card">
                 <div className={`grid lg:grid-cols-2 ${i%2!==0 ? 'lg:grid-flow-dense' : ''}`}>
                   <div className={`relative h-64 lg:h-auto ${i%2!==0 ? 'lg:col-start-2' : ''}`}>
                     <img src={s.img} alt={s.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-navy-800/50 to-transparent" aria-hidden="true" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#05070D]/60 to-transparent" aria-hidden="true" />
                     <div className="absolute top-5 left-5">
-                      <span className={`px-3.5 py-1.5 rounded-full text-[0.72rem] font-bold ${s.available ? 'bg-gold-500 text-navy-800' : 'bg-navy-700 text-white'}`}>
+                      <span className={`px-3.5 py-1.5 rounded-full text-[0.72rem] font-bold ${s.available ? 'bg-gold-500 text-[#05070D]' : 'bg-white/15 text-white backdrop-blur'}`}>
                         {s.available ? 'Available Now' : 'Coming Soon'}
                       </span>
                     </div>
                   </div>
                   <div className={`p-10 lg:p-12 flex flex-col justify-center ${i%2!==0 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                    <p className="text-gold-600 text-[0.68rem] font-bold tracking-[0.14em] uppercase mb-3">{s.number}</p>
-                    <h2 className="font-playfair text-3xl md:text-4xl font-bold text-navy-700 leading-tight mb-1">{s.title}</h2>
-                    <p className="text-gold-500 font-semibold text-lg mb-3">{s.subtitle}</p>
-                    <div className="flex items-center gap-4 mb-5 text-sm text-navy-400">
+                    <p className="text-gold-300 text-[0.68rem] font-bold tracking-[0.14em] uppercase mb-3">{s.number}</p>
+                    <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white leading-tight mb-1">{s.title}</h2>
+                    <p className="text-gold-400 font-semibold text-lg mb-3">{s.subtitle}</p>
+                    <div className="flex items-center gap-4 mb-5 text-sm text-white/55">
                       <span className="flex items-center gap-1.5"><Clock size={13} aria-hidden="true" /> {s.days} Days</span>
                       <span className="flex items-center gap-1.5"><Users size={13} aria-hidden="true" /> All Generations</span>
                       <span className="flex items-center gap-1.5"><BookOpen size={13} aria-hidden="true" /> 3 Editions</span>
                     </div>
-                    <p className="text-[#6B6B6B] leading-relaxed mb-6 text-[0.9rem]">{s.description}</p>
+                    <p className="text-white/60 leading-relaxed mb-6 text-[0.9rem]">{s.description}</p>
                     <ul className="space-y-1.5 mb-6" role="list">
                       {s.highlights.map((h,j)=>(
-                        <li key={j} className="flex items-start gap-2 text-sm text-navy-700">
-                          <Check size={13} className="text-gold-500 mt-0.5 shrink-0" aria-hidden="true" /> {h}
+                        <li key={j} className="flex items-start gap-2 text-sm text-white/75">
+                          <Check size={13} className="text-gold-400 mt-0.5 shrink-0" aria-hidden="true" /> {h}
                         </li>
                       ))}
                     </ul>
-                    <div className="p-4 rounded-xl bg-ivory-200 mb-6">
-                      <p className="text-[0.68rem] font-semibold text-navy-500 uppercase tracking-wider mb-2">Editions Included</p>
+                    <div className="p-4 rounded-xl bg-white/5 mb-6">
+                      <p className="text-[0.68rem] font-semibold text-white/50 uppercase tracking-wider mb-2">Editions Included</p>
                       {s.audiences.map((a,j)=>(
-                        <p key={j} className="text-[0.82rem] text-navy-600 py-1 border-b border-ivory-300 last:border-0">{a}</p>
+                        <p key={j} className="text-[0.82rem] text-white/70 py-1 border-b border-white/10 last:border-0">{a}</p>
                       ))}
                     </div>
                     <Link to="/free-sample"
                       className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-px w-fit ${
-                        s.available ? 'bg-navy-700 text-white hover:bg-navy-600 shadow-navy' : 'bg-ivory-300 text-navy-400 cursor-not-allowed'
+                        s.available ? 'ih-btn-gold' : 'bg-white/10 text-white/40 cursor-not-allowed'
                       }`}>
                       {s.available ? 'Get Free Sample' : 'Join Waitlist'}
                       <ArrowRight size={15} aria-hidden="true" />
@@ -134,21 +134,21 @@ export default function DevotionalsPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-ivory-200" aria-labelledby="inside-heading">
+      <section className="py-24 ih-section" aria-labelledby="inside-heading">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Every Day Includes</p>
-            <h2 id="inside-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700">What's Inside Each Day</h2>
+            <p className="ih-eyebrow mb-3">Every Day Includes</p>
+            <h2 id="inside-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white">What's Inside Each Day</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
             {inside.map((item,i)=>(
               <ScrollReveal key={i} delay={i*70}>
-                <div className="premium-card p-6 bg-white rounded-2xl border border-ivory-300 shadow-sm">
-                  <div className="w-8 h-8 rounded-lg bg-gold-50 border border-gold-200 flex items-center justify-center mb-4">
-                    <span className="text-gold-600 font-bold text-[0.72rem]">{item.n}</span>
+                <div className="premium-card p-6 ih-card">
+                  <div className="w-8 h-8 rounded-lg bg-gold-400/10 border border-gold-400/30 flex items-center justify-center mb-4">
+                    <span className="text-gold-300 font-bold text-[0.72rem]">{item.n}</span>
                   </div>
-                  <h3 className="font-playfair text-base font-bold text-navy-700 mb-2">{item.title}</h3>
-                  <p className="text-[#6B6B6B] text-xs leading-relaxed">{item.desc}</p>
+                  <h3 className="font-playfair text-base font-bold text-white mb-2">{item.title}</h3>
+                  <p className="text-white/55 text-xs leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -156,12 +156,12 @@ export default function DevotionalsPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-navy-700 text-center" aria-label="Get started">
+      <section className="py-20 ih-section text-center" aria-label="Get started">
         <div className="max-w-xl mx-auto px-4">
           <ScrollReveal>
             <h2 className="font-playfair text-4xl font-bold text-white mb-4">Ready to Begin?</h2>
             <p className="text-white/55 mb-8">Start your family's encounter with a free 7-day sample from Series One.</p>
-            <Link to="/free-sample" className="inline-flex items-center gap-2 px-8 py-4 bg-gold-500 text-navy-800 font-bold rounded-full hover:bg-gold-400 transition-all duration-300 shadow-gold hover:-translate-y-0.5">
+            <Link to="/free-sample" className="inline-flex items-center gap-2 px-8 py-4 ih-btn-gold">
               Get Your Free Sample <ArrowRight size={17} aria-hidden="true" />
             </Link>
           </ScrollReveal>

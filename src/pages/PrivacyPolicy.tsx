@@ -80,12 +80,12 @@ export default function PrivacyPolicyPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-[#FAF8F3]" aria-labelledby="intro-heading">
+      <section className="py-16 ih-section" aria-labelledby="intro-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <div className="p-6 rounded-2xl bg-white border border-ivory-300 shadow-sm">
-              <h2 id="intro-heading" className="font-playfair text-xl font-bold text-navy-700 mb-3">Our Commitment to You</h2>
-              <p className="text-[#6B6B6B] text-sm leading-relaxed">
+            <div className="p-6 rounded-2xl ih-card">
+              <h2 id="intro-heading" className="font-playfair text-xl font-bold text-white mb-3">Our Commitment to You</h2>
+              <p className="text-white/60 text-sm leading-relaxed">
                 At In Him Daily, we take your privacy seriously. This policy explains what information we collect, how we use it, and the choices you have. We are committed to being transparent and protecting the trust you place in us when you share your details.
               </p>
             </div>
@@ -93,20 +93,20 @@ export default function PrivacyPolicyPage() {
         </div>
       </section>
 
-      <section className="pb-24 bg-[#FAF8F3]" aria-label="Privacy policy sections">
+      <section className="pb-24 ih-section" aria-label="Privacy policy sections">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
           {sections.map((s, i) => (
             <ScrollReveal key={i} delay={i * 50}>
-              <div className="p-7 rounded-2xl bg-white border border-ivory-300 shadow-sm">
+              <div className="p-7 rounded-2xl ih-card">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-gold-50 border border-gold-200 flex items-center justify-center shrink-0">
-                    <s.icon size={18} className="text-gold-600" aria-hidden="true" />
+                  <div className="w-10 h-10 rounded-xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center shrink-0">
+                    <s.icon size={18} className="text-gold-300" aria-hidden="true" />
                   </div>
-                  <h2 className="font-playfair text-lg font-bold text-navy-700">{s.title}</h2>
+                  <h2 className="font-playfair text-lg font-bold text-white">{s.title}</h2>
                 </div>
                 <ul className="space-y-3">
                   {s.content.map((item, j) => (
-                    <li key={j} className="flex gap-3 text-sm text-[#6B6B6B] leading-relaxed">
+                    <li key={j} className="flex gap-3 text-sm text-white/60 leading-relaxed">
                       <span className="w-1.5 h-1.5 rounded-full bg-gold-400 mt-2 shrink-0" aria-hidden="true" />
                       <span>{item}</span>
                     </li>
@@ -117,11 +117,11 @@ export default function PrivacyPolicyPage() {
           ))}
 
           <ScrollReveal>
-            <div className="p-7 rounded-2xl bg-navy-700 text-center">
+            <div className="p-7 rounded-2xl ih-card text-center">
               <h2 className="font-playfair text-xl font-bold text-white mb-3">Questions About Your Privacy?</h2>
               <p className="text-white/55 text-sm mb-5">We are happy to help with any questions or requests regarding your personal data.</p>
               <a href="mailto:hello@inhimdaily.org"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-800 font-semibold rounded-full transition-all duration-300 hover:-translate-y-0.5 text-sm">
+                className="inline-flex items-center gap-2 px-6 py-3 ih-btn-gold text-sm">
                 <Mail size={15} aria-hidden="true" />
                 Contact Us
               </a>

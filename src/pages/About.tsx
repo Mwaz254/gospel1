@@ -35,7 +35,7 @@ export default function AboutPage() {
       </section>
 
       {/* Origin Story */}
-      <section className="py-24 bg-[#FAF8F3]" aria-labelledby="origin-heading">
+      <section className="py-24 ih-section" aria-labelledby="origin-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             <ScrollReveal>
@@ -45,7 +45,7 @@ export default function AboutPage() {
                     alt="Family reading the Bible together" loading="lazy" decoding="async"
                     className="w-full h-full object-cover" />
                 </div>
-                <div className="absolute -bottom-5 -right-5 p-5 bg-navy-700 rounded-2xl shadow-navy hidden md:block">
+                <div className="absolute -bottom-5 -right-5 p-5 ih-card hidden md:block">
                   <p className="font-cormorant text-xl text-gold-200 italic">&ldquo;Three generations.<br />One Jesus.&rdquo;</p>
                 </div>
               </div>
@@ -54,10 +54,10 @@ export default function AboutPage() {
             <ScrollReveal delay={140}>
               <div>
                 <div className="gold-divider mb-8" aria-hidden="true" />
-                <h2 id="origin-heading" className="font-playfair text-3xl md:text-4xl font-bold text-navy-700 mb-6 leading-snug">
+                <h2 id="origin-heading" className="font-playfair text-3xl md:text-4xl font-bold text-white mb-6 leading-snug">
                   The Need for a Three-Generation Devotional
                 </h2>
-                <div className="space-y-4 text-[#6B6B6B] leading-relaxed text-[0.95rem]">
+                <div className="space-y-4 text-white/65 leading-relaxed text-[0.95rem]">
                   <p>For years, Christian families have faithfully pursued personal devotion. Yet a quiet fragmentation has occurred—adults reading commentary, teenagers scrolling youth apps, children looking at picture Bibles. The same family. The same faith. But entirely separate encounters with Jesus.</p>
                   <p>In Him Daily was created to bridge this gap. Not by simplifying scripture to the lowest common denominator, but by presenting the same truth in three different voices—each deeply crafted to meet its reader exactly where they are.</p>
                   <p>The result is remarkable: families who sit at dinner and discover they were all reading about the same thing. Children who ask parents about the reflection question. Grandparents who call their grandchildren to talk about the devotional they read.</p>
@@ -69,21 +69,21 @@ export default function AboutPage() {
       </section>
 
       {/* What We Believe */}
-      <section className="py-24 bg-ivory-200" aria-labelledby="beliefs-heading">
+      <section className="py-24 ih-section" aria-labelledby="beliefs-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Our Foundation</p>
-            <h2 id="beliefs-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700">What We Believe</h2>
+            <p className="ih-eyebrow mb-3">Our Foundation</p>
+            <h2 id="beliefs-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white">What We Believe</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-6">
             {beliefs.map((b, i) => (
               <ScrollReveal key={i} delay={i * 90}>
-                <div className="premium-card p-7 bg-white rounded-2xl border border-ivory-300 shadow-sm h-full">
-                  <div className="w-12 h-12 rounded-xl bg-gold-50 border border-gold-200 flex items-center justify-center mb-5">
-                    <b.icon size={21} className="text-gold-600" aria-hidden="true" />
+                <div className="premium-card p-7 rounded-2xl ih-card h-full">
+                  <div className="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center mb-5">
+                    <b.icon size={21} className="text-gold-300" aria-hidden="true" />
                   </div>
-                  <h3 className="font-playfair text-lg font-bold text-navy-700 mb-3">{b.title}</h3>
-                  <p className="text-[#6B6B6B] text-sm leading-relaxed">{b.text}</p>
+                  <h3 className="font-playfair text-lg font-bold text-white mb-3">{b.title}</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">{b.text}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -125,14 +125,14 @@ export default function AboutPage() {
       </section>
 
       {/* Statement of Faith */}
-      <section className="py-24 bg-ivory-200" aria-labelledby="faith-heading">
+      <section className="py-24 ih-section" aria-labelledby="faith-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <div className="w-12 h-12 mx-auto mb-5 rounded-xl bg-navy-700 flex items-center justify-center">
+            <div className="w-12 h-12 mx-auto mb-5 rounded-xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center">
               <Cross size={22} className="text-gold-300" aria-hidden="true" />
             </div>
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Our Statement of Faith</p>
-            <h2 id="faith-heading" className="font-playfair text-3xl md:text-4xl font-bold text-navy-700">What We Believe</h2>
+            <p className="ih-eyebrow mb-3">Our Statement of Faith</p>
+            <h2 id="faith-heading" className="font-playfair text-3xl md:text-4xl font-bold text-white">What We Believe</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-5">
             {[
@@ -144,9 +144,9 @@ export default function AboutPage() {
               { title: 'The Family', desc: 'We believe the family is the first and most powerful place of discipleship — and that every generation deserves to encounter Jesus at full depth.' },
             ].map((item, i) => (
               <ScrollReveal key={i} delay={i * 60}>
-                <div className="p-6 rounded-2xl bg-white border border-ivory-300 shadow-sm h-full">
-                  <h3 className="font-playfair text-lg font-bold text-navy-700 mb-2">{item.title}</h3>
-                  <p className="text-[#6B6B6B] text-sm leading-relaxed">{item.desc}</p>
+                <div className="p-6 rounded-2xl ih-card-solid h-full">
+                  <h3 className="font-playfair text-lg font-bold text-white mb-2">{item.title}</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -155,14 +155,14 @@ export default function AboutPage() {
       </section>
 
       {/* Leadership */}
-      <section className="py-24 bg-[#FAF8F3]" aria-labelledby="leadership-heading">
+      <section className="py-24 ih-section" aria-labelledby="leadership-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-14">
-            <div className="w-12 h-12 mx-auto mb-5 rounded-xl bg-gold-500 flex items-center justify-center">
-              <Crown size={22} className="text-navy-800" aria-hidden="true" />
+            <div className="w-12 h-12 mx-auto mb-5 rounded-xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center">
+              <Crown size={22} className="text-gold-300" aria-hidden="true" />
             </div>
-            <p className="text-gold-600 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-3">Our Leadership</p>
-            <h2 id="leadership-heading" className="font-playfair text-3xl md:text-4xl font-bold text-navy-700">The Team Behind In Him Daily</h2>
+            <p className="ih-eyebrow mb-3">Our Leadership</p>
+            <h2 id="leadership-heading" className="font-playfair text-3xl md:text-4xl font-bold text-white">The Team Behind In Him Daily</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-3 gap-6">
             {[
@@ -171,21 +171,21 @@ export default function AboutPage() {
               { name: "Children's Edition Writer", role: 'Kids Content', desc: 'An educator and parent who crafts wonder-filled, story-rich devotionals that help children meet Jesus naturally.' },
             ].map((person, i) => (
               <ScrollReveal key={i} delay={i * 80}>
-                <div className="p-6 rounded-2xl bg-white border border-ivory-300 shadow-sm text-center h-full">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-navy-700 flex items-center justify-center">
+                <div className="p-6 rounded-2xl ih-card-solid text-center h-full">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gold-400/10 border border-gold-400/30 flex items-center justify-center">
                     <Church size={24} className="text-gold-300" aria-hidden="true" />
                   </div>
-                  <h3 className="font-playfair text-base font-bold text-navy-700 mb-1">{person.name}</h3>
-                  <p className="text-gold-600 text-xs font-semibold mb-3">{person.role}</p>
-                  <p className="text-[#6B6B6B] text-sm leading-relaxed">{person.desc}</p>
+                  <h3 className="font-playfair text-base font-bold text-white mb-1">{person.name}</h3>
+                  <p className="text-gold-300 text-xs font-semibold mb-3">{person.role}</p>
+                  <p className="text-white/55 text-sm leading-relaxed">{person.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
           </div>
           <ScrollReveal className="text-center mt-10">
-            <p className="text-[#6B6B6B] text-sm">
+            <p className="text-white/55 text-sm">
               Have a question about our ministry?{' '}
-              <Link to="/contact" className="text-navy-700 font-semibold hover:text-gold-600 transition-colors">
+              <Link to="/contact" className="text-gold-300 font-semibold hover:text-gold-200 transition-colors">
                 Contact us
               </Link>
               {' '}— we&apos;d love to hear from you.
@@ -195,12 +195,12 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-[#FAF8F3] text-center" aria-label="Call to action">
+      <section className="py-20 ih-section text-center" aria-label="Call to action">
         <div className="max-w-xl mx-auto px-4">
           <ScrollReveal>
-            <h2 className="font-playfair text-3xl font-bold text-navy-700 mb-4">Join the Movement</h2>
-            <p className="text-[#6B6B6B] mb-8">Begin your family's journey with a free 7-day sample devotional.</p>
-            <Link to="/free-sample" className="inline-flex items-center gap-2 px-8 py-4 bg-navy-700 text-white font-bold rounded-full hover:bg-navy-600 transition-colors shadow-navy">
+            <h2 className="font-playfair text-3xl font-bold text-white mb-4">Join the Movement</h2>
+            <p className="text-white/55 mb-8">Begin your family's journey with a free 7-day sample devotional.</p>
+            <Link to="/free-sample" className="inline-flex items-center gap-2 px-8 py-4 ih-btn-gold">
               Get Free Sample <ArrowRight size={17} aria-hidden="true" />
             </Link>
           </ScrollReveal>

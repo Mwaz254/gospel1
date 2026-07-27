@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import AnimatedBackground from './books/AnimatedBackground';
 import BooksNav from './books/BooksNav';
 import Hero from './books/Hero';
 import AgeCards from './books/AgeCards';
@@ -29,7 +28,6 @@ export default function Books() {
 
   return (
     <div className="relative min-h-screen text-white">
-      <AnimatedBackground />
       <BooksNav />
       <main>
         <Hero />

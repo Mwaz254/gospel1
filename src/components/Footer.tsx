@@ -23,7 +23,7 @@ const resourceLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-700 text-white" aria-label="Site footer">
+    <footer className="bg-[#05070D] text-white border-t border-white/10" aria-label="Site footer">
       <div className="border-b border-white/10">
         <div className="max-w-3xl mx-auto px-6 py-10 text-center">
           <p className="font-cormorant text-2xl md:text-[1.75rem] text-gold-200 italic leading-relaxed">

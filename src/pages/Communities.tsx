@@ -126,7 +126,7 @@ export default function CommunitiesPage() {
       </section>
 
       {/* WHATSAPP SECTION */}
-      <section id="whatsapp" className="py-24 bg-[#FAF8F3] relative overflow-hidden" aria-labelledby="whatsapp-heading">
+      <section id="whatsapp" className="py-24 ih-section relative overflow-hidden" aria-labelledby="whatsapp-heading">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(circle at 10% 50%, rgba(37,211,102,0.05) 0%, transparent 55%), radial-gradient(circle at 90% 20%, rgba(23,50,77,0.04) 0%, transparent 55%)' }} />
 
@@ -136,10 +136,10 @@ export default function CommunitiesPage() {
               <WhatsAppIcon size={14} className="text-[#128C7E]" />
               <span className="text-[#128C7E] text-[0.68rem] font-bold tracking-[0.15em] uppercase">WhatsApp Communities</span>
             </div>
-            <h2 id="whatsapp-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy-700 mb-4">
+            <h2 id="whatsapp-heading" className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
               Three Groups. One Family.
             </h2>
-            <p className="text-[#6B6B6B] text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="text-white/55 text-lg max-w-2xl mx-auto leading-relaxed">
               Scan the QR code or tap the link to join the community that matches your generation.
               Each group is tailored to support your unique devotional journey.
             </p>
@@ -149,7 +149,7 @@ export default function CommunitiesPage() {
             {whatsappGroups.map((group, i) => (
               <ScrollReveal key={group.id} delay={i * 100}>
                 <div
-                  className="rounded-3xl overflow-hidden bg-white border-2 flex flex-col transition-all duration-300 hover:-translate-y-2"
+                  className="rounded-3xl overflow-hidden ih-card flex flex-col transition-all duration-300 hover:-translate-y-2"
                   style={{
                     borderColor: `${group.gradA}22`,
                     boxShadow: `0 8px 32px ${group.glow}`,
@@ -161,7 +161,7 @@ export default function CommunitiesPage() {
                   <div className="p-7 flex flex-col flex-1">
                     {/* Header */}
                     <div className="mb-5">
-                      <p className="font-playfair text-2xl font-bold text-navy-700 leading-none mb-1">{group.label}</p>
+                      <p className="font-playfair text-2xl font-bold text-white leading-none mb-1">{group.label}</p>
                       <p className="text-[0.68rem] font-semibold tracking-wider" style={{ color: group.gradA }}>{group.tag}</p>
                     </div>
 
@@ -180,14 +180,14 @@ export default function CommunitiesPage() {
                           <WhatsAppIcon size={16} className="text-white" />
                         </div>
                       </div>
-                      <p className="text-center text-xs text-navy-400 mt-3 font-medium">Scan to join on WhatsApp</p>
+                      <p className="text-center text-xs text-white/40 mt-3 font-medium">Scan to join on WhatsApp</p>
                     </div>
 
-                    <p className="text-[#6B6B6B] text-sm leading-relaxed mb-5">{group.description}</p>
+                    <p className="text-white/60 text-sm leading-relaxed mb-5">{group.description}</p>
 
                     <ul className="space-y-2 mb-5 flex-1" role="list">
                       {group.features.map((f, j) => (
-                        <li key={j} className="flex items-center gap-2.5 text-xs text-navy-600">
+                        <li key={j} className="flex items-center gap-2.5 text-xs text-white/65">
                           <div className="w-4 h-4 rounded-full flex items-center justify-center shrink-0" style={{ background: `${group.gradA}15` }}>
                             <Check size={9} style={{ color: group.gradA }} aria-hidden="true" />
                           </div>
@@ -197,8 +197,8 @@ export default function CommunitiesPage() {
                     </ul>
 
                     <div className="flex items-center gap-1.5 mb-5">
-                      <Users size={12} className="text-navy-300" aria-hidden="true" />
-                      <span className="text-xs text-navy-400">{group.members} members growing daily</span>
+                      <Users size={12} className="text-white/40" aria-hidden="true" />
+                      <span className="text-xs text-white/45">{group.members} members growing daily</span>
                     </div>
 
                     <a
@@ -225,8 +225,8 @@ export default function CommunitiesPage() {
           {/* How to join note */}
           <ScrollReveal className="mt-12">
             <div className="max-w-2xl mx-auto p-6 rounded-2xl bg-[#25D366]/8 border border-[#25D366]/20 text-center">
-              <p className="text-sm text-navy-600 leading-relaxed">
-                <span className="font-semibold text-navy-700">How to join:</span> Tap the button to open WhatsApp directly, or open WhatsApp on your phone and scan the QR code above.
+              <p className="text-sm text-white/70 leading-relaxed">
+                <span className="font-semibold text-white">How to join:</span> Tap the button to open WhatsApp directly, or open WhatsApp on your phone and scan the QR code above.
                 No approval needed — you'll be connected instantly.
               </p>
             </div>
@@ -303,26 +303,26 @@ export default function CommunitiesPage() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="py-20 bg-[#FAF8F3] text-center" aria-label="Final community call to action">
+      <section className="py-20 ih-section text-center" aria-label="Final community call to action">
         <div className="max-w-xl mx-auto px-4 sm:px-6">
           <ScrollReveal>
             <div className="w-14 h-14 mx-auto mb-7 rounded-full bg-[#25D366]/15 flex items-center justify-center">
               <WhatsAppIcon size={26} className="text-[#25D366]" />
             </div>
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-navy-700 mb-4">
+            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white mb-4">
               Find Your Community Today
             </h2>
-            <p className="text-[#6B6B6B] text-lg mb-8 leading-relaxed">
+            <p className="text-white/55 text-lg mb-8 leading-relaxed">
               Every encounter with Jesus becomes richer when shared with others. Pick your group and join thousands already walking together in faith.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="#whatsapp" onClick={e => { e.preventDefault(); document.getElementById('whatsapp')?.scrollIntoView({ behavior: 'smooth' }); }}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-navy-700 hover:bg-navy-600 text-white font-bold rounded-full transition-all duration-300 hover:-translate-y-0.5">
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 ih-btn-gold">
                 <WhatsAppIcon size={17} />
                 Join a WhatsApp Group
               </a>
               <a href="#social" onClick={e => { e.preventDefault(); document.getElementById('social')?.scrollIntoView({ behavior: 'smooth' }); }}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-navy-200 text-navy-700 hover:border-gold-400 hover:text-gold-600 font-bold rounded-full transition-all duration-300">
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 ih-btn-ghost">
                 Follow on Social
               </a>
             </div>

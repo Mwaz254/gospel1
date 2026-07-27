@@ -52,10 +52,10 @@ export default function Navigation() {
               />
             </div>
             <div className="hidden sm:block leading-tight">
-              <p className={`font-playfair font-bold transition-all duration-400 ${scrolled ? 'text-navy-600 text-base' : 'text-white text-[1.1rem]'}`}>
-                In Him <em className="not-italic text-gold-500">Daily</em>
+              <p className={`font-playfair font-bold transition-all duration-400 ${scrolled ? 'text-white text-base' : 'text-white text-[1.1rem]'}`}>
+                In Him <em className="not-italic text-gold-400">Daily</em>
               </p>
-              <p className={`text-[0.65rem] tracking-[0.15em] uppercase transition-all duration-400 ${scrolled ? 'text-navy-400' : 'text-white/60'}`}>
+              <p className={`text-[0.65rem] tracking-[0.15em] uppercase transition-all duration-400 ${scrolled ? 'text-gold-300/70' : 'text-white/60'}`}>
                 Hidden with Christ in God
               </p>
             </div>
@@ -70,11 +70,7 @@ export default function Navigation() {
                   to={link.href}
                   className={`relative px-3.5 py-2 text-[0.82rem] font-medium rounded-lg transition-all duration-200 ${
                     active
-                      ? scrolled
-                        ? 'text-navy-600 bg-gold-50'
-                        : 'text-gold-300 bg-white/10'
-                      : scrolled
-                      ? 'text-navy-500 hover:text-navy-700 hover:bg-ivory-200'
+                      ? 'text-gold-300 bg-white/10'
                       : 'text-white/80 hover:text-white hover:bg-white/10'
                   }`}
                   aria-current={active ? 'page' : undefined}
@@ -89,9 +85,7 @@ export default function Navigation() {
             <Link
               to="/free-sample"
               className={`px-5 py-2.5 text-[0.82rem] font-semibold rounded-full transition-all duration-300 ${
-                scrolled
-                  ? 'bg-navy-600 text-white hover:bg-navy-500 shadow-navy'
-                  : 'bg-gold-500 text-navy-700 hover:bg-gold-400 shadow-gold'
+                'bg-gold-500 text-[#05070D] hover:bg-gold-400 shadow-gold'
               } hover:-translate-y-px`}
             >
               Get Free Sample
@@ -99,9 +93,7 @@ export default function Navigation() {
           </div>
 
           <button
-            className={`lg:hidden p-2 rounded-lg transition-colors ${
-              scrolled ? 'text-navy-600 hover:bg-ivory-300' : 'text-white hover:bg-white/10'
-            }`}
+            className={`lg:hidden p-2 rounded-lg transition-colors text-white hover:bg-white/10`}
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
@@ -129,8 +121,8 @@ export default function Navigation() {
               to={link.href}
               className={`flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-colors ${
                 pathname === link.href
-                  ? 'text-navy-700 bg-gold-50 font-semibold'
-                  : 'text-navy-500 hover:text-navy-700 hover:bg-ivory-200'
+                  ? 'text-gold-300 bg-white/10 font-semibold'
+                  : 'text-white/70 hover:text-white hover:bg-white/10'
               }`}
               aria-current={pathname === link.href ? 'page' : undefined}
             >
@@ -140,7 +132,7 @@ export default function Navigation() {
           <div className="pt-3">
             <Link
               to="/free-sample"
-              className="block text-center px-5 py-3 bg-navy-600 text-white text-sm font-semibold rounded-full hover:bg-navy-500 transition-colors"
+              className="block text-center px-5 py-3 bg-gold-500 text-[#05070D] text-sm font-semibold rounded-full hover:bg-gold-400 transition-colors"
             >
               Get Free Sample
             </Link>

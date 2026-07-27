@@ -1,19 +1,29 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import BackgroundDecoration from '@/components/BackgroundDecoration';
 import Home from './pages/Home';
-import About from './pages/About';
-import Admin from './pages/Admin';
-import Contact from './pages/Contact';
-import Devotionals from './pages/Devotionals';
-import FreeSample from './pages/FreeSample';
-import PrayerGuidelines from './pages/PrayerGuidelines';
-import PrayerPartners from './pages/PrayerPartners';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import Communities from './pages/Communities';
-import Books from './pages/Books';
-import NotFound from './pages/NotFound';
+
+const About            = lazy(() => import('./pages/About'));
+const Admin            = lazy(() => import('./pages/Admin'));
+const Contact          = lazy(() => import('./pages/Contact'));
+const Devotionals      = lazy(() => import('./pages/Devotionals'));
+const FreeSample       = lazy(() => import('./pages/FreeSample'));
+const PrayerGuidelines = lazy(() => import('./pages/PrayerGuidelines'));
+const PrayerPartners   = lazy(() => import('./pages/PrayerPartners'));
+const PrivacyPolicy    = lazy(() => import('./pages/PrivacyPolicy'));
+const Communities      = lazy(() => import('./pages/Communities'));
+const Books            = lazy(() => import('./pages/Books'));
+const NotFound         = lazy(() => import('./pages/NotFound'));
+
+function PageLoader() {
+  return (
+    <div className="flex items-center justify-center min-h-[60vh]">
+      <div className="w-10 h-10 border-2 border-gold-400/30 border-t-gold-400 rounded-full animate-spin" aria-label="Loading" />
+    </div>
+  );
+}
 
 export default function App() {
   return (
@@ -21,20 +31,22 @@ export default function App() {
       <BackgroundDecoration />
       <Navigation />
       <main id="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/devotionals" element={<Devotionals />} />
-          <Route path="/free-sample" element={<FreeSample />} />
-          <Route path="/prayer-guidelines" element={<PrayerGuidelines />} />
-          <Route path="/prayer-partners" element={<PrayerPartners />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/communities" element={<Communities />} />
-          <Route path="/books" element={<Books />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/devotionals" element={<Devotionals />} />
+            <Route path="/free-sample" element={<FreeSample />} />
+            <Route path="/prayer-guidelines" element={<PrayerGuidelines />} />
+            <Route path="/prayer-partners" element={<PrayerPartners />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/communities" element={<Communities />} />
+            <Route path="/books" element={<Books />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
     </BrowserRouter>
