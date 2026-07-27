@@ -42,7 +42,7 @@ export default function Hero() {
                 animationDelay: `${i * 0.8}s`,
               }}
             >
-              <div className="relative overflow-hidden rounded-lg shadow-2xl group">
+              <div className="relative rounded-lg shadow-2xl group">
                 <div
                   className="absolute -inset-1 rounded-lg blur-md opacity-60 -z-10"
                   style={{ background: book.accent }}
@@ -52,7 +52,7 @@ export default function Hero() {
                   src={book.cover}
                   alt={`${book.title} devotional cover`}
                   loading="eager"
-                  className="w-28 sm:w-40 lg:w-52 h-40 sm:h-56 lg:h-72 object-cover rounded-lg border border-white/10 transition-transform duration-500 group-hover:scale-105"
+                  className="w-28 sm:w-40 lg:w-52 h-40 sm:h-56 lg:h-72 object-contain rounded-lg border border-white/10 shadow-xl"
                 />
                 {/* light sweep */}
                 <span className="bk-sweep" />

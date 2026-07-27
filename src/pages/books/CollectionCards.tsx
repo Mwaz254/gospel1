@@ -18,12 +18,12 @@ export default function CollectionCards() {
           </p>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {collections.map((c, i) => (
             <ScrollReveal key={c.id} delay={i * 100}>
-              <div className="bk-glass rounded-2xl overflow-hidden h-full group transition-all duration-500 hover:-translate-y-3 hover:border-gold-400/50 hover:shadow-[0_24px_64px_rgba(212,175,55,0.2)]">
-                {/* Book mockup */}
-                <div className="relative h-56 overflow-hidden">
+              <div className="bk-glass rounded-2xl overflow-hidden h-full group transition-all duration-500 hover:-translate-y-1 hover:border-gold-400/50 hover:shadow-[0_24px_64px_rgba(212,175,55,0.2)]">
+                {/* Book cover */}
+                <div className="relative flex items-center justify-center bg-white/[0.03] border-b border-white/5" style={{ height: 460 }}>
                   <div
                     className="absolute inset-0"
                     style={{
@@ -35,7 +35,7 @@ export default function CollectionCards() {
                     src={c.cover}
                     alt={c.title}
                     loading="lazy"
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-40 object-cover rounded-md shadow-2xl border border-white/10 transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-2"
+                    className="relative max-h-full max-w-full object-contain p-4 rounded-lg shadow-xl border border-white/10 transition-transform duration-500"
                   />
                   <span className="bk-sweep" />
                 </div>

@@ -19,12 +19,12 @@ export default function AgeCards() {
           </p>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {ageCards.map((card, i) => {
             const Icon = icons[i] ?? Baby;
             return (
               <ScrollReveal key={card.id} delay={i * 120}>
-                <div className="bk-glass rounded-2xl p-8 h-full group transition-all duration-500 hover:-translate-y-2 hover:border-gold-400/50 hover:shadow-[0_20px_60px_rgba(212,175,55,0.18)]">
+                <div className="bk-glass rounded-2xl p-8 h-full group transition-all duration-500 hover:-translate-y-1 hover:border-gold-400/50 hover:shadow-[0_20px_60px_rgba(212,175,55,0.18)]">
                   <div className="flex items-center justify-between mb-6">
                     <div
                       className="w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110"
@@ -53,12 +53,12 @@ export default function AgeCards() {
                     ))}
                   </ul>
 
-                  <div className="mt-8 overflow-hidden rounded-lg">
+                  <div className="mt-8 flex items-center justify-center rounded-xl bg-white/[0.03] border border-white/5" style={{ height: 440 }}>
                     <img
                       src={card.cover}
-                      alt={`${card.age} devotional`}
+                      alt={`${card.age} devotional cover`}
                       loading="lazy"
-                      className="w-full h-40 object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="max-h-full max-w-full object-contain p-3 rounded-lg shadow-xl transition-transform duration-500"
                     />
                   </div>
                 </div>
