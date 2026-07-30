@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Mail, MessageSquare, Heart, Check, ArrowRight } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
+import LocationFields, { type LocationData } from '@/components/LocationFields';
 import { insertContactMessage, insertPrayerRequest, insertNewsletterSubscriber } from '@/lib/supabase';
 
 type FormType = 'contact' | 'prayer' | 'newsletter';
@@ -10,9 +11,9 @@ export default function ContactPage() {
   const [submitted, setSubmitted]   = useState<FormType | null>(null);
   const [formError, setFormError]   = useState('');
 
-  const [cData, setCData]   = useState({ name:'', email:'', subject:'', message:'' });
-  const [pData, setPData]   = useState({ name:'', email:'', request:'' });
-  const [nData, setNData]   = useState({ name:'', email:'' });
+  const [cData, setCData]   = useState({ name:'', email:'', subject:'', message:'', location:{country:'',city_region:''} as LocationData });
+  const [pData, setPData]   = useState({ name:'', email:'', request:'', location:{country:'',city_region:''} as LocationData });
+  const [nData, setNData]   = useState({ name:'', email:'', location:{country:'',city_region:''} as LocationData });
 
   const inputCls  = "w-full px-5 py-3.5 rounded-xl ih-input text-white placeholder-white/35 transition-colors text-sm";
   const taCls     = `${inputCls} resize-none`;
@@ -88,17 +89,18 @@ export default function ContactPage() {
                         <p className="text-white/55">Thank you, {cData.name}. We'll reply within 24–48 hours.</p>
                       </div>
                     ) : (
-                      <form onSubmit={async (e)=>{ e.preventDefault(); setFormError(''); try { await insertContactMessage(cData); setSubmitted('contact'); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-4" noValidate>
+                      <form onSubmit={async (e)=>{ e.preventDefault(); setFormError(''); if(!cData.location.country){setFormError('Please select your country.');return;} try { await insertContactMessage({name:cData.name,email:cData.email,subject:cData.subject,message:cData.message,country:cData.location.country,city_region:cData.location.city_region}); setSubmitted('contact'); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-4" noValidate>
                         <div>
                           <h2 className="font-playfair text-2xl font-bold text-white mb-1">Send a Message</h2>
                           <p className="text-white/55 text-sm">We read every message and respond personally.</p>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-3.5">
-                          <input type="text" placeholder="Your Name" value={cData.name} onChange={e=>setCData({...cData,name:e.target.value})} required aria-label="Your name" className={inputCls} />
-                          <input type="email" placeholder="Email Address" value={cData.email} onChange={e=>setCData({...cData,email:e.target.value})} required aria-label="Email address" className={inputCls} />
+                          <input type="text" placeholder="Your Name *" value={cData.name} onChange={e=>setCData({...cData,name:e.target.value})} required aria-label="Your name" className={inputCls} />
+                          <input type="email" placeholder="Email Address *" value={cData.email} onChange={e=>setCData({...cData,email:e.target.value})} required aria-label="Email address" className={inputCls} />
                         </div>
                         <input type="text" placeholder="Subject" value={cData.subject} onChange={e=>setCData({...cData,subject:e.target.value})} required aria-label="Subject" className={inputCls} />
                         <textarea placeholder="Your message…" value={cData.message} onChange={e=>setCData({...cData,message:e.target.value})} required rows={5} aria-label="Message" className={taCls} />
+                        <LocationFields value={cData.location} onChange={(loc)=>setCData({...cData,location:loc})} />
                         <button type="submit" className="inline-flex items-center gap-2 px-7 py-3.5 ih-btn-gold">
                           Send Message <ArrowRight size={15} aria-hidden="true" />
                         </button>
@@ -117,18 +119,19 @@ export default function ContactPage() {
                         <p className="text-white/55">Thank you, {pData.name}. Your request is in safe hands.</p>
                       </div>
                     ) : (
-                      <form onSubmit={async (e)=>{ e.preventDefault(); setFormError(''); try { await insertPrayerRequest({name:pData.name, email:pData.email||undefined, request:pData.request}); setSubmitted('prayer'); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-4" noValidate>
+                      <form onSubmit={async (e)=>{ e.preventDefault(); setFormError(''); try { await insertPrayerRequest({name:pData.name, email:pData.email||undefined, request:pData.request, country:pData.location.country||undefined, city_region:pData.location.city_region||undefined}); setSubmitted('prayer'); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-4" noValidate>
                         <div>
-                          <h2 className="font-playfair text-2xl font-bold text-navy-700 mb-1">Submit a Prayer Request</h2>
-                          <p className="text-[#6B6B6B] text-sm">Your request will be held in confidence and prayed over faithfully.</p>
+                          <h2 className="font-playfair text-2xl font-bold text-white mb-1">Submit a Prayer Request</h2>
+                          <p className="text-white/55 text-sm">Your request will be held in confidence and prayed over faithfully.</p>
                         </div>
-                        <div className="p-4 rounded-xl bg-gold-50 border border-gold-200">
-                          <p className="font-cormorant text-lg text-navy-700 italic">&ldquo;Do not be anxious about anything, but in every situation, by prayer and petition, present your requests to God.&rdquo;</p>
-                          <p className="text-gold-600 text-[0.72rem] font-semibold mt-2">Philippians 4:6</p>
+                        <div className="p-4 rounded-xl bg-gold-400/10 border border-gold-400/20">
+                          <p className="font-cormorant text-lg text-white italic">&ldquo;Do not be anxious about anything, but in every situation, by prayer and petition, present your requests to God.&rdquo;</p>
+                          <p className="text-gold-300 text-[0.72rem] font-semibold mt-2">Philippians 4:6</p>
                         </div>
                         <input type="text" placeholder="Your Name" value={pData.name} onChange={e=>setPData({...pData,name:e.target.value})} required aria-label="Your name" className={inputCls} />
                         <input type="email" placeholder="Email (optional)" value={pData.email} onChange={e=>setPData({...pData,email:e.target.value})} aria-label="Email address (optional)" className={inputCls} />
                         <textarea placeholder="Share your prayer request…" value={pData.request} onChange={e=>setPData({...pData,request:e.target.value})} required rows={5} aria-label="Prayer request" className={taCls} />
+                        <LocationFields value={pData.location} onChange={(loc)=>setPData({...pData,location:loc})} />
                         <button type="submit" className="inline-flex items-center gap-2 px-7 py-3.5 ih-btn-gold">
                           Submit Request <Heart size={15} aria-hidden="true" />
                         </button>
@@ -147,7 +150,7 @@ export default function ContactPage() {
                         <p className="text-white/55">Welcome, {nData.name}! Look out for updates from In Him Daily.</p>
                       </div>
                     ) : (
-                      <form onSubmit={async (e)=>{ e.preventDefault(); setFormError(''); try { await insertNewsletterSubscriber({name:nData.name,email:nData.email}); setSubmitted('newsletter'); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-4" noValidate>
+                      <form onSubmit={async (e)=>{ e.preventDefault(); setFormError(''); try { await insertNewsletterSubscriber({name:nData.name,email:nData.email,country:nData.location.country||undefined,city_region:nData.location.city_region||undefined}); setSubmitted('newsletter'); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-4" noValidate>
                         <div>
                           <h2 className="font-playfair text-2xl font-bold text-white mb-1">Subscribe to Our Newsletter</h2>
                           <p className="text-white/55 text-sm">New content, family resources, and ministry updates.</p>
@@ -161,6 +164,7 @@ export default function ContactPage() {
                         </ul>
                         <input type="text" placeholder="Your First Name" value={nData.name} onChange={e=>setNData({...nData,name:e.target.value})} required aria-label="First name" className={inputCls} />
                         <input type="email" placeholder="Email Address" value={nData.email} onChange={e=>setNData({...nData,email:e.target.value})} required aria-label="Email address" className={inputCls} />
+                        <LocationFields value={nData.location} onChange={(loc)=>setNData({...nData,location:loc})} />
                         <button type="submit" className="inline-flex items-center gap-2 px-7 py-3.5 ih-btn-gold">
                           Subscribe <ArrowRight size={15} aria-hidden="true" />
                         </button>

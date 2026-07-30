@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Users, Mail, Heart, MessageSquare, BookOpen, RefreshCw, Rocket, ExternalLink, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Users, Mail, Heart, MessageSquare, BookOpen, RefreshCw, Rocket, ExternalLink, CheckCircle2, AlertCircle, HandHeart } from 'lucide-react';
 
 type FreeSampleLead = { id: string; first_name: string; email: string; source: string; status: string; created_at: string; };
 type NewsletterSub  = { id: string; name: string; email: string; status: string; created_at: string; };
 type PrayerPartner  = { id: string; name: string; email: string; status: string; created_at: string; };
 type PrayerRequest  = { id: string; name: string; email: string | null; request: string; status: string; created_at: string; };
-type ContactMessage = { id: string; name: string; email: string; subject: string; message: string; status: string; created_at: string; };
+type ContactMessage = { id: string; name: string; email: string; subject: string; message: string; status: string; country: string | null; city_region: string | null; created_at: string; };
+type Donation = { id: string; name: string; email: string; country: string | null; city_region: string | null; amount: number | null; prayer_request: string | null; message: string | null; status: string; created_at: string; };
 
-type Tab = 'leads' | 'newsletter' | 'partners' | 'prayers' | 'messages';
+type Tab = 'leads' | 'newsletter' | 'partners' | 'prayers' | 'messages' | 'donations';
 
 const TABS: { id: Tab; label: string; icon: React.ElementType; color: string }[] = [
   { id: 'leads',     label: 'Free Sample Leads',    icon: BookOpen,      color: 'text-gold-300' },
@@ -16,6 +17,7 @@ const TABS: { id: Tab; label: string; icon: React.ElementType; color: string }[]
   { id: 'partners',  label: 'Prayer Partners',      icon: Users,         color: 'text-gold-300' },
   { id: 'prayers',   label: 'Prayer Requests',      icon: Heart,         color: 'text-gold-300' },
   { id: 'messages',  label: 'Contact Messages',     icon: MessageSquare, color: 'text-gold-300' },
+  { id: 'donations', label: 'Donations',             icon: HandHeart,     color: 'text-gold-300' },
 ];
 
 const STATUS_COLORS: Record<string, string> = {
@@ -47,34 +49,38 @@ function StatusBadge({ status }: { status: string }) {
 export default function AdminPage() {
   const [tab,      setTab]      = useState<Tab>('leads');
   const [loading,  setLoading]  = useState(true);
-  const [counts,   setCounts]   = useState<Record<Tab, number>>({ leads:0, newsletter:0, partners:0, prayers:0, messages:0 });
+  const [counts,   setCounts]   = useState<Record<Tab, number>>({ leads:0, newsletter:0, partners:0, prayers:0, messages:0, donations:0 });
 
   const [leads,    setLeads]    = useState<FreeSampleLead[]>([]);
   const [subs,     setSubs]     = useState<NewsletterSub[]>([]);
   const [partners, setPartners] = useState<PrayerPartner[]>([]);
   const [prayers,  setPrayers]  = useState<PrayerRequest[]>([]);
   const [messages, setMessages] = useState<ContactMessage[]>([]);
+  const [donations, setDonations] = useState<Donation[]>([]);
 
   async function loadAll() {
     setLoading(true);
-    const [l, n, pp, pr, m] = await Promise.all([
+    const [l, n, pp, pr, m, d] = await Promise.all([
       supabase.from('free_sample_leads').select('*').order('created_at', { ascending: false }),
       supabase.from('newsletter_subscribers').select('*').order('created_at', { ascending: false }),
       supabase.from('prayer_partners').select('*').order('created_at', { ascending: false }),
       supabase.from('prayer_requests').select('*').order('created_at', { ascending: false }),
       supabase.from('contact_messages').select('*').order('created_at', { ascending: false }),
+      supabase.from('donations').select('*').order('created_at', { ascending: false }),
     ]);
     setLeads(l.data ?? []);
     setSubs(n.data ?? []);
     setPartners(pp.data ?? []);
     setPrayers(pr.data ?? []);
     setMessages(m.data ?? []);
+    setDonations(d.data ?? []);
     setCounts({
       leads:      l.data?.length    ?? 0,
       newsletter: n.data?.length    ?? 0,
       partners:   pp.data?.length   ?? 0,
       prayers:    pr.data?.length   ?? 0,
       messages:   m.data?.length    ?? 0,
+      donations:  d.data?.length    ?? 0,
     });
     setLoading(false);
   }
@@ -210,6 +216,26 @@ export default function AdminPage() {
                           <td className="px-5 py-3.5 text-white font-medium">{r.subject}</td>
                           <td className="px-5 py-3.5 text-white/60 max-w-xs"><span className="line-clamp-2">{r.message}</span></td>
                           <td className="px-5 py-3.5 whitespace-nowrap"><StatusBadge status={r.status} /></td>
+                          <td className="px-5 py-3.5 text-white/60 text-[0.8rem] whitespace-nowrap">{fmt(r.created_at)}</td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              )}
+              {tab === 'donations' && (
+                <table className="w-full text-sm">
+                  <thead className="bg-white/5 text-white/50 text-[0.72rem] uppercase tracking-wider">
+                    <tr>{['Name','Email','Amount','Country','City/Region','Date'].map(h => <th key={h} className="px-5 py-3 text-left font-semibold">{h}</th>)}</tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/10">
+                    {donations.length === 0 ? <tr><td colSpan={6} className="px-5 py-10 text-center text-white/40">No donations yet.</td></tr>
+                      : donations.map(r => (
+                        <tr key={r.id} className="hover:bg-white/5 transition-colors">
+                          <td className="px-5 py-3.5 font-medium text-white whitespace-nowrap">{r.name}</td>
+                          <td className="px-5 py-3.5 text-white/60">{r.email}</td>
+                          <td className="px-5 py-3.5 text-gold-300 font-semibold">{r.amount ? `${r.amount}` : '—'}</td>
+                          <td className="px-5 py-3.5 text-white/60">{r.country ?? '—'}</td>
+                          <td className="px-5 py-3.5 text-white/60">{r.city_region ?? '—'}</td>
                           <td className="px-5 py-3.5 text-white/60 text-[0.8rem] whitespace-nowrap">{fmt(r.created_at)}</td>
                         </tr>
                       ))}

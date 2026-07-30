@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Check, BookOpen, Star } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
+import LocationFields, { type LocationData } from '@/components/LocationFields';
 import { insertFreeSampleLead } from '@/lib/supabase';
 
 type Tab = 'adult' | 'teen' | 'children';
@@ -57,6 +58,7 @@ export default function FreeSamplePage() {
   const [submitted, setSubmitted] = useState(false);
   const [email, setEmail]         = useState('');
   const [firstName, setFirstName] = useState('');
+  const [location, setLocation]   = useState<LocationData>({ country: '', city_region: '' });
   const [formError, setFormError] = useState('');
 
   const c = content[tab];
@@ -166,14 +168,15 @@ export default function FreeSamplePage() {
                   <Check size={22} className="text-gold-300" aria-hidden="true" />
                 </div>
                 <h3 className="font-playfair text-2xl font-bold text-white mb-2">It's On Its Way!</h3>
-                <p className="text-white/55">Welcome, {firstName}! Check your inbox for your free 7-day sample.</p>
+                <p className="text-white/55">Thank you! Your free 7-Day Sample is on its way. We pray these devotionals help you encounter Jesus every day.</p>
               </div>
             ) : (
-              <form onSubmit={async (e)=>{ e.preventDefault(); if(!email||!firstName) return; try { await insertFreeSampleLead({first_name:firstName,email,source:'free_sample_page'}); setSubmitted(true); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-3.5" noValidate>
-                <input type="text" placeholder="First Name" value={firstName} onChange={e=>setFirstName(e.target.value)} required aria-label="First name"
+              <form onSubmit={async (e)=>{ e.preventDefault(); if(!email||!firstName||!location.country) { setFormError('Please fill in your name, email, and country.'); return; } try { await insertFreeSampleLead({first_name:firstName,email,source:'free_sample_page',country:location.country,city_region:location.city_region}); setSubmitted(true); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-3.5" noValidate>
+                <input type="text" placeholder="Full Name *" value={firstName} onChange={e=>setFirstName(e.target.value)} required aria-label="Full name"
                   className="w-full px-5 py-3.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/35 focus:outline-none focus:border-gold-400 transition-colors text-sm" />
-                <input type="email" placeholder="Email Address" value={email} onChange={e=>setEmail(e.target.value)} required aria-label="Email address"
+                <input type="email" placeholder="Email Address *" value={email} onChange={e=>setEmail(e.target.value)} required aria-label="Email address"
                   className="w-full px-5 py-3.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/35 focus:outline-none focus:border-gold-400 transition-colors text-sm" />
+                <LocationFields value={location} onChange={setLocation} />
                 <button type="submit" className="w-full py-4 ih-btn-gold text-[0.9rem]">
                   Send Me The Free Sample
                 </button>
