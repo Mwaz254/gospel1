@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseClient, isSupabaseConfigured } from '@/lib/supabase';
 import { Users, Mail, Heart, MessageSquare, BookOpen, RefreshCw, Rocket, ExternalLink, CheckCircle2, AlertCircle, HandHeart } from 'lucide-react';
 
 type FreeSampleLead = { id: string; first_name: string; email: string; source: string; status: string; created_at: string; };
@@ -49,6 +49,7 @@ function StatusBadge({ status }: { status: string }) {
 export default function AdminPage() {
   const [tab,      setTab]      = useState<Tab>('leads');
   const [loading,  setLoading]  = useState(true);
+  const [loadError, setLoadError] = useState('');
   const [counts,   setCounts]   = useState<Record<Tab, number>>({ leads:0, newsletter:0, partners:0, prayers:0, messages:0, donations:0 });
 
   const [leads,    setLeads]    = useState<FreeSampleLead[]>([]);
@@ -60,29 +61,44 @@ export default function AdminPage() {
 
   async function loadAll() {
     setLoading(true);
-    const [l, n, pp, pr, m, d] = await Promise.all([
-      supabase.from('free_sample_leads').select('*').order('created_at', { ascending: false }),
-      supabase.from('newsletter_subscribers').select('*').order('created_at', { ascending: false }),
-      supabase.from('prayer_partners').select('*').order('created_at', { ascending: false }),
-      supabase.from('prayer_requests').select('*').order('created_at', { ascending: false }),
-      supabase.from('contact_messages').select('*').order('created_at', { ascending: false }),
-      supabase.from('donations').select('*').order('created_at', { ascending: false }),
-    ]);
-    setLeads(l.data ?? []);
-    setSubs(n.data ?? []);
-    setPartners(pp.data ?? []);
-    setPrayers(pr.data ?? []);
-    setMessages(m.data ?? []);
-    setDonations(d.data ?? []);
-    setCounts({
-      leads:      l.data?.length    ?? 0,
-      newsletter: n.data?.length    ?? 0,
-      partners:   pp.data?.length   ?? 0,
-      prayers:    pr.data?.length   ?? 0,
-      messages:   m.data?.length    ?? 0,
-      donations:  d.data?.length    ?? 0,
-    });
-    setLoading(false);
+    setLoadError('');
+
+    try {
+      const supabase = getSupabaseClient();
+      const [l, n, pp, pr, m, d] = await Promise.all([
+        supabase.from('free_sample_leads').select('*').order('created_at', { ascending: false }),
+        supabase.from('newsletter_subscribers').select('*').order('created_at', { ascending: false }),
+        supabase.from('prayer_partners').select('*').order('created_at', { ascending: false }),
+        supabase.from('prayer_requests').select('*').order('created_at', { ascending: false }),
+        supabase.from('contact_messages').select('*').order('created_at', { ascending: false }),
+        supabase.from('donations').select('*').order('created_at', { ascending: false }),
+      ]);
+      const requestError = [l, n, pp, pr, m, d].find((result) => result.error)?.error;
+      if (requestError) throw requestError;
+
+      setLeads(l.data ?? []);
+      setSubs(n.data ?? []);
+      setPartners(pp.data ?? []);
+      setPrayers(pr.data ?? []);
+      setMessages(m.data ?? []);
+      setDonations(d.data ?? []);
+      setCounts({
+        leads:      l.data?.length    ?? 0,
+        newsletter: n.data?.length    ?? 0,
+        partners:   pp.data?.length   ?? 0,
+        prayers:    pr.data?.length   ?? 0,
+        messages:   m.data?.length    ?? 0,
+        donations:  d.data?.length    ?? 0,
+      });
+    } catch {
+      setLoadError(
+        isSupabaseConfigured()
+          ? 'Submission data could not be loaded. Please try again.'
+          : 'Submission data is unavailable until the site data connection is configured.'
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => { loadAll(); }, []);
@@ -105,6 +121,12 @@ export default function AdminPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {loadError && (
+          <div className="mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 flex gap-3 items-start" role="alert">
+            <AlertCircle size={18} className="text-amber-400 shrink-0 mt-0.5" aria-hidden="true" />
+            <p className="text-sm text-amber-200">{loadError}</p>
+          </div>
+        )}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
           {TABS.map((t) => (
             <button key={t.id} onClick={() => setTab(t.id)}
