@@ -1,9 +1,24 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl  = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY?.trim();
+let supabaseClient: SupabaseClient | null = null;
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export function isSupabaseConfigured() {
+  return Boolean(supabaseUrl && supabaseAnonKey);
+}
+
+export function getSupabaseClient() {
+  if (!isSupabaseConfigured()) {
+    throw new Error('Form submissions are temporarily unavailable. Please try again later.');
+  }
+
+  if (!supabaseClient) {
+    supabaseClient = createClient(supabaseUrl, supabaseAnonKey);
+  }
+
+  return supabaseClient;
+}
 
 /* ─── typed helpers ─────────────────────────────────────────── */
 
@@ -15,6 +30,7 @@ export async function insertFreeSampleLead(data: {
   city_region?: string;
   referral_source?: string;
 }) {
+  const supabase = getSupabaseClient();
   const { error } = await supabase.from('free_sample_leads').insert(data);
   if (error) throw error;
 }
@@ -25,6 +41,7 @@ export async function insertNewsletterSubscriber(data: {
   country?: string;
   city_region?: string;
 }) {
+  const supabase = getSupabaseClient();
   const { error } = await supabase
     .from('newsletter_subscribers')
     .upsert(
@@ -40,6 +57,7 @@ export async function insertPrayerPartner(data: {
   country?: string;
   city_region?: string;
 }) {
+  const supabase = getSupabaseClient();
   const { error } = await supabase
     .from('prayer_partners')
     .upsert(
@@ -56,6 +74,7 @@ export async function insertPrayerRequest(data: {
   country?: string;
   city_region?: string;
 }) {
+  const supabase = getSupabaseClient();
   const { error } = await supabase.from('prayer_requests').insert({
     name:    data.name,
     email:   data.email || null,
@@ -74,6 +93,7 @@ export async function insertContactMessage(data: {
   country?: string;
   city_region?: string;
 }) {
+  const supabase = getSupabaseClient();
   const { error } = await supabase.from('contact_messages').insert(data);
   if (error) throw error;
 }
@@ -87,6 +107,7 @@ export async function insertDonation(data: {
   prayer_request?: string;
   message?: string;
 }) {
+  const supabase = getSupabaseClient();
   const { error } = await supabase.from('donations').insert(data);
   if (error) throw error;
 }
