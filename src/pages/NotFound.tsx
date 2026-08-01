@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
 
 export default function NotFound() {
+  useSEO({
+    title: 'Page Not Found | In Him Daily',
+    description: 'The page you are looking for does not exist or has been moved.',
+  });
+
   return (
     <div className="min-h-screen flex items-center justify-center px-4 pt-20">
       <div className="text-center max-w-md">

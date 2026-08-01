@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Heart, BookOpen, Users, Globe, Shield, Clock, Hand, Eye, Ear, Check, ArrowRight } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const foundations = [
@@ -64,6 +65,12 @@ const commitments = [
 ];
 
 export default function PrayerGuidelinesPage() {
+  useSEO({
+    title: 'Prayer Guidelines | In Him Daily',
+    description: 'A guide for intercessors — six foundations of effective intercession, a daily prayer rhythm, specific prayer points, and a weekly prayer guide for praying for In Him Daily.',
+    canonicalPath: '/prayer-guidelines',
+  });
+
   return (
     <div className="overflow-x-hidden">
       <section className="relative pt-32 pb-24 bg-navy-700 overflow-hidden" aria-label="Prayer guidelines hero">

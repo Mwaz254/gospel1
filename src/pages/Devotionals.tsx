@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useSEO } from '@/hooks/useSEO';
 import { ArrowRight, BookOpen, Users, Clock, Check, Search, ChevronDown, Calendar, Download } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import { dailyDevotionals, getTodayDevotional, type DailyDevotional } from '@/data/devotionals';
@@ -244,6 +245,12 @@ function FAQSection() {
 /* ─── Main Page ───────────────────────────────────────────── */
 
 export default function DevotionalsPage() {
+  useSEO({
+    title: 'Daily Devotionals & FAQ | In Him Daily',
+    description: 'Read today\'s devotional, explore the 240-day devotional library, and find answers to common questions about In Him Daily devotionals for adults, teens, and children.',
+    canonicalPath: '/devotionals',
+  });
+
   return (
     <div className="overflow-x-hidden">
       <section className="relative pt-32 pb-24 bg-navy-700 overflow-hidden" aria-label="Devotionals hero">

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Check, BookOpen, Star } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
 import ScrollReveal from '@/components/ScrollReveal';
 import LocationFields, { type LocationData } from '@/components/LocationFields';
 import { insertFreeSampleLead } from '@/lib/supabase';
@@ -54,6 +55,12 @@ const content: Record<Tab, {
 };
 
 export default function FreeSamplePage() {
+  useSEO({
+    title: 'Free 7-Day Sample | In Him Daily',
+    description: 'Experience In Him Daily for free — read actual pages from all three editions (adult, teen, children) and get a free 7-day sample delivered to your inbox.',
+    canonicalPath: '/free-sample',
+  });
+
   const [tab, setTab]           = useState<Tab>('adult');
   const [submitted, setSubmitted] = useState(false);
   const [email, setEmail]         = useState('');

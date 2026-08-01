@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Heart, HandHeart } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
 import ScrollReveal from '@/components/ScrollReveal';
 import LocationFields, { type LocationData } from '@/components/LocationFields';
 import { insertDonation } from '@/lib/supabase';
@@ -7,6 +8,12 @@ import { insertDonation } from '@/lib/supabase';
 const PRESET_AMOUNTS = [5, 10, 25, 50, 100];
 
 export default function DonatePage() {
+  useSEO({
+    title: 'Donate | In Him Daily',
+    description: 'Partner with In Him Daily through your generosity. Your donation helps share Jesus with families across generations around the world.',
+    canonicalPath: '/donate',
+  });
+
   const [name, setName]           = useState('');
   const [email, setEmail]         = useState('');
   const [location, setLocation]   = useState<LocationData>({ country: '', city_region: '' });

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Heart, Globe, BookOpen, Users, Cross, Church, Crown } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const beliefs = [
@@ -10,6 +11,12 @@ const beliefs = [
 ];
 
 export default function AboutPage() {
+  useSEO({
+    title: 'About Us | In Him Daily',
+    description: 'Learn the story behind In Him Daily — a ministry helping every generation in a family encounter Jesus together through the same scripture, every day.',
+    canonicalPath: '/about',
+  });
+
   return (
     <div className="overflow-x-hidden">
 

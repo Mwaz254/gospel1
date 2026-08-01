@@ -1,0 +1,23 @@
+{
+  "name": "In Him Daily",
+  "short_name": "In Him Daily",
+  "description": "Daily Christian devotionals and faith resources for adults, teens, and children.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05070D",
+  "theme_color": "#05070D",
+  "icons": [
+    {
+      "src": "/images/733127106_122096833941384062_9064072413288732878_n.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/733127106_122096833941384062_9064072413288732878_n.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

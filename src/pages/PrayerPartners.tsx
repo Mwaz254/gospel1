@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Globe, Shield, Users, BookOpen, Check, ArrowRight } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
 import ScrollReveal from '@/components/ScrollReveal';
 import { insertPrayerPartner } from '@/lib/supabase';
 
@@ -20,6 +21,12 @@ const monthly = [
 ];
 
 export default function PrayerPartnersPage() {
+  useSEO({
+    title: 'Prayer Partners | In Him Daily',
+    description: 'Join the In Him Daily prayer team and receive monthly prayer guides and specific intercession requests. Every movement needs intercessors.',
+    canonicalPath: '/prayer-partners',
+  });
+
   const [submitted, setSubmitted] = useState(false);
   const [name, setName]           = useState('');
   const [email, setEmail]         = useState('');

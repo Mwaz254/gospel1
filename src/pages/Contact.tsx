@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Mail, MessageSquare, Heart, Check, ArrowRight } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
 import ScrollReveal from '@/components/ScrollReveal';
 import LocationFields, { type LocationData } from '@/components/LocationFields';
 import { insertContactMessage, insertPrayerRequest, insertNewsletterSubscriber } from '@/lib/supabase';
@@ -7,6 +8,12 @@ import { insertContactMessage, insertPrayerRequest, insertNewsletterSubscriber }
 type FormType = 'contact' | 'prayer' | 'newsletter';
 
 export default function ContactPage() {
+  useSEO({
+    title: 'Contact Us | In Him Daily',
+    description: 'Get in touch with In Him Daily — send a message, share a prayer request, or subscribe to our newsletter. We read every message and respond personally.',
+    canonicalPath: '/contact',
+  });
+
   const [active, setActive]         = useState<FormType>('contact');
   const [submitted, setSubmitted]   = useState<FormType | null>(null);
   const [formError, setFormError]   = useState('');

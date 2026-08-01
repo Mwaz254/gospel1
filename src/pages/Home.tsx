@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSEO } from '@/hooks/useSEO';
 import { ArrowRight, BookOpen, Star, Check, X, Sparkles, ChevronRight, Mail, Copy } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import WhatsAppCommunity from '@/components/WhatsAppCommunity';
@@ -74,6 +75,12 @@ const stats = [
 ];
 
 export default function HomePage() {
+  useSEO({
+    title: 'In Him Daily | Daily Christian Devotionals & Faith Community',
+    description: 'Grow closer to Christ through daily devotionals, Bible reflections, prayer resources, and a thriving Christian community. Written for adults, teens, and children — every generation, every day.',
+    canonicalPath: '/',
+  });
+
   const [active, setActive]         = useState<'adult'|'teen'|'child'>('adult');
   const [submitted, setSubmitted]   = useState(false);
   const [email, setEmail]           = useState('');

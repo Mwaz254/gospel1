@@ -1,4 +1,5 @@
 import { ExternalLink, Check, Users, Youtube, Facebook, Instagram } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
 import ScrollReveal from '@/components/ScrollReveal';
 
 function WhatsAppIcon({ size = 20, className = '' }: { size?: number; className?: string }) {
@@ -88,6 +89,12 @@ const socialLinks = [
 ];
 
 export default function CommunitiesPage() {
+  useSEO({
+    title: 'Communities | In Him Daily',
+    description: 'Join thousands of believers growing daily in Christ through our WhatsApp communities for adults, teens, and kids — plus YouTube, Facebook, and Instagram.',
+    canonicalPath: '/communities',
+  });
+
   return (
     <div className="overflow-x-hidden">
 

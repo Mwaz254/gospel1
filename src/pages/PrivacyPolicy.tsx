@@ -1,4 +1,5 @@
 import { Shield, Mail, Eye, Lock, FileText, Users } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const sections = [
@@ -63,6 +64,12 @@ const sections = [
 ];
 
 export default function PrivacyPolicyPage() {
+  useSEO({
+    title: 'Privacy Policy | In Him Daily',
+    description: 'Read the In Him Daily privacy policy — how we collect, use, and protect your personal data when you sign up for devotionals, newsletters, or prayer partners.',
+    canonicalPath: '/privacy-policy',
+  });
+
   return (
     <div className="overflow-x-hidden">
       <section className="relative pt-32 pb-20 bg-navy-700 overflow-hidden" aria-label="Privacy policy hero">

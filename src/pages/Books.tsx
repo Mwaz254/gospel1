@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSEO } from '@/hooks/useSEO';
 import BooksNav from './books/BooksNav';
 import Hero from './books/Hero';
 import AgeCards from './books/AgeCards';
@@ -16,6 +17,12 @@ import BooksFooter from './books/BooksFooter';
 
 export default function Books() {
   const { hash } = useLocation();
+
+  useSEO({
+    title: 'Books | In Him Daily',
+    description: 'Explore the In Him Daily devotional book collections for adults, teens, and children — five series, three generations, one Jesus.',
+    canonicalPath: '/books',
+  });
 
   useEffect(() => {
     if (hash) {
