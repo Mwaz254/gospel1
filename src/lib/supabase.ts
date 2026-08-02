@@ -27,8 +27,22 @@ export async function insertFreeSampleLead(data: {
   city_region?: string;
   referral_source?: string;
 }) {
-  const { error } = await getSupabaseClient().from('free_sample_leads').insert(data);
-  if (error) throw error;
+  const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-free-sample`;
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+    },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    throw new Error(`Request failed (${response.status})`);
+  }
+  const result = await response.json();
+  if (result.error) {
+    throw new Error(result.error);
+  }
 }
 
 export async function insertNewsletterSubscriber(data: {
