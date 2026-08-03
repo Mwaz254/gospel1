@@ -214,8 +214,22 @@ Deno.serve(async (req: Request) => {
     });
 
     if (!emailResponse.ok) {
-      const errorText = await emailResponse.text();
-      console.error("Resend API error:", errorText);
+      const errorBody = await emailResponse.json().catch(() => null);
+      console.error("Resend API error:", JSON.stringify(errorBody));
+
+      // Domain not verified yet — still save the lead so signups aren't lost
+      const isUnverifiedDomain = emailResponse.status === 403 || emailResponse.status === 422;
+      if (isUnverifiedDomain) {
+        return new Response(
+          JSON.stringify({
+            success: true,
+            message: "Your request has been received. The email will be sent once our email domain is verified.",
+            email_sent: false,
+          }),
+          { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
+      }
+
       return new Response(
         JSON.stringify({ error: "Failed to send email. Please try again later." }),
         { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
