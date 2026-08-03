@@ -22,20 +22,22 @@ export default function CollectionCards() {
           {collections.map((c, i) => (
             <ScrollReveal key={c.id} delay={i * 100}>
               <div className="bk-glass rounded-2xl overflow-hidden h-full group transition-all duration-500 hover:-translate-y-1 hover:border-gold-400/50 hover:shadow-[0_24px_64px_rgba(212,175,55,0.2)]">
-                {/* Book cover */}
-                <div className="relative flex items-center justify-center bg-white/[0.03] border-b border-white/5" style={{ height: 460 }}>
+                {/* Book cover — aspect-[3/2] matches the landscape promotional images;
+                    portrait images are letterboxed but fully visible */}
+                <div className="relative w-full aspect-[3/2] bg-white/[0.03] border-b border-white/5 overflow-hidden">
                   <div
                     className="absolute inset-0"
                     style={{
                       background:
                         'linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(212,175,55,0.10) 100%)',
                     }}
+                    aria-hidden="true"
                   />
                   <img
                     src={c.cover}
                     alt={c.title}
                     loading="lazy"
-                    className="relative max-h-full max-w-full object-contain p-4 rounded-lg shadow-xl border border-white/10 transition-transform duration-500"
+                    className="absolute inset-0 w-full h-full object-contain p-5 transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                   <span className="bk-sweep" />
                 </div>

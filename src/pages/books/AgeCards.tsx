@@ -53,12 +53,12 @@ export default function AgeCards() {
                     ))}
                   </ul>
 
-                  <div className="mt-8 flex items-center justify-center rounded-xl bg-white/[0.03] border border-white/5" style={{ height: 440 }}>
+                  <div className="mt-8 relative w-full aspect-[3/2] rounded-xl bg-white/[0.03] border border-white/5 overflow-hidden">
                     <img
                       src={card.cover}
                       alt={`${card.age} devotional cover`}
                       loading="lazy"
-                      className="max-h-full max-w-full object-contain p-3 rounded-lg shadow-xl transition-transform duration-500"
+                      className="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </div>
                 </div>

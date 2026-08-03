@@ -48,19 +48,21 @@ export default function Hero() {
                   style={{ background: book.accent }}
                   aria-hidden="true"
                 />
-                <img
-                  src={book.cover}
-                  alt={`${book.title} devotional cover`}
-                  loading="eager"
-                  className="w-28 sm:w-40 lg:w-52 h-40 sm:h-56 lg:h-72 object-contain rounded-lg border border-white/10 shadow-xl"
-                />
-                {/* light sweep */}
-                <span className="bk-sweep" />
-                <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3 bg-gradient-to-t from-black/70 to-transparent">
-                  <p className="font-cinzel text-white text-xs sm:text-sm font-semibold tracking-wide">
-                    {book.title}
-                  </p>
-                  <p className="text-white/60 text-[10px] sm:text-xs">{book.subtitle}</p>
+                <div className="relative rounded-lg overflow-hidden border border-white/10 shadow-xl">
+                  <img
+                    src={book.cover}
+                    alt={`${book.title} devotional cover`}
+                    loading="eager"
+                    className="w-32 sm:w-44 lg:w-56 aspect-[3/2] object-contain bg-black/20"
+                  />
+                  {/* light sweep */}
+                  <span className="bk-sweep" />
+                  <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3 bg-gradient-to-t from-black/70 to-transparent">
+                    <p className="font-cinzel text-white text-xs sm:text-sm font-semibold tracking-wide">
+                      {book.title}
+                    </p>
+                    <p className="text-white/60 text-[10px] sm:text-xs">{book.subtitle}</p>
+                  </div>
                 </div>
               </div>
             </div>
