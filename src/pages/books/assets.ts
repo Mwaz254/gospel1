@@ -85,7 +85,7 @@ export const collections: Collection[] = [
     scripture: 'The Songbook of the King',
     days: 82,
     description: 'Hear the voice of the Shepherd-King in every psalm, from the cross-shaped cries of David to the praises of Zion.',
-    cover: '/images/books/he_sang_about_himself(adult_edition).png',
+    cover: '/images/books/he_sang_about_himself.png',
   },
   {
     id: 'nt',
@@ -94,7 +94,7 @@ export const collections: Collection[] = [
     scripture: 'The Gospels & Beyond',
     days: 120,
     description: 'See how the Old Testament promises burst into living colour the moment the Word becomes flesh.',
-    cover: '/images/books/every_where_i_look_its_him(adult_edition).png',
+    cover: '/images/books/everywhere_i_look_its_him.png',
   },
   {
     id: 'deut',
