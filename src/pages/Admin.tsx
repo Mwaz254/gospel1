@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getSupabaseClient } from '@/lib/supabase';
-import { Users, Mail, Heart, MessageSquare, BookOpen, RefreshCw, Rocket, ExternalLink, CheckCircle2, AlertCircle, HandHeart } from 'lucide-react';
+import { Users, Mail, Heart, MessageSquare, BookOpen, RefreshCw, Rocket, ExternalLink, CheckCircle2, AlertCircle, HandHeart, Loader2, LogOut } from 'lucide-react';
 
 type FreeSampleLead = { id: string; first_name: string; email: string; source: string; status: string; created_at: string; };
 type NewsletterSub  = { id: string; name: string; email: string; status: string; created_at: string; };
@@ -47,6 +48,8 @@ function StatusBadge({ status }: { status: string }) {
 }
 
 export default function AdminPage() {
+  const navigate = useNavigate();
+  const [authed, setAuthed] = useState(false);
   const [tab,      setTab]      = useState<Tab>('leads');
   const [loading,  setLoading]  = useState(true);
   const [loadError, setLoadError] = useState('');
@@ -58,6 +61,26 @@ export default function AdminPage() {
   const [prayers,  setPrayers]  = useState<PrayerRequest[]>([]);
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [donations, setDonations] = useState<Donation[]>([]);
+
+  useEffect(() => {
+    const supabase = getSupabaseClient();
+    let mounted = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (!mounted) return;
+      if (!data.session) {
+        navigate('/admin-login', { replace: true, state: { from: { pathname: '/admin' } } });
+      } else {
+        setAuthed(true);
+      }
+    });
+    return () => { mounted = false; };
+  }, [navigate]);
+
+  async function handleSignOut() {
+    const supabase = getSupabaseClient();
+    await supabase.auth.signOut();
+    navigate('/admin-login', { replace: true });
+  }
 
   async function loadAll() {
     setLoading(true);
@@ -99,22 +122,38 @@ export default function AdminPage() {
     }
   }
 
-  useEffect(() => { loadAll(); }, []);
+  useEffect(() => { if (authed) loadAll(); }, [authed]);
+
+  if (!authed) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-20">
+        <Loader2 size={28} className="animate-spin text-gold-400" aria-hidden="true" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen pt-20">
       <div className="text-white px-4 sm:px-6 lg:px-8 py-10 border-b border-white/10">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <div>
             <p className="text-gold-400 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-1">Ministry Dashboard</p>
             <h1 className="font-playfair text-3xl font-bold">In Him Daily — Submissions</h1>
           </div>
-          <button onClick={loadAll} disabled={loading}
-            className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
-            aria-label="Refresh data">
-            <RefreshCw size={15} className={loading ? 'animate-spin' : ''} aria-hidden="true" />
-            Refresh
-          </button>
+          <div className="flex items-center gap-2">
+            <button onClick={loadAll} disabled={loading}
+              className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
+              aria-label="Refresh data">
+              <RefreshCw size={15} className={loading ? 'animate-spin' : ''} aria-hidden="true" />
+              Refresh
+            </button>
+            <button onClick={handleSignOut}
+              className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-red-500/20 rounded-full text-sm font-medium transition-colors"
+              aria-label="Sign out">
+              <LogOut size={15} aria-hidden="true" />
+              Sign Out
+            </button>
+          </div>
         </div>
       </div>
 

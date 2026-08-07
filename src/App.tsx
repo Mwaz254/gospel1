@@ -7,6 +7,7 @@ import Home from './pages/Home';
 
 const About            = lazy(() => import('./pages/About'));
 const Admin            = lazy(() => import('./pages/Admin'));
+const AdminLogin       = lazy(() => import('./pages/AdminLogin'));
 const Contact          = lazy(() => import('./pages/Contact'));
 const Devotionals      = lazy(() => import('./pages/Devotionals'));
 const FreeSample       = lazy(() => import('./pages/FreeSample'));
@@ -36,6 +37,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/devotionals" element={<Devotionals />} />
