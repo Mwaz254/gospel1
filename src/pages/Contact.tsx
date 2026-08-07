@@ -79,6 +79,9 @@ export default function ContactPage() {
                   <a href="mailto:hello@inhimdaily.org" className="flex items-center gap-2 text-sm text-white/55 hover:text-gold-300 transition-colors">
                     <Mail size={13} aria-hidden="true" /> hello@inhimdaily.org
                   </a>
+                  <a href="mailto:henry@inhimdaily.org" className="flex items-center gap-2 text-sm text-white/55 hover:text-gold-300 transition-colors mt-2">
+                    <Mail size={13} aria-hidden="true" /> henry@inhimdaily.org
+                  </a>
                 </div>
               </ScrollReveal>
             </div>
