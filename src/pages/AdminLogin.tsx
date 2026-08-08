@@ -13,15 +13,23 @@ export default function AdminLogin() {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    const supabase = getSupabaseClient();
     let mounted = true;
-    supabase.auth.getSession().then(({ data }) => {
-      if (mounted && data.session) {
-        navigate('/admin', { replace: true });
-      } else if (mounted) {
-        setChecking(false);
-      }
-    });
+    try {
+      const supabase = getSupabaseClient();
+      supabase.auth.getSession()
+        .then(({ data, error }) => {
+          if (!mounted) return;
+          if (error) { setChecking(false); return; }
+          if (data.session) {
+            navigate('/admin', { replace: true });
+          } else {
+            setChecking(false);
+          }
+        })
+        .catch(() => { if (mounted) setChecking(false); });
+    } catch {
+      if (mounted) setChecking(false);
+    }
     return () => { mounted = false; };
   }, [navigate]);
 
@@ -32,15 +40,23 @@ export default function AdminLogin() {
 
     try {
       const supabase = getSupabaseClient();
-      const { error: signInError } = await supabase.auth.signInWithPassword({
+      const { error: signInError, data } = await supabase.auth.signInWithPassword({
         email: email.trim(),
         password,
       });
       if (signInError) throw signInError;
+      if (!data.session) throw new Error('No session returned');
       const dest = location.state?.from?.pathname ?? '/admin';
       navigate(dest, { replace: true });
-    } catch {
-      setError('Invalid email or password. Please try again.');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : '';
+      if (msg.includes('Invalid login credentials')) {
+        setError('Invalid email or password. Please try again.');
+      } else if (msg.includes('not configured')) {
+        setError('Submission services are not configured for this deployment.');
+      } else {
+        setError('Sign-in failed. Please check your connection and try again.');
+      }
     } finally {
       setLoading(false);
     }

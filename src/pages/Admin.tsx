@@ -63,16 +63,24 @@ export default function AdminPage() {
   const [donations, setDonations] = useState<Donation[]>([]);
 
   useEffect(() => {
-    const supabase = getSupabaseClient();
     let mounted = true;
-    supabase.auth.getSession().then(({ data }) => {
-      if (!mounted) return;
-      if (!data.session) {
-        navigate('/admin-login', { replace: true, state: { from: { pathname: '/admin' } } });
-      } else {
-        setAuthed(true);
-      }
-    });
+    try {
+      const supabase = getSupabaseClient();
+      supabase.auth.getSession()
+        .then(({ data, error }) => {
+          if (!mounted) return;
+          if (error || !data.session) {
+            navigate('/admin-login', { replace: true, state: { from: { pathname: '/admin' } } });
+          } else {
+            setAuthed(true);
+          }
+        })
+        .catch(() => {
+          if (mounted) navigate('/admin-login', { replace: true, state: { from: { pathname: '/admin' } } });
+        });
+    } catch {
+      if (mounted) navigate('/admin-login', { replace: true, state: { from: { pathname: '/admin' } } });
+    }
     return () => { mounted = false; };
   }, [navigate]);
 
