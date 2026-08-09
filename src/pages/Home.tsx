@@ -100,6 +100,13 @@ export default function HomePage() {
     if (!email || !firstName) return;
     try {
       await insertFreeSampleLead({ first_name: firstName, email, source: 'homepage_cta' });
+      try {
+        await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-free-sample`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}` },
+          body: JSON.stringify({ email, firstName, source: 'homepage_cta' }),
+        });
+      } catch { /* email send failure should not block the success state */ }
       setSubmitted(true);
     } catch {
       setFormError('Something went wrong. Please try again.');
