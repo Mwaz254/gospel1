@@ -16,6 +16,8 @@ const PrivacyPolicy    = lazy(() => import('./pages/PrivacyPolicy'));
 const Communities      = lazy(() => import('./pages/Communities'));
 const Books            = lazy(() => import('./pages/Books'));
 const Donate           = lazy(() => import('./pages/Donate'));
+const Blog             = lazy(() => import('./pages/Blog'));
+const BlogPost         = lazy(() => import('./pages/BlogPost'));
 const NotFound         = lazy(() => import('./pages/NotFound'));
 
 function PageLoader() {
@@ -46,6 +48,8 @@ export default function App() {
             <Route path="/communities" element={<Communities />} />
             <Route path="/books" element={<Books />} />
             <Route path="/donate" element={<Donate />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

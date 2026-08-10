@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { getSupabaseClient } from '@/lib/supabase';
-import { Users, Mail, Heart, MessageSquare, BookOpen, RefreshCw, Rocket, ExternalLink, CheckCircle2, AlertCircle, HandHeart } from 'lucide-react';
+import { Users, Mail, Heart, MessageSquare, BookOpen, RefreshCw, Rocket, ExternalLink, CheckCircle2, AlertCircle, HandHeart, PenLine } from 'lucide-react';
+
+const BlogAdmin = lazy(() => import('./admin/BlogAdmin'));
 
 type FreeSampleLead = { id: string; first_name: string; email: string; source: string; status: string; created_at: string; };
 type NewsletterSub  = { id: string; name: string; email: string; status: string; created_at: string; };
@@ -9,7 +11,7 @@ type PrayerRequest  = { id: string; name: string; email: string | null; request:
 type ContactMessage = { id: string; name: string; email: string; subject: string; message: string; status: string; country: string | null; city_region: string | null; created_at: string; };
 type Donation = { id: string; name: string; email: string; country: string | null; city_region: string | null; amount: number | null; prayer_request: string | null; message: string | null; status: string; created_at: string; };
 
-type Tab = 'leads' | 'newsletter' | 'partners' | 'prayers' | 'messages' | 'donations';
+type Tab = 'leads' | 'newsletter' | 'partners' | 'prayers' | 'messages' | 'donations' | 'blog';
 
 const TABS: { id: Tab; label: string; icon: React.ElementType; color: string }[] = [
   { id: 'leads',     label: 'Free Sample Leads',    icon: BookOpen,      color: 'text-gold-300' },
@@ -18,6 +20,7 @@ const TABS: { id: Tab; label: string; icon: React.ElementType; color: string }[]
   { id: 'prayers',   label: 'Prayer Requests',      icon: Heart,         color: 'text-gold-300' },
   { id: 'messages',  label: 'Contact Messages',     icon: MessageSquare, color: 'text-gold-300' },
   { id: 'donations', label: 'Donations',             icon: HandHeart,     color: 'text-gold-300' },
+  { id: 'blog',      label: 'Blog Articles',        icon: PenLine,       color: 'text-gold-300' },
 ];
 
 const STATUS_COLORS: Record<string, string> = {
@@ -50,7 +53,7 @@ export default function AdminPage() {
   const [tab,      setTab]      = useState<Tab>('leads');
   const [loading,  setLoading]  = useState(true);
   const [loadError, setLoadError] = useState('');
-  const [counts,   setCounts]   = useState<Record<Tab, number>>({ leads:0, newsletter:0, partners:0, prayers:0, messages:0, donations:0 });
+  const [counts,   setCounts]   = useState<Record<Tab, number>>({ leads:0, newsletter:0, partners:0, prayers:0, messages:0, donations:0, blog:0 });
 
   const [leads,    setLeads]    = useState<FreeSampleLead[]>([]);
   const [subs,     setSubs]     = useState<NewsletterSub[]>([]);
@@ -65,15 +68,17 @@ export default function AdminPage() {
 
     try {
       const supabase = getSupabaseClient();
-      const [l, n, pp, pr, m, d] = await Promise.all([
+      const [l, n, pp, pr, m, d, b] = await Promise.all([
         supabase.from('free_sample_leads').select('*').order('created_at', { ascending: false }),
         supabase.from('newsletter_subscribers').select('*').order('created_at', { ascending: false }),
         supabase.from('prayer_partners').select('*').order('created_at', { ascending: false }),
         supabase.from('prayer_requests').select('*').order('created_at', { ascending: false }),
         supabase.from('contact_messages').select('*').order('created_at', { ascending: false }),
         supabase.from('donations').select('*').order('created_at', { ascending: false }),
+        supabase.from('blog_posts').select('id', { count: 'exact', head: true }),
       ]);
-      const requestError = [l, n, pp, pr, m, d].find((result) => result.error)?.error;
+      const blogResult = b as { count?: number; data?: unknown[]; error?: unknown };
+      const requestError = [l, n, pp, pr, m, d, b].find((result) => result.error)?.error;
       if (requestError) throw requestError;
 
       setLeads(l.data ?? []);
@@ -89,6 +94,7 @@ export default function AdminPage() {
         prayers:    pr.data?.length   ?? 0,
         messages:   m.data?.length    ?? 0,
         donations:  d.data?.length    ?? 0,
+        blog:       blogResult.count ?? blogResult.data?.length ?? 0,
       });
     } catch {
       setLoadError(
@@ -261,6 +267,13 @@ export default function AdminPage() {
                       ))}
                   </tbody>
                 </table>
+              )}
+              {tab === 'blog' && (
+                <div className="p-6">
+                  <Suspense fallback={<div className="flex items-center justify-center py-16 text-white/50"><RefreshCw size={20} className="animate-spin mr-3" /> Loading blog manager...</div>}>
+                    <BlogAdmin />
+                  </Suspense>
+                </div>
               )}
             </>
           )}
