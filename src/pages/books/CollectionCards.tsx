@@ -22,9 +22,8 @@ export default function CollectionCards() {
           {collections.map((c, i) => (
             <ScrollReveal key={c.id} delay={i * 100}>
               <div className="bk-glass rounded-2xl overflow-hidden h-full group transition-all duration-500 hover:-translate-y-1 hover:border-gold-400/50 hover:shadow-[0_24px_64px_rgba(212,175,55,0.2)]">
-                {/* Book cover — aspect-[3/2] matches the landscape promotional images;
-                    portrait images are letterboxed but fully visible */}
-                <div className="relative w-full aspect-[3/2] bg-white/[0.03] border-b border-white/5 overflow-hidden">
+                {/* Book cover — container adapts to the image's natural landscape ratio */}
+                <div className="relative w-full bg-white/[0.03] border-b border-white/5 overflow-hidden">
                   <div
                     className="absolute inset-0"
                     style={{
@@ -37,7 +36,7 @@ export default function CollectionCards() {
                     src={c.cover}
                     alt={c.title}
                     loading="lazy"
-                    className="absolute inset-0 w-full h-full object-contain p-5 transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="relative block w-full h-auto object-contain p-5 transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                   <span className="bk-sweep" />
                 </div>

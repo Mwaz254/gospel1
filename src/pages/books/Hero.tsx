@@ -53,7 +53,7 @@ export default function Hero() {
                     src={book.cover}
                     alt={`${book.title} devotional cover`}
                     loading="eager"
-                    className="w-32 sm:w-44 lg:w-56 aspect-[3/2] object-contain bg-black/20"
+                    className="block w-32 sm:w-44 lg:w-56 h-auto object-contain bg-black/20"
                   />
                   {/* light sweep */}
                   <span className="bk-sweep" />
