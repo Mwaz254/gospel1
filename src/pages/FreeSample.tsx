@@ -174,8 +174,8 @@ export default function FreeSamplePage() {
                 <div className="w-11 h-11 rounded-full bg-gold-400/25 flex items-center justify-center mx-auto mb-4">
                   <Check size={22} className="text-gold-300" aria-hidden="true" />
                 </div>
-                <h3 className="font-playfair text-2xl font-bold text-white mb-2">It's On Its Way!</h3>
-                <p className="text-white/55">Thank you! Your free 7-Day Sample is on its way. We pray these devotionals help you encounter Jesus every day.</p>
+                <h3 className="font-playfair text-2xl font-bold text-white mb-2">Check Your Inbox!</h3>
+                <p className="text-white/55">Thank you! We've sent you an email with a link to read your free 7-day sample. We pray these devotionals help you encounter Jesus every day.</p>
               </div>
             ) : (
               <form onSubmit={async (e)=>{ e.preventDefault(); if(!email||!firstName||!location.country) { setFormError('Please fill in your name, email, and country.'); return; } try { await insertFreeSampleLead({first_name:firstName,email,source:'free_sample_page',country:location.country,city_region:location.city_region}); try { await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-free-sample`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}` }, body: JSON.stringify({ email, firstName, source: 'free_sample_page' }) }); } catch { /* email send failure should not block the success state */ } setSubmitted(true); } catch { setFormError('Something went wrong. Please try again.'); } }} className="space-y-3.5" noValidate>

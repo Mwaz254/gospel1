@@ -17,6 +17,7 @@ const PrivacyPolicy    = lazy(() => import('./pages/PrivacyPolicy'));
 const Communities      = lazy(() => import('./pages/Communities'));
 const Books            = lazy(() => import('./pages/Books'));
 const Donate           = lazy(() => import('./pages/Donate'));
+const SampleContent    = lazy(() => import('./pages/SampleContent'));
 const NotFound         = lazy(() => import('./pages/NotFound'));
 
 function PageLoader() {
@@ -48,6 +49,7 @@ export default function App() {
             <Route path="/communities" element={<Communities />} />
             <Route path="/books" element={<Books />} />
             <Route path="/donate" element={<Donate />} />
+            <Route path="/sample-content" element={<SampleContent />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
