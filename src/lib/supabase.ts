@@ -97,3 +97,112 @@ export async function insertDonation(data: {
   const { error } = await getSupabaseClient().from('donations').insert(data);
   if (error) throw error;
 }
+
+/* ─── blog helpers ─────────────────────────────────────────── */
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  content: string | null;
+  cover_image: string | null;
+  author: string | null;
+  category: string | null;
+  status: string;
+  published_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export async function fetchPublishedPosts(): Promise<BlogPost[]> {
+  const { data, error } = await getSupabaseClient()
+    .from('blog_posts')
+    .select('*')
+    .eq('status', 'published')
+    .order('published_at', { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as BlogPost[];
+}
+
+export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
+  const { data, error } = await getSupabaseClient()
+    .from('blog_posts')
+    .select('*')
+    .eq('slug', slug)
+    .eq('status', 'published')
+    .maybeSingle();
+  if (error) throw error;
+  return data as BlogPost | null;
+}
+
+export async function fetchAllPosts(): Promise<BlogPost[]> {
+  const { data, error } = await getSupabaseClient()
+    .from('blog_posts')
+    .select('*')
+    .order('updated_at', { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as BlogPost[];
+}
+
+export async function createPost(data: {
+  title: string;
+  slug: string;
+  excerpt?: string;
+  content?: string;
+  cover_image?: string;
+  author?: string;
+  category?: string;
+  status?: string;
+  published_at?: string | null;
+}): Promise<BlogPost> {
+  const { data: row, error } = await getSupabaseClient()
+    .from('blog_posts')
+    .insert(data)
+    .select()
+    .single();
+  if (error) throw error;
+  return row as BlogPost;
+}
+
+export async function updatePost(
+  id: string,
+  data: Partial<{
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    cover_image: string;
+    author: string;
+    category: string;
+    status: string;
+    published_at: string | null;
+  }>,
+): Promise<BlogPost> {
+  const { data: row, error } = await getSupabaseClient()
+    .from('blog_posts')
+    .update({ ...data, updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select()
+    .single();
+  if (error) throw error;
+  return row as BlogPost;
+}
+
+export async function deletePost(id: string): Promise<void> {
+  const { error } = await getSupabaseClient()
+    .from('blog_posts')
+    .delete()
+    .eq('id', id);
+  if (error) throw error;
+}
+
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
