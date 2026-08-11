@@ -1,10 +1,14 @@
-import { Baby, Sparkles, BookText, Users } from 'lucide-react';
+import { useState } from 'react';
+import { Baby, Sparkles, BookText, Users, ZoomIn } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import { ageCards } from './assets';
+import BookLightbox from './BookLightbox';
 
 const icons = [Baby, Sparkles, BookText, Users];
 
 export default function AgeCards() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
   return (
     <section className="relative py-24 sm:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,13 +57,27 @@ export default function AgeCards() {
                     ))}
                   </ul>
 
-                  <div className="mt-8 relative w-full rounded-xl bg-white/[0.03] border border-white/5 overflow-hidden">
-                    <img
-                      src={card.cover}
-                      alt={`${card.age} devotional cover`}
-                      loading="lazy"
-                      className="relative block w-full h-auto object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
+                  <div className="mt-8 relative w-full h-56 rounded-xl bg-white/[0.03] border border-white/5 overflow-hidden flex items-center justify-center">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setLightbox({ src: card.cover, alt: `${card.age} devotional cover` })
+                      }
+                      className="relative z-10 block w-full h-full p-4 m-0 border-0 bg-transparent cursor-zoom-in flex items-center justify-center"
+                      aria-label={`View ${card.age} devotional cover enlarged`}
+                    >
+                      <img
+                        src={card.cover}
+                        alt={`${card.age} devotional cover`}
+                        loading="lazy"
+                        className="block w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                      <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <span className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                          <ZoomIn size={20} className="text-white" />
+                        </span>
+                      </span>
+                    </button>
                   </div>
                 </div>
               </ScrollReveal>
@@ -67,6 +85,10 @@ export default function AgeCards() {
           })}
         </div>
       </div>
+
+      {lightbox && (
+        <BookLightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
+      )}
     </section>
   );
 }

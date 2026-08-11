@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShoppingBag } from 'lucide-react';
+import { ArrowRight, ShoppingBag, ZoomIn } from 'lucide-react';
 import { heroBooks } from './assets';
+import BookLightbox from './BookLightbox';
 
 export default function FinalCTA() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
   return (
     <section className="relative py-32 sm:py-40 overflow-hidden">
       {/* slow moving light */}
@@ -29,7 +33,7 @@ export default function FinalCTA() {
           {heroBooks.map((book, i) => (
             <div
               key={book.id}
-              className="bk-float relative"
+              className="bk-float relative group"
               style={{ ['--rot' as string]: `${(i - 1) * 3}deg`, animationDelay: `${i * 0.6}s` }}
             >
               <div
@@ -37,12 +41,26 @@ export default function FinalCTA() {
                 style={{ background: book.accent }}
                 aria-hidden="true"
               />
-              <img
-                src={book.cover}
-                alt={book.title}
-                loading="lazy"
-                className="block w-32 sm:w-48 lg:w-64 h-auto rounded-lg border border-white/10 shadow-2xl bg-black/20"
-              />
+              <button
+                type="button"
+                onClick={() => setLightbox({ src: book.cover, alt: `${book.title} devotional cover` })}
+                className="relative block p-0 m-0 border-0 bg-transparent cursor-zoom-in"
+                aria-label={`View ${book.title} cover enlarged`}
+              >
+                <div className="rounded-lg overflow-hidden border border-white/10 shadow-2xl bg-black/20 flex items-center justify-center">
+                  <img
+                    src={book.cover}
+                    alt={`${book.title} devotional cover`}
+                    loading="lazy"
+                    className="block w-32 sm:w-48 lg:w-64 h-auto object-contain bg-black/20"
+                  />
+                </div>
+                <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <span className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+                    <ZoomIn size={18} className="text-white" />
+                  </span>
+                </span>
+              </button>
             </div>
           ))}
         </div>
@@ -70,6 +88,10 @@ export default function FinalCTA() {
           </Link>
         </div>
       </div>
+
+      {lightbox && (
+        <BookLightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
+      )}
     </section>
   );
 }

@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Clock } from 'lucide-react';
+import { ArrowUpRight, Clock, ZoomIn } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import { collections } from './assets';
+import BookLightbox from './BookLightbox';
 
 export default function CollectionCards() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
   return (
     <section id="collections" className="relative py-24 sm:py-32 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,8 +26,8 @@ export default function CollectionCards() {
           {collections.map((c, i) => (
             <ScrollReveal key={c.id} delay={i * 100}>
               <div className="bk-glass rounded-2xl overflow-hidden h-full group transition-all duration-500 hover:-translate-y-1 hover:border-gold-400/50 hover:shadow-[0_24px_64px_rgba(212,175,55,0.2)]">
-                {/* Book cover — container adapts to the image's natural landscape ratio */}
-                <div className="relative w-full bg-white/[0.03] border-b border-white/5 overflow-hidden">
+                {/* Book cover — fixed-height container with object-contain so the full image is visible */}
+                <div className="relative w-full h-64 bg-white/[0.03] border-b border-white/5 overflow-hidden flex items-center justify-center">
                   <div
                     className="absolute inset-0"
                     style={{
@@ -32,13 +36,25 @@ export default function CollectionCards() {
                     }}
                     aria-hidden="true"
                   />
-                  <img
-                    src={c.cover}
-                    alt={c.title}
-                    loading="lazy"
-                    className="relative block w-full h-auto object-contain p-5 transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                  <span className="bk-sweep" />
+                  <button
+                    type="button"
+                    onClick={() => setLightbox({ src: c.cover, alt: `${c.title} book cover` })}
+                    className="relative z-10 block w-full h-full p-5 m-0 border-0 bg-transparent cursor-zoom-in flex items-center justify-center"
+                    aria-label={`View ${c.title} cover enlarged`}
+                  >
+                    <img
+                      src={c.cover}
+                      alt={`${c.title} book cover`}
+                      loading="lazy"
+                      className="block w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                    <span className="bk-sweep" />
+                    <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                      <span className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                        <ZoomIn size={20} className="text-white" />
+                      </span>
+                    </span>
+                  </button>
                 </div>
 
                 <div className="p-6">
@@ -71,6 +87,10 @@ export default function CollectionCards() {
           ))}
         </div>
       </div>
+
+      {lightbox && (
+        <BookLightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
+      )}
     </section>
   );
 }

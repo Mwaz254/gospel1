@@ -1,12 +1,16 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen } from 'lucide-react';
+import { ArrowRight, BookOpen, ZoomIn } from 'lucide-react';
 import { heroBooks } from './assets';
+import BookLightbox from './BookLightbox';
 
 /**
  * Immersive hero: three floating 3D-style books, glowing halo,
  * cinematic headline, scripture quote.
  */
 export default function Hero() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
       {/* glowing halo behind books */}
@@ -48,16 +52,27 @@ export default function Hero() {
                   style={{ background: book.accent }}
                   aria-hidden="true"
                 />
-                <div className="relative rounded-lg overflow-hidden border border-white/10 shadow-xl">
-                  <img
-                    src={book.cover}
-                    alt={`${book.title} devotional cover`}
-                    loading="eager"
-                    className="block w-48 sm:w-72 lg:w-96 h-auto bg-black/20"
-                  />
-                  {/* light sweep */}
-                  <span className="bk-sweep" />
-                  <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3 bg-gradient-to-t from-black/70 to-transparent">
+                <div className="relative rounded-lg overflow-hidden border border-white/10 shadow-xl bg-black/20 flex items-center justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setLightbox({ src: book.cover, alt: `${book.title} devotional cover` })}
+                    className="relative block w-full p-0 m-0 border-0 bg-transparent cursor-zoom-in"
+                    aria-label={`View ${book.title} cover enlarged`}
+                  >
+                    <img
+                      src={book.cover}
+                      alt={`${book.title} devotional cover`}
+                      loading="eager"
+                      className="block w-48 sm:w-72 lg:w-96 h-auto object-contain bg-black/20"
+                    />
+                    <span className="bk-sweep" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                      <span className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                        <ZoomIn size={20} className="text-white" />
+                      </span>
+                    </div>
+                  </button>
+                  <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3 bg-gradient-to-t from-black/70 to-transparent pointer-events-none">
                     <p className="font-cinzel text-white text-xs sm:text-sm font-semibold tracking-wide">
                       {book.title}
                     </p>
@@ -118,6 +133,10 @@ export default function Hero() {
           <footer className="mt-3 text-gold-300 text-sm tracking-[0.2em]">JOHN 5:39</footer>
         </blockquote>
       </div>
+
+      {lightbox && (
+        <BookLightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
+      )}
     </section>
   );
 }
