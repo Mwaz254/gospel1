@@ -189,55 +189,39 @@ Deno.serve(async (req: Request) => {
       }
     }
 
-    // Send the email via Resend
+    // Attempt to send the email via Resend — but always return success
+    // so the visitor sees confirmation even if the email service is not yet configured.
     const RESEND_API_KEY = await getResendApiKey();
-    if (!RESEND_API_KEY) {
-      console.error("RESEND_API_KEY is not configured");
-      return new Response(
-        JSON.stringify({ error: "Email service is not configured." }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
-      );
-    }
 
-    const emailResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${RESEND_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: FROM_EMAIL,
-        to: [body.email],
-        subject: "Your Free 7-Day Sample — In Him Daily",
-        html: buildEmailHtml(body.first_name),
-      }),
-    });
-
-    if (!emailResponse.ok) {
-      const errorBody = await emailResponse.json().catch(() => null);
-      console.error("Resend API error:", JSON.stringify(errorBody));
-
-      // Domain not verified yet — still save the lead so signups aren't lost
-      const isUnverifiedDomain = emailResponse.status === 403 || emailResponse.status === 422;
-      if (isUnverifiedDomain) {
-        return new Response(
-          JSON.stringify({
-            success: true,
-            message: "Your request has been received. The email will be sent once our email domain is verified.",
-            email_sent: false,
+    if (RESEND_API_KEY) {
+      try {
+        const emailResponse = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: FROM_EMAIL,
+            to: [body.email],
+            subject: "Your Free 7-Day Sample — In Him Daily",
+            html: buildEmailHtml(body.first_name),
           }),
-          { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
-        );
-      }
+        });
 
-      return new Response(
-        JSON.stringify({ error: "Failed to send email. Please try again later." }),
-        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
-      );
+        if (!emailResponse.ok) {
+          const errorBody = await emailResponse.json().catch(() => null);
+          console.error("Resend API error:", JSON.stringify(errorBody));
+        }
+      } catch (emailErr) {
+        console.error("Email send failed:", emailErr);
+      }
+    } else {
+      console.error("RESEND_API_KEY is not configured — lead saved, email skipped");
     }
 
     return new Response(
-      JSON.stringify({ success: true, message: "Free sample email sent." }),
+      JSON.stringify({ success: true, message: "Your request has been received." }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   } catch (err) {
