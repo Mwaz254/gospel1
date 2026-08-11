@@ -17,6 +17,7 @@ const Communities      = lazy(() => import('./pages/Communities'));
 const Books            = lazy(() => import('./pages/Books'));
 const Donate           = lazy(() => import('./pages/Donate'));
 const Blog             = lazy(() => import('./pages/Blog'));
+const AdminLogin       = lazy(() => import('./pages/AdminLogin'));
 const BlogPost         = lazy(() => import('./pages/BlogPost'));
 const NotFound         = lazy(() => import('./pages/NotFound'));
 
@@ -39,6 +40,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/devotionals" element={<Devotionals />} />
             <Route path="/free-sample" element={<FreeSample />} />

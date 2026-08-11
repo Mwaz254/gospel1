@@ -1,6 +1,7 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getSupabaseClient } from '@/lib/supabase';
-import { Users, Mail, Heart, MessageSquare, BookOpen, RefreshCw, Rocket, ExternalLink, CheckCircle2, AlertCircle, HandHeart, PenLine } from 'lucide-react';
+import { Users, Mail, Heart, MessageSquare, BookOpen, RefreshCw, Rocket, ExternalLink, CheckCircle2, AlertCircle, HandHeart, PenLine, LogOut } from 'lucide-react';
 
 const BlogAdmin = lazy(() => import('./admin/BlogAdmin'));
 
@@ -50,9 +51,11 @@ function StatusBadge({ status }: { status: string }) {
 }
 
 export default function AdminPage() {
+  const navigate = useNavigate();
   const [tab,      setTab]      = useState<Tab>('leads');
   const [loading,  setLoading]  = useState(true);
   const [loadError, setLoadError] = useState('');
+  const [authChecked, setAuthChecked] = useState(false);
   const [counts,   setCounts]   = useState<Record<Tab, number>>({ leads:0, newsletter:0, partners:0, prayers:0, messages:0, donations:0, blog:0 });
 
   const [leads,    setLeads]    = useState<FreeSampleLead[]>([]);
@@ -105,7 +108,39 @@ export default function AdminPage() {
     }
   }
 
-  useEffect(() => { loadAll(); }, []);
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const supabase = getSupabaseClient();
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) {
+          navigate('/admin/login', { replace: true });
+          return;
+        }
+        setAuthChecked(true);
+        loadAll();
+      } catch {
+        navigate('/admin/login', { replace: true });
+      }
+    }
+    checkAuth();
+  }, [navigate]);
+
+  async function handleSignOut() {
+    try {
+      const supabase = getSupabaseClient();
+      await supabase.auth.signOut();
+    } catch { /* ignore */ }
+    navigate('/admin/login', { replace: true });
+  }
+
+  if (!authChecked) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-gold-400/30 border-t-gold-400 rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen pt-20">
@@ -115,12 +150,20 @@ export default function AdminPage() {
             <p className="text-gold-400 text-[0.72rem] font-semibold tracking-[0.16em] uppercase mb-1">Ministry Dashboard</p>
             <h1 className="font-playfair text-3xl font-bold">In Him Daily — Submissions</h1>
           </div>
-          <button onClick={loadAll} disabled={loading}
-            className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
-            aria-label="Refresh data">
-            <RefreshCw size={15} className={loading ? 'animate-spin' : ''} aria-hidden="true" />
-            Refresh
-          </button>
+          <div className="flex items-center gap-3">
+            <button onClick={loadAll} disabled={loading}
+              className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-sm font-medium transition-colors disabled:opacity-50"
+              aria-label="Refresh data">
+              <RefreshCw size={15} className={loading ? 'animate-spin' : ''} aria-hidden="true" />
+              Refresh
+            </button>
+            <button onClick={handleSignOut}
+              className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-red-500/20 text-white/70 hover:text-red-300 rounded-full text-sm font-medium transition-colors"
+              aria-label="Sign out">
+              <LogOut size={15} aria-hidden="true" />
+              Sign Out
+            </button>
+          </div>
         </div>
       </div>
 
