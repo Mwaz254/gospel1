@@ -1,7 +1,7 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getSupabaseClient } from '@/lib/supabase';
-import { Users, Mail, Heart, MessageSquare, BookOpen, RefreshCw, Rocket, ExternalLink, CheckCircle2, AlertCircle, HandHeart, PenLine, LogOut } from 'lucide-react';
+import { Users, Mail, Heart, MessageSquare, BookOpen, RefreshCw, Rocket, ExternalLink, CheckCircle2, AlertCircle, HandHeart, PenLine, LogOut, Send, Save, Eye, EyeOff } from 'lucide-react';
 
 const BlogAdmin = lazy(() => import('./admin/BlogAdmin'));
 
@@ -12,9 +12,9 @@ type PrayerRequest  = { id: string; name: string; email: string | null; request:
 type ContactMessage = { id: string; name: string; email: string; subject: string; message: string; status: string; country: string | null; city_region: string | null; created_at: string; };
 type Donation = { id: string; name: string; email: string; country: string | null; city_region: string | null; amount: number | null; prayer_request: string | null; message: string | null; status: string; created_at: string; };
 
-type Tab = 'leads' | 'newsletter' | 'partners' | 'prayers' | 'messages' | 'donations' | 'blog';
+type Tab = 'leads' | 'newsletter' | 'partners' | 'prayers' | 'messages' | 'donations' | 'blog' | 'email';
 
-const TABS: { id: Tab; label: string; icon: React.ElementType; color: string }[] = [
+const TABS: { id: Tab; label: string; icon: React.ElementType; color: string; isSettings?: boolean }[] = [
   { id: 'leads',     label: 'Free Sample Leads',    icon: BookOpen,      color: 'text-gold-300' },
   { id: 'newsletter',label: 'Newsletter',           icon: Mail,          color: 'text-gold-300' },
   { id: 'partners',  label: 'Prayer Partners',      icon: Users,         color: 'text-gold-300' },
@@ -22,6 +22,7 @@ const TABS: { id: Tab; label: string; icon: React.ElementType; color: string }[]
   { id: 'messages',  label: 'Contact Messages',     icon: MessageSquare, color: 'text-gold-300' },
   { id: 'donations', label: 'Donations',             icon: HandHeart,     color: 'text-gold-300' },
   { id: 'blog',      label: 'Blog Articles',        icon: PenLine,       color: 'text-gold-300' },
+  { id: 'email',     label: 'Email Settings',       icon: Send,          color: 'text-gold-300', isSettings: true },
 ];
 
 const STATUS_COLORS: Record<string, string> = {
@@ -56,7 +57,14 @@ export default function AdminPage() {
   const [loading,  setLoading]  = useState(true);
   const [loadError, setLoadError] = useState('');
   const [authChecked, setAuthChecked] = useState(false);
-  const [counts,   setCounts]   = useState<Record<Tab, number>>({ leads:0, newsletter:0, partners:0, prayers:0, messages:0, donations:0, blog:0 });
+  const [counts,   setCounts]   = useState<Record<Tab, number>>({ leads:0, newsletter:0, partners:0, prayers:0, messages:0, donations:0, blog:0, email:0 });
+
+  const [resendKey,      setResendKey]      = useState('');
+  const [resendSaved,    setResendSaved]    = useState(false);
+  const [resendSaving,   setResendSaving]   = useState(false);
+  const [resendError,   setResendError]    = useState('');
+  const [resendStatus,  setResendStatus]   = useState<'unknown' | 'configured' | 'not_configured'>('unknown');
+  const [showResendKey, setShowResendKey]  = useState(false);
 
   const [leads,    setLeads]    = useState<FreeSampleLead[]>([]);
   const [subs,     setSubs]     = useState<NewsletterSub[]>([]);
@@ -98,6 +106,7 @@ export default function AdminPage() {
         messages:   m.data?.length    ?? 0,
         donations:  d.data?.length    ?? 0,
         blog:       blogResult.count ?? blogResult.data?.length ?? 0,
+        email:      0,
       });
     } catch {
       setLoadError(
@@ -105,6 +114,59 @@ export default function AdminPage() {
       );
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function loadResendKey() {
+    try {
+      const supabase = getSupabaseClient();
+      const { data, error } = await supabase
+        .from('app_config')
+        .select('value')
+        .eq('key', 'RESEND_API_KEY')
+        .maybeSingle();
+      if (error) throw error;
+      if (data?.value) {
+        setResendKey(data.value);
+        setResendStatus('configured');
+      } else {
+        setResendStatus('not_configured');
+      }
+    } catch {
+      setResendStatus('not_configured');
+    }
+  }
+
+  async function saveResendKey() {
+    setResendSaving(true);
+    setResendError('');
+    setResendSaved(false);
+    try {
+      const supabase = getSupabaseClient();
+      const { data: existing } = await supabase
+        .from('app_config')
+        .select('key')
+        .eq('key', 'RESEND_API_KEY')
+        .maybeSingle();
+      if (existing) {
+        const { error } = await supabase
+          .from('app_config')
+          .update({ value: resendKey.trim(), updated_at: new Date().toISOString() })
+          .eq('key', 'RESEND_API_KEY');
+        if (error) throw error;
+      } else {
+        const { error } = await supabase
+          .from('app_config')
+          .insert({ key: 'RESEND_API_KEY', value: resendKey.trim() });
+        if (error) throw error;
+      }
+      setResendSaved(true);
+      setResendStatus('configured');
+      setTimeout(() => setResendSaved(false), 4000);
+    } catch {
+      setResendError('Could not save the API key. Please try again.');
+    } finally {
+      setResendSaving(false);
     }
   }
 
@@ -119,6 +181,7 @@ export default function AdminPage() {
         }
         setAuthChecked(true);
         loadAll();
+        loadResendKey();
       } catch {
         navigate('/admin/login', { replace: true });
       }
@@ -182,7 +245,13 @@ export default function AdminPage() {
               }`}>
               <t.icon size={20} className={tab === t.id ? 'text-gold-300 mb-3' : `${t.color} mb-3`} aria-hidden="true" />
               <p className={`text-2xl font-bold font-playfair ${tab === t.id ? 'text-white' : 'text-white'}`}>
-                {loading ? '—' : counts[t.id]}
+                {loading ? '—' : t.isSettings
+                  ? (resendStatus === 'configured'
+                    ? <CheckCircle2 size={22} className="text-green-400" aria-label="Configured" />
+                    : resendStatus === 'not_configured'
+                      ? <AlertCircle size={22} className="text-amber-400" aria-label="Not configured" />
+                      : '—')
+                  : counts[t.id]}
               </p>
               <p className={`text-xs mt-0.5 ${tab === t.id ? 'text-white/60' : 'text-white/45'}`}>{t.label}</p>
             </button>
@@ -316,6 +385,108 @@ export default function AdminPage() {
                   <Suspense fallback={<div className="flex items-center justify-center py-16 text-white/50"><RefreshCw size={20} className="animate-spin mr-3" /> Loading blog manager...</div>}>
                     <BlogAdmin />
                   </Suspense>
+                </div>
+              )}
+              {tab === 'email' && (
+                <div className="p-6 sm:p-8 max-w-2xl">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Send size={20} className="text-gold-300" aria-hidden="true" />
+                    <h2 className="font-playfair text-xl font-bold text-white">Email Settings</h2>
+                  </div>
+                  <p className="text-sm text-white/50 mb-6">
+                    When someone requests a free sample, the system automatically sends them a
+                    beautifully designed email with their 7-day devotional sample. To enable this,
+                    connect a free Resend account below.
+                  </p>
+
+                  {resendStatus === 'configured' ? (
+                    <div className="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/20 flex gap-3 items-start">
+                      <CheckCircle2 size={18} className="text-green-400 shrink-0 mt-0.5" aria-hidden="true" />
+                      <div>
+                        <p className="text-sm font-medium text-green-300">Email service is active</p>
+                        <p className="text-xs text-green-400/70 mt-0.5">Free sample emails are being sent automatically when someone fills the form.</p>
+                      </div>
+                    </div>
+                  ) : resendStatus === 'not_configured' ? (
+                    <div className="mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 flex gap-3 items-start">
+                      <AlertCircle size={18} className="text-amber-400 shrink-0 mt-0.5" aria-hidden="true" />
+                      <div>
+                        <p className="text-sm font-medium text-amber-300">Email service not yet connected</p>
+                        <p className="text-xs text-amber-400/70 mt-0.5">Leads are still saved in the dashboard, but no email is sent to the visitor yet.</p>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {resendSaved && (
+                    <div className="mb-5 p-3.5 rounded-xl bg-green-500/10 border border-green-500/20 flex gap-2.5 items-center">
+                      <CheckCircle2 size={16} className="text-green-400 shrink-0" aria-hidden="true" />
+                      <p className="text-sm text-green-300">API key saved. Emails will now be sent automatically.</p>
+                    </div>
+                  )}
+                  {resendError && (
+                    <div className="mb-5 p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 flex gap-2.5 items-center">
+                      <AlertCircle size={16} className="text-red-400 shrink-0" aria-hidden="true" />
+                      <p className="text-sm text-red-300">{resendError}</p>
+                    </div>
+                  )}
+
+                  <label htmlFor="resend-key" className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5">
+                    Resend API Key
+                  </label>
+                  <div className="relative mb-4">
+                    <input
+                      id="resend-key"
+                      type={showResendKey ? 'text' : 'password'}
+                      value={resendKey}
+                      onChange={(e) => setResendKey(e.target.value)}
+                      placeholder="re_..."
+                      className="ih-input w-full px-4 py-3 pr-11 text-sm font-mono"
+                      autoComplete="off"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowResendKey(!showResendKey)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-white/40 hover:text-white/70 transition-colors"
+                      aria-label={showResendKey ? 'Hide API key' : 'Show API key'}
+                      tabIndex={-1}
+                    >
+                      {showResendKey ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={saveResendKey}
+                    disabled={resendSaving || !resendKey.trim()}
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-[#05070D] text-sm font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {resendSaving ? (
+                      <><RefreshCw size={15} className="animate-spin" aria-hidden="true" /> Saving...</>
+                    ) : (
+                      <><Save size={15} aria-hidden="true" /> Save API Key</>
+                    )}
+                  </button>
+
+                  <div className="mt-8 p-5 rounded-xl bg-white/[0.03] border border-white/10">
+                    <h3 className="font-playfair text-base font-bold text-white mb-3">How to set up Resend (free)</h3>
+                    <ol className="space-y-2.5 text-sm text-white/60">
+                      <li className="flex gap-3">
+                        <span className="w-5 h-5 rounded-full bg-gold-400/20 text-gold-300 text-[0.7rem] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                        <span>Go to <a href="https://resend.com" target="_blank" rel="noopener noreferrer" className="text-gold-300 hover:text-gold-200 underline">resend.com</a> and create a free account (3,000 emails per month free).</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="w-5 h-5 rounded-full bg-gold-400/20 text-gold-300 text-[0.7rem] font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                        <span>In the Resend dashboard, go to API Keys and click &ldquo;Create API Key&rdquo;.</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="w-5 h-5 rounded-full bg-gold-400/20 text-gold-300 text-[0.7rem] font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                        <span>Copy the API key (starts with <code className="text-gold-300 bg-gold-400/10 px-1 rounded text-xs">re_</code>) and paste it in the field above.</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="w-5 h-5 rounded-full bg-gold-400/20 text-gold-300 text-[0.7rem] font-bold flex items-center justify-center shrink-0 mt-0.5">4</span>
+                        <span>Click Save. The free sample email will be sent automatically from <code className="text-gold-300 bg-gold-400/10 px-1 rounded text-xs">onboarding@resend.dev</code> until you verify your own domain in Resend.</span>
+                      </li>
+                    </ol>
+                  </div>
                 </div>
               )}
             </>
