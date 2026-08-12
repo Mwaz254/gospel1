@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { getSupabaseClient } from '@/lib/supabase';
-import { Plus, Pencil, Trash2, Eye, EyeOff, X, Save, RefreshCw, AlertCircle } from 'lucide-react';
+import { Plus, Pencil, Trash2, Eye, EyeOff, X, Save, RefreshCw, AlertCircle, Upload, Image as ImageIcon } from 'lucide-react';
 
 type BlogPost = {
   id: string;
@@ -65,6 +65,8 @@ export default function BlogAdmin() {
   const [editing, setEditing] = useState<EditState | null>(null);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -167,6 +169,42 @@ export default function BlogAdmin() {
       );
     } finally {
       setSaving(false);
+    }
+  }
+
+  async function handleImageUpload(file: File) {
+    if (file.size > 10 * 1024 * 1024) {
+      setSaveError('Image must be under 10 MB.');
+      return;
+    }
+    if (!file.type.startsWith('image/')) {
+      setSaveError('Please select an image file.');
+      return;
+    }
+    setUploading(true);
+    setSaveError('');
+    try {
+      const supabase = getSupabaseClient();
+      const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg';
+      const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+      const { error: uploadError } = await supabase.storage
+        .from('blog-images')
+        .upload(fileName, file, { cacheControl: '3600', upsert: false });
+      if (uploadError) throw uploadError;
+      const { data: urlData } = supabase.storage
+        .from('blog-images')
+        .getPublicUrl(fileName);
+      if (editing) {
+        setEditing({ ...editing, cover_image_url: urlData.publicUrl });
+      }
+    } catch (err) {
+      setSaveError(
+        err instanceof Error && err.message
+          ? `Upload failed: ${err.message}`
+          : 'Upload failed. Please try again.'
+      );
+    } finally {
+      setUploading(false);
     }
   }
 
@@ -361,13 +399,50 @@ export default function BlogAdmin() {
 
               {/* Cover image URL */}
               <div>
-                <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5">Cover Image URL</label>
+                <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5">
+                  Cover Image
+                </label>
+                {editing.cover_image_url && (
+                  <div className="mb-3 relative rounded-xl overflow-hidden border border-white/10 group">
+                    <img src={editing.cover_image_url} alt="Cover preview" className="w-full h-40 object-cover" />
+                    <button
+                      onClick={() => setEditing({ ...editing, cover_image_url: '' })}
+                      className="absolute top-2 right-2 p-1.5 rounded-lg bg-black/60 text-white/80 hover:text-white hover:bg-black/80 transition-colors"
+                      title="Remove image"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                )}
+                <div className="flex gap-2">
+                  <input
+                    type="url"
+                    value={editing.cover_image_url}
+                    onChange={(e) => setEditing({ ...editing, cover_image_url: e.target.value })}
+                    className="ih-input w-full px-4 py-2.5 text-sm"
+                    placeholder="Paste an image URL or upload below"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={uploading}
+                    className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-sm text-white/70 hover:text-white transition-colors disabled:opacity-50 shrink-0"
+                    title="Upload image"
+                  >
+                    {uploading ? <RefreshCw size={15} className="animate-spin" /> : <Upload size={15} />}
+                    {uploading ? '' : <ImageIcon size={15} />}
+                  </button>
+                </div>
                 <input
-                  type="url"
-                  value={editing.cover_image_url}
-                  onChange={(e) => setEditing({ ...editing, cover_image_url: e.target.value })}
-                  className="ih-input w-full px-4 py-2.5 text-sm"
-                  placeholder="https://images.pexels.com/..."
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/gif,image/avif"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleImageUpload(file);
+                    e.target.value = '';
+                  }}
                 />
               </div>
 
